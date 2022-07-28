@@ -1,0 +1,23 @@
+---
+title: "Financial and Actuarial Modelling in R (MATH377)"
+subtitle: "Lecture Notes"
+author: "Jorge Yslas"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook: default
+  bookdown::pdf_book:
+    extra_dependencies: ["actuarialsymbol"]
+    includes:
+      in_header: preamble.tex
+papersize: a4
+fontsize: 10pt
+geometry: margin=1in
+linkcolor: blue
+---
+
+# Preface {-}
+
+The objective of this module is to give a set of skills used in practice in financial and insurance institutions. We aim at introducing students to the basic principles and practices of the R programming language.
+
+
