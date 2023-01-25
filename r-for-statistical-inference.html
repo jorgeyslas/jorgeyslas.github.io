@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 R for Statistical Inference | Financial and Actuarial Modelling in R (MATH377)</title>
   <meta name="description" content="2 R for Statistical Inference | Financial and Actuarial Modelling in R (MATH377)" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 R for Statistical Inference | Financial and Actuarial Modelling in R (MATH377)" />
   <meta property="og:type" content="book" />
@@ -257,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="descriptive-statistics" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Descriptive statistics<a href="r-for-statistical-inference.html#descriptive-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When working with real-life data, one of the first things we may want to do is get a general understanding of the data. For this purpose, we can use some descriptive statics and plots available in R.</p>
-<p>R comes with some databases. To see the list of data sets available, type <code>data()</code>. For example, you will find the <code>iris</code> data set (type <code>?iris</code> for a complete description of the data). Although not an insurance or financial data set, we will use <code>iris</code> in this section since it is readily available and the tools presented here do not depend on the type of data.</p>
+<p>R comes with some databases that can be accessed using the <code>data()</code> function. Moreover, we can see the list of data sets available by typing <code>data()</code>. For example, we can find the <code>iris</code> data set (use <code>?iris</code> for a complete description of the data). Although not an insurance or financial data set, we will use <code>iris</code> in this section since it is readily available, and the tools presented here do not depend on the source of the data.</p>
 <p>First, we need to load the data into our working space using <code>data()</code>:</p>
 <div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="r-for-statistical-inference.html#cb540-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span></code></pre></div>
 <p>Now, the <code>iris</code> should appear in the <strong>Environment</strong> tab. Note that <code>iris</code> is a data frame, which is one of the most common ways of presenting data in R.</p>
@@ -277,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can also compute the sample median using the <code>median()</code> function. Recall that the sample median refers to the value in the middle of the observations.</p>
 <div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="r-for-statistical-inference.html#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
 <pre><code>## [1] 5.8</code></pre>
-<p>Let us now move to some measures of variability, which help us understand how spread the data is. First, we can look at the minimum and maximum values using the functions <code>min()</code> and <code>max()</code>, receptively.</p>
+<p>Let us now move to some measures of variability, which help us understand how spread the data is. First, we can look at the minimum and maximum values, which can be obtained using the functions <code>min()</code> and <code>max()</code> receptively.</p>
 <div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="r-for-statistical-inference.html#cb547-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
 <pre><code>## [1] 4.3</code></pre>
 <div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="r-for-statistical-inference.html#cb549-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
@@ -295,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="r-for-statistical-inference.html#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
 <pre><code>##   0%  25%  50%  75% 100% 
 ##  4.3  5.1  5.8  6.4  7.9</code></pre>
-<p>Note that by default, R computes the quantiles of 0% (min), 25%, 50% (median), 75% and 100% (max). We can change this in with the argument <code>probs</code>:</p>
+<p>Note that by default, R computes the quantiles of 0% (min), 25%, 50% (median), 75%, and 100% (max). However, we can change this with the argument <code>probs</code>:</p>
 <div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="r-for-statistical-inference.html#cb559-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(iris<span class="sc">$</span>Sepal.Length, <span class="at">probs =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>, <span class="at">by =</span> <span class="fl">0.1</span>))</span></code></pre></div>
 <pre><code>##  10%  20%  30%  40%  50%  60%  70%  80%  90% 
 ## 4.80 5.00 5.27 5.60 5.80 6.10 6.30 6.52 6.90</code></pre>
@@ -319,7 +319,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##                 
 ##                 
 ## </code></pre>
-<p>Note that our data set has a column called <code>Species</code> indicating the flower species. Although the summary function above already provide us with the list of species (three species), we can also use the <code>unique()</code> function to check how many species we have:</p>
+<p>Note that our data set has a column called <code>Species</code>, indicating the flower species. Although the summary function above already provides us with the list of species (three species), we can also use the <code>unique()</code> function to check how many species we have:</p>
 <div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="r-for-statistical-inference.html#cb565-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(iris<span class="sc">$</span>Species)</span></code></pre></div>
 <pre><code>## [1] setosa     versicolor virginica 
 ## Levels: setosa versicolor virginica</code></pre>
@@ -340,7 +340,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## $virginica
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   4.900   6.225   6.500   6.588   6.900   7.900</code></pre>
-<p>We may also be interested in seeing if there is a relationship among the different columns of our data set. For instance, we can start by computing their correlation, a measure of how a pair of variables are linearly related. Recall that for two vectors <span class="math inline">\(\mathbf{x} = (x_1, \dots, x_n)\)</span> and <span class="math inline">\(\mathbf{y} = (y_1, \dots, y_n)\)</span> the sample covariance is given by
+<p>We may also be interested in seeing if there is a relationship among the different columns of our data set. For that purpose, we can start, for instance, by computing their correlation, a measure of how a pair of variables are linearly related. Recall that for two vectors <span class="math inline">\(\mathbf{x} = (x_1, \dots, x_n)\)</span> and <span class="math inline">\(\mathbf{y} = (y_1, \dots, y_n)\)</span> the sample covariance is given by
 <span class="math display">\[
 \mbox{Cov}(\mathbf{x}, \mathbf{y}) = \frac{1}{n-1} \sum_{i = 1}^{n} \frac{(x_i - \bar{x})(y_i - \bar{y})}{s_{x}s_{y}} \,,
 \]</span>
@@ -355,7 +355,7 @@ where <span class="math inline">\(s_{\mathbf{x}}\)</span> and <span class="math 
 ## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
 ## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000</code></pre>
 <div class="remark">
-<p><span id="unlabeled-div-24" class="remark"><em>Remark</em>. </span>The <code>cor()</code> computes, by default, Person’s correlation coefficient described above. However, we can use the <code>method</code> argument to calculate Kendall’s tau and Spearman’s rho, two measures that assess how well the relationship between two variables can be described using a monotonic function.</p>
+<p><span id="unlabeled-div-24" class="remark"><em>Remark</em>. </span>The <code>cor()</code> computes, by default, the Person’s correlation coefficient described above. However, we can use the <code>method</code> argument to calculate Kendall’s tau and Spearman’s rho, two measures that assess how well the relationship between two variables can be described using a monotonic function. We will review these two other measures later on.</p>
 </div>
 <div id="visual-tools" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Visual tools<a href="r-for-statistical-inference.html#visual-tools" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -365,7 +365,7 @@ where <span class="math inline">\(s_{\mathbf{x}}\)</span> and <span class="math 
 <p>To create a histogram, we can use the <code>hist()</code> function. For instance, to draw a histogram for <code>Sepal.Length</code>, we type:</p>
 <div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="r-for-statistical-inference.html#cb575-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-224-1.png" width="672" /></p>
-<p>We can customize further our plot using the different argument of <code>hist()</code> (see <code>?hist</code>):</p>
+<p>We can customize our plot further using the different arguments of <code>hist()</code> (see <code>?hist</code>):</p>
 <div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="r-for-statistical-inference.html#cb576-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(iris<span class="sc">$</span>Sepal.Length,</span>
 <span id="cb576-2"><a href="r-for-statistical-inference.html#cb576-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">15</span>, <span class="co"># Number of cells in the histogram</span></span>
 <span id="cb576-3"><a href="r-for-statistical-inference.html#cb576-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Histogram of Sepal Lenght&quot;</span>, <span class="co"># Main tittle</span></span>
@@ -389,7 +389,7 @@ where <span class="math inline">\(s_{\mathbf{x}}\)</span> and <span class="math 
 <span id="cb578-8"><a href="r-for-statistical-inference.html#cb578-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb578-9"><a href="r-for-statistical-inference.html#cb578-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(iris<span class="sc">$</span>Sepal.Length),</span>
 <span id="cb578-10"><a href="r-for-statistical-inference.html#cb578-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">3</span>, <span class="co"># Line width</span></span>
-<span id="cb578-11"><a href="r-for-statistical-inference.html#cb578-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;red&quot;</span></span>
+<span id="cb578-11"><a href="r-for-statistical-inference.html#cb578-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;red&quot;</span> <span class="co"># Color of the line</span></span>
 <span id="cb578-12"><a href="r-for-statistical-inference.html#cb578-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-227-1.png" width="672" /></p>
 </div>
@@ -404,14 +404,17 @@ where <span class="math inline">\(s_{\mathbf{x}}\)</span> and <span class="math 
 <p>Let us now customize the above plot:</p>
 <div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="r-for-statistical-inference.html#cb581-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(iris[, <span class="sc">-</span><span class="dv">5</span>],</span>
 <span id="cb581-2"><a href="r-for-statistical-inference.html#cb581-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Box plot - Iris data set&quot;</span>,</span>
-<span id="cb581-3"><a href="r-for-statistical-inference.html#cb581-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;Sepal length&quot;</span>, <span class="st">&quot;Sepal width&quot;</span>, <span class="st">&quot;Petal length&quot;</span>, <span class="st">&quot;Petal width&quot;</span>), <span class="co"># Change names of x axis</span></span>
-<span id="cb581-4"><a href="r-for-statistical-inference.html#cb581-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;green&quot;</span></span>
-<span id="cb581-5"><a href="r-for-statistical-inference.html#cb581-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb581-3"><a href="r-for-statistical-inference.html#cb581-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">names =</span> <span class="fu">c</span>(</span>
+<span id="cb581-4"><a href="r-for-statistical-inference.html#cb581-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Sepal length&quot;</span>, <span class="st">&quot;Sepal width&quot;</span>,</span>
+<span id="cb581-5"><a href="r-for-statistical-inference.html#cb581-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Petal length&quot;</span>, <span class="st">&quot;Petal width&quot;</span></span>
+<span id="cb581-6"><a href="r-for-statistical-inference.html#cb581-6" aria-hidden="true" tabindex="-1"></a>  ), <span class="co"># Change names of x axis</span></span>
+<span id="cb581-7"><a href="r-for-statistical-inference.html#cb581-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;green&quot;</span></span>
+<span id="cb581-8"><a href="r-for-statistical-inference.html#cb581-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-230-1.png" width="672" /></p>
 </div>
 <div id="scatter-plots" class="section level4 unnumbered hasAnchor">
 <h4>Scatter plots<a href="r-for-statistical-inference.html#scatter-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Scatter plots can help us to visualize the relationship between the different data columns. To create an scatter plot, we can use the <code>plot()</code> function. For instance, below we plot Sepal Length against Petal Length:</p>
+<p>Scatter plots can help us to visualize the relationship between the different data columns. We can use the <code>plot()</code> function to create a scatter plot. For instance, below, we plot Sepal Length against Petal Length:</p>
 <div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="r-for-statistical-inference.html#cb582-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Petal.Length,</span>
 <span id="cb582-2"><a href="r-for-statistical-inference.html#cb582-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.first =</span> <span class="fu">grid</span>(<span class="dv">8</span>, <span class="dv">8</span>), <span class="co"># Adds a 8x8 grid</span></span>
 <span id="cb582-3"><a href="r-for-statistical-inference.html#cb582-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">1.2</span>, <span class="co"># Size of the dots</span></span>
@@ -439,7 +442,7 @@ where <span class="math inline">\(s_{\mathbf{x}}\)</span> and <span class="math 
 <li><p><code>r</code>: Random generator for the specified distribution.</p></li>
 </ul>
 <p>For instance, the exponential distribution has the four functions: <code>dexp()</code>, <code>pexp()</code>, <code>qexp()</code> and <code>rexp()</code>.</p>
-<p>Table <a href="r-for-statistical-inference.html#tab:contdist">2.1</a> shows the continuous distributions, and Table <a href="r-for-statistical-inference.html#tab:disdist">2.2</a> the discrete distributions available in R. Note, however, that these two lists are far from comprehensive. Fortunately, other distributions may be available in other packages. For example, an implementation for Pareto distribution can be found in the <code>actuar</code> R package.</p>
+<p>Table <a href="r-for-statistical-inference.html#tab:contdist">2.1</a> shows the continuous distributions, and Table <a href="r-for-statistical-inference.html#tab:disdist">2.2</a> the discrete distributions available by default in R. Note, however, that these two lists are far from comprehensive since there are several other distributions not contained there. Fortunately, other distributions may be available in different packages. For example, an implementation for the Pareto distribution can be found in the <code>actuar</code> R package.</p>
 <table>
 <caption><span id="tab:contdist">Table 2.1: </span>Continuous distributions.</caption>
 <thead>
@@ -531,15 +534,15 @@ where <span class="math inline">\(s_{\mathbf{x}}\)</span> and <span class="math 
 </tbody>
 </table>
 <div class="remark">
-<p><span id="unlabeled-div-25" class="remark"><em>Remark</em>. </span>When using these R built-in functions, you must keep in mind that the parametric form of these distributions may differ from the ones you are familiar with. For instance, in R, the pdf of the Gamma distribution is implemented as (see help - <code>?pgamma</code>):</p>
+<p><span id="unlabeled-div-25" class="remark"><em>Remark</em>. </span>When using these R built-in functions, we must be careful and check the parametric form implemented for these distributions since they may differ from the ones we are familiar with. For instance, in R, the pdf of the Gamma distribution has two parametrizations (see help - <code>?pgamma</code>). The first one is</p>
 <p><span class="math display">\[
-f(x) = \frac{1}{s^a \Gamma(a)} x^{a-1} e^{-x/s} \,, \quad x\ge 0\,,
+f(x) = \frac{1}{\sigma^\alpha \Gamma(\alpha)} x^{\alpha-1} e^{-x/\sigma} \,, \quad x\ge 0\,,
 \]</span>
-where <span class="math inline">\(a&gt;0\)</span> and <span class="math inline">\(s&gt;0\)</span>. In the other hand, some textbooks use</p>
+where <span class="math inline">\(\alpha&gt;0\)</span> and <span class="math inline">\(\sigma&gt;0\)</span> and is accessible by using the arguments <code>shape</code> (<span class="math inline">\(\alpha\)</span>) and <code>scale</code> (<span class="math inline">\(\sigma\)</span>). The second parametrization is</p>
 <p><span class="math display">\[
 f(x) = \frac{\lambda^\alpha}{ \Gamma(\alpha)} x^{\alpha-1} e^{-\lambda x} \,, \quad x\ge 0\,,
 \]</span>
-where <span class="math inline">\(\lambda&gt;0\)</span> and <span class="math inline">\(\alpha&gt;0\)</span>. However, note that both representations are equivalent. Indeed, take <span class="math inline">\(s = 1/\lambda\)</span> and <span class="math inline">\(a = \alpha\)</span>.</p>
+where <span class="math inline">\(\alpha&gt;0\)</span> and <span class="math inline">\(\lambda&gt;0\)</span>, which correspond to the use of the arguments <code>shape</code> (<span class="math inline">\(\alpha\)</span>) and <code>rate</code> (<span class="math inline">\(\lambda\)</span>). However, note that both representations are equivalent. Indeed, take <span class="math inline">\(s = 1/\lambda\)</span> and <span class="math inline">\(a = \alpha\)</span>.</p>
 </div>
 <p>We now look at some examples of how to use these functions, and we will use the normal distribution to do so. Recall that a random variable <span class="math inline">\(X\)</span> is said to be normal distributed with mean <span class="math inline">\(\mu \in \mathbb{R}\)</span> and standard deviation <span class="math inline">\(\sigma&gt;0\)</span>, if its density function is given by
 <span class="math display">\[
@@ -560,7 +563,7 @@ The usual way to plot a function in R is first generate a sequence of numbers, t
 <span id="cb588-5"><a href="r-for-statistical-inference.html#cb588-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(sq, <span class="fu">dnorm</span>(sq, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;green&quot;</span>)</span>
 <span id="cb588-6"><a href="r-for-statistical-inference.html#cb588-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(sq, <span class="fu">dnorm</span>(sq, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;orange&quot;</span>)</span>
 <span id="cb588-7"><a href="r-for-statistical-inference.html#cb588-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>,</span>
-<span id="cb588-8"><a href="r-for-statistical-inference.html#cb588-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">leg =</span> <span class="fu">paste</span>(<span class="st">&quot;mu =&quot;</span>, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>), <span class="st">&quot;, sigma =&quot;</span>, <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>)),</span>
+<span id="cb588-8"><a href="r-for-statistical-inference.html#cb588-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">leg =</span> <span class="fu">paste0</span>(<span class="st">&quot;mu = &quot;</span>, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>), <span class="st">&quot;, sigma = &quot;</span>, <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>)),</span>
 <span id="cb588-9"><a href="r-for-statistical-inference.html#cb588-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">1</span>,</span>
 <span id="cb588-10"><a href="r-for-statistical-inference.html#cb588-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>)</span>
 <span id="cb588-11"><a href="r-for-statistical-inference.html#cb588-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
@@ -569,7 +572,7 @@ The usual way to plot a function in R is first generate a sequence of numbers, t
 <p><span class="math display">\[
 F(x) = \mathbb{P} (X \leq x) = \int_{-\infty}^x \frac{1}{\sigma \sqrt{2 \pi }} \exp\left({- \frac{(y - \mu)^2}{2 \sigma^2}}\right) dy \,.
 \]</span>
-To evaluate this function in R we can use <code>pnorm()</code>. For example, if we want to find <span class="math inline">\(\mathbb{P} (X \leq 1.8)\)</span> for <span class="math inline">\(X \sim N(0, 1)\)</span>, we simply type:</p>
+To evaluate this function in R, we can use <code>pnorm()</code>. For example, if we want to find <span class="math inline">\(\mathbb{P} (X \leq 1.8)\)</span> for <span class="math inline">\(X \sim N(0, 1)\)</span>, we simply type:</p>
 <div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="r-for-statistical-inference.html#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.8</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9640697</code></pre>
 <p>Note that <code>pnorm()</code> has an optional argument <code>lower.tail</code>. By default <code>lower.tail</code> takes the value <code>TRUE</code>, indicating that <code>pnorm()</code> will compute <span class="math inline">\(\mathbb{P} (X \leq x)\)</span>. However, we can compute <span class="math inline">\(\mathbb{P} (X &gt; x) = 1 - \mathbb{P} (X \leq x)\)</span> by using <code>lower.tail = FALSE</code>. For instance,</p>
@@ -585,25 +588,25 @@ To evaluate this function in R we can use <code>pnorm()</code>. For example, if 
 <div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="r-for-statistical-inference.html#cb597-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##  [1]  1.10177950  0.75578151 -0.23823356  0.98744470  0.74139013  0.08934727
 ##  [7] -0.95494386 -0.19515038  0.92552126  0.48297852</code></pre>
-<p>However, sometimes it is convenient to generate the same random sequence at will. This can allow us, for example, to replicate a study. To do this, we need to give R an initial <em>seed</em> to generate the random numbers, which is done via the <code>set.seed()</code> function. For example, type</p>
+<p>However, sometimes it is convenient to generate the same random sequence at will. This can allow us, for example, to replicate a study. To do this, we need to give R an initial <em>seed</em> to generate the random numbers, which is done via the <code>set.seed()</code> function. For example, consider the following code</p>
 <div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="r-for-statistical-inference.html#cb599-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb599-2"><a href="r-for-statistical-inference.html#cb599-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##  [1] -0.6264538  0.1836433 -0.8356286  1.5952808  0.3295078 -0.8204684
 ##  [7]  0.4874291  0.7383247  0.5757814 -0.3053884</code></pre>
-<p>If we run the code again, we will get exactly the same sequence of values:</p>
+<p>Then, if we run the code above again, we will get exactly the same sequence of values:</p>
 <div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="r-for-statistical-inference.html#cb601-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb601-2"><a href="r-for-statistical-inference.html#cb601-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##  [1] -0.6264538  0.1836433 -0.8356286  1.5952808  0.3295078 -0.8204684
 ##  [7]  0.4874291  0.7383247  0.5757814 -0.3053884</code></pre>
-<p>A visual way to evaluate if certain data follows an specific distribution, is to compare the histogram generated by the data and the density function of the distribution. Let us look at a simple example: First we generate a random sample following a <span class="math inline">\(N(0, 1)\)</span> distribution.</p>
+<p>A visual way to evaluate if certain data follows a specific distribution is to compare the histogram generated by the data and the density function of the distribution. Let us look at a simple example: First, we generate a random sample following a <span class="math inline">\(N(0, 1)\)</span> distribution.</p>
 <div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="r-for-statistical-inference.html#cb603-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb603-2"><a href="r-for-statistical-inference.html#cb603-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span></code></pre></div>
-<p>Now, if the data would really follow a <span class="math inline">\(N(0, 1)\)</span> distribution (which in this case it does by construction), the histogram of the data should be similar to the density of a <span class="math inline">\(N(0, 1)\)</span> distribution. The following plot shows exactly this:</p>
+<p>Now, if the data would really follow a <span class="math inline">\(N(0, 1)\)</span> distribution (which, in this case, it does by construction), the histogram of the data should be similar to the density of a <span class="math inline">\(N(0, 1)\)</span> distribution. The following plot shows precisely this:</p>
 <div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="r-for-statistical-inference.html#cb604-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">freq =</span> F, <span class="at">main =</span> <span class="st">&quot;Histogram vs density&quot;</span>)</span>
 <span id="cb604-2"><a href="r-for-statistical-inference.html#cb604-2" aria-hidden="true" tabindex="-1"></a>sq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
 <span id="cb604-3"><a href="r-for-statistical-inference.html#cb604-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(sq, <span class="fu">dnorm</span>(sq), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-243-1.png" width="672" /></p>
-<p>Finally, we will look at function to compute quantiles of a distribution. Recall that for a random variable <span class="math inline">\(X\)</span> with distribution function <span class="math inline">\(F\)</span>, its quantile function <span class="math inline">\(F^{\leftarrow}\)</span> is given by
+<p>Finally, we will look at the function to compute the quantiles of a distribution. Recall that for a random variable <span class="math inline">\(X\)</span> with distribution function <span class="math inline">\(F\)</span>, its quantile function <span class="math inline">\(F^{\leftarrow}\)</span> is given by
 <span class="math display">\[
 F^{\leftarrow}(p) = \inf \{x : p \leq F(x)  \} \,, \quad p \in [0,1] \,.
 \]</span>
@@ -618,7 +621,7 @@ In other words, it corresponds to the inverse of <span class="math inline">\(F\)
 <pre><code>## [1] 4.289707</code></pre>
 <div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="r-for-statistical-inference.html#cb607-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(x, <span class="dv">1</span>, <span class="dv">2</span>) <span class="co"># Check</span></span></code></pre></div>
 <pre><code>## [1] 0.95</code></pre>
-<p>An alternative visual way of evaluating if our data comes from a certain distribution, is to plot the sample quantiles against the theoretical quantiles of the distribution to check. This is called, a QQ plot. If the data comes from that specific distribution, then we should observe that the points form (approximately) an identity line. Let us look at an example:</p>
+<p>An alternative visual way of evaluating if our data comes from a certain distribution is to plot the sample quantiles against the theoretical quantiles of the distribution to check. This is called a QQ-plot. If the data comes from that specific distribution, then we should observe that the points form (approximately) an identity line. Let us look at an example:</p>
 <div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="r-for-statistical-inference.html#cb609-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb609-2"><a href="r-for-statistical-inference.html#cb609-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
 <span id="cb609-3"><a href="r-for-statistical-inference.html#cb609-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.99</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
@@ -634,7 +637,7 @@ In other words, it corresponds to the inverse of <span class="math inline">\(F\)
 <div id="tranformations" class="section level3 hasAnchor" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> Tranformations<a href="r-for-statistical-inference.html#tranformations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Several distributions are obtained via transformations. For instance, a lognormal distributed random variable can be obtained by exponentiation of a normal distributed random variable. Here, we will illustrate how to use the previous implementations to work with transformations of random variables.</p>
-<p>First let us recall some results. Let <span class="math inline">\(Y\)</span> be a continuous random variable with density and distributions functions <span class="math inline">\(f_{Y}\)</span> and <span class="math inline">\(F_{Y}\)</span>, respectively. Now, consider a strictly increasing transformation <span class="math inline">\(g(\cdot)\)</span>, and define <span class="math inline">\(X = g(Y)\)</span>. Then, the distribution function <span class="math inline">\(F_X\)</span> of X is given by
+<p>First, let us recall some results. Let <span class="math inline">\(Y\)</span> be a continuous random variable with density and distribution functions <span class="math inline">\(f_{Y}\)</span> and <span class="math inline">\(F_{Y}\)</span>, respectively. Now, consider a strictly increasing transformation <span class="math inline">\(g(\cdot)\)</span>, and define <span class="math inline">\(X = g(Y)\)</span>. Then, the distribution function <span class="math inline">\(F_X\)</span> of X is given by
 <span class="math display">\[
 F_X(x) = \mathbb{P}(X \leq x) = \mathbb{P}(g(Y) \leq x) = \mathbb{P}(Y \leq g^{-1}(x)) = F_Y(g^{-1}(x)) \,.
 \]</span>
@@ -646,7 +649,7 @@ f_X(x) =   f_Y(g^{-1}(x)) \frac{d}{dx} (g^{-1}(x)) \,.
 <p><span class="math display">\[
 X = \exp(Y) \,,
 \]</span>
-where <span class="math inline">\(Y \sim N(\mu, \sigma^2)\)</span>. We write <span class="math inline">\(X \sim LN(\mu, \sigma^2)\)</span>. Although already implemented in R under the root name <code>lnorm</code>, we can use this distribution to illustrate how to work with transformations, and at the same time, verify our computations. Note that in this case <span class="math inline">\(g(y) = \exp(y)\)</span>, <span class="math inline">\(y \in \mathbb{R}\)</span>, and <span class="math inline">\(g^{-1}(x) = \log(x)\)</span>, <span class="math inline">\(x&gt;0\)</span>.</p>
+where <span class="math inline">\(Y \sim N(\mu, \sigma^2)\)</span>. We write <span class="math inline">\(X \sim LN(\mu, \sigma^2)\)</span>. Although already implemented in R under the root name <code>lnorm</code>, we can use this distribution to illustrate how to work with transformations and, at the same time, verify our computations. Note that in this case <span class="math inline">\(g(y) = \exp(y)\)</span>, <span class="math inline">\(y \in \mathbb{R}\)</span>, and <span class="math inline">\(g^{-1}(x) = \log(x)\)</span>, <span class="math inline">\(x&gt;0\)</span>.</p>
 <p>We can now compute the distribution function <span class="math inline">\(F_X(x)\)</span> of <span class="math inline">\(X \sim LN(\mu, \sigma^2)\)</span> at <span class="math inline">\(x\)</span>, by using <code>pnorm()</code> evaluated at <span class="math inline">\(g^{-1}(x) = \log(x)\)</span>. For example, for <span class="math inline">\(X \sim LN(1, 2^2)\)</span>, <span class="math inline">\(\mathbb{P}(X \leq 3)\)</span> can be computed as follows:</p>
 <div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="r-for-statistical-inference.html#cb610-1" aria-hidden="true" tabindex="-1"></a>user_plnorm <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mu, sigma) {</span>
 <span id="cb610-2"><a href="r-for-statistical-inference.html#cb610-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pnorm</span>(<span class="fu">log</span>(x), mu, sigma)</span>
@@ -671,7 +674,7 @@ where <span class="math inline">\(Y \sim N(\mu, \sigma^2)\)</span>. We write <sp
 <pre><code>## [1] 72.94511</code></pre>
 <div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="r-for-statistical-inference.html#cb620-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qlnorm</span>(<span class="fl">0.95</span>, <span class="dv">1</span>, <span class="dv">2</span>) <span class="co"># Check</span></span></code></pre></div>
 <pre><code>## [1] 72.94511</code></pre>
-<p>Simulation can also be performed using the relationship <span class="math inline">\(X = \exp(Y)\)</span></p>
+<p>Simulation can also be performed using the relationship <span class="math inline">\(X = \exp(Y)\)</span>:</p>
 <div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="r-for-statistical-inference.html#cb622-1" aria-hidden="true" tabindex="-1"></a>user_rlnorm <span class="ot">&lt;-</span> <span class="cf">function</span>(n, mu, sigma) {</span>
 <span id="cb622-2"><a href="r-for-statistical-inference.html#cb622-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>(<span class="fu">rnorm</span>(n, mu, sigma))</span>
 <span id="cb622-3"><a href="r-for-statistical-inference.html#cb622-3" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -679,7 +682,7 @@ where <span class="math inline">\(Y \sim N(\mu, \sigma^2)\)</span>. We write <sp
 <span id="cb622-5"><a href="r-for-statistical-inference.html#cb622-5" aria-hidden="true" tabindex="-1"></a><span class="fu">user_rlnorm</span>(<span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##  [1]  0.7765396  3.9246872  0.5110656 66.0598801  5.2541358  0.5267987
 ##  [7]  7.2055971 11.9013211  8.5982845  1.4758340</code></pre>
-<p>In this case, we can check that our simulation is correct by using <code>rlnorm()</code></p>
+<p>In this very particular case, we can check that our simulation is correct by using <code>rlnorm()</code>:</p>
 <div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="r-for-statistical-inference.html#cb624-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb624-2"><a href="r-for-statistical-inference.html#cb624-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##  [1]  0.7765396  3.9246872  0.5110656 66.0598801  5.2541358  0.5267987
@@ -691,7 +694,7 @@ where <span class="math inline">\(Y \sim N(\mu, \sigma^2)\)</span>. We write <sp
 <div class="theorem">
 <p><span id="thm:unlabeled-div-26" class="theorem"><strong>Theorem 2.1  </strong></span>Let <span class="math inline">\(X_1,X_2,\dots\)</span> be a sequence of i.i.d. random variables such that <span class="math inline">\(\mathbb{E}[X_1]=\mu&lt;\infty\)</span>. Then, for any <span class="math inline">\(\epsilon &gt;0\)</span>
 <span class="math display">\[
-\underset{n\rightarrow \infty}{\lim}P\{|\bar{X}_n-\mu|\geq \epsilon\}=0 \,,
+\underset{n\rightarrow \infty}{\lim}\mathbb{P}(|\bar{X}_n-\mu|\geq \epsilon)=0 \,,
 \]</span>
 where <span class="math inline">\(\bar{X}_n = n^{-1}\sum_{i = 1}^n X_i\)</span> denotes the sample mean.
 In other words, as the sample size <span class="math inline">\(n\)</span> increases, the probability that the sample mean <span class="math inline">\(\bar{X}_n\)</span> is different from the population mean <span class="math inline">\(\mu\)</span> converges to zero.</p>
@@ -708,7 +711,7 @@ In other words, as the sample size <span class="math inline">\(n\)</span> increa
 <p>In the figure above, we can observe that as the sample size increases, the sample mean gets closer to the population mean (zero).
 Next, we recall the Central Limit Theorem:</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-27" class="theorem"><strong>Theorem 2.2  </strong></span>Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be a sequence of i.i.d. random variables with a finite expected value <span class="math inline">\(\mathbb{E}[X_1]=\mu&lt;\infty\)</span> and variance <span class="math inline">\(\mbox{Var}[X_1] = \sigma^2 &lt;\infty\)</span>. Now, let <span class="math inline">\(Z_n\)</span> be the standarized mean given by
+<p><span id="thm:unlabeled-div-27" class="theorem"><strong>Theorem 2.2  </strong></span>Let <span class="math inline">\(X_1,X_2,\ldots\)</span> be a sequence of i.i.d. random variables with a finite expected value <span class="math inline">\(\mathbb{E}[X_1]=\mu&lt;\infty\)</span> and variance <span class="math inline">\(\mbox{Var}(X_1)= \sigma^2 &lt;\infty\)</span>. Now, let <span class="math inline">\(Z_n\)</span> be the standardized mean given by
 <span class="math display">\[
 Z_n:=\frac{\bar{X}_n-\mu}{\sigma/\sqrt{n}}.
 \]</span>
@@ -720,21 +723,21 @@ Or equivalently,
 <span class="math display">\[
 \bar{X}_n\simeq N(\mu,\sigma^2/n)\,,\quad
 \]</span>
-In other words, for sufficiently large <span class="math inline">\(n\)</span>, the sample mean <span class="math inline">\(\bar{X}_n\)</span> is close to be normal distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2/n\)</span>.</p>
+In other words, for sufficiently large <span class="math inline">\(n\)</span>, the sample mean <span class="math inline">\(\bar{X}_n\)</span> is close to being normal distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2/n\)</span>.</p>
 </div>
-<p>Let us exemplify this result via a simulation study. The idea is as follows: consider a sample of size <span class="math inline">\(n\)</span> from an exponential distributed random variable with mean <span class="math inline">\(1/\lambda\)</span>. If we were to observe several samples of size <span class="math inline">\(n\)</span> from this distribution, lets say <span class="math inline">\(p\)</span> samples, and compute <span class="math inline">\(Z_n^{(j)}\)</span> for each sample <span class="math inline">\(j = 1,\dots, p\)</span>, then for <span class="math inline">\(n\)</span> large enough <span class="math inline">\(Z_n^{(j)}\)</span>, <span class="math inline">\(j = 1,\dots, p\)</span>, should be approximately a sample from a standard normal distributed random variable. We could then, for example, check if <span class="math inline">\(Z_n^{(j)}\)</span>, <span class="math inline">\(j = 1,\dots, p\)</span> is truly normal distributed via a QQ plot. Let us try this, with <span class="math inline">\(n = 10\)</span>, <span class="math inline">\(p = 500\)</span> and <span class="math inline">\(\lambda = 0.5\)</span>:</p>
+<p>Let us exemplify this result via a simulation study. The idea is as follows: consider a sample of size <span class="math inline">\(n\)</span> from an exponential distributed random variable with mean <span class="math inline">\(1/\lambda\)</span>. If we were to observe several samples of size <span class="math inline">\(n\)</span> from this distribution, let’s say <span class="math inline">\(p\)</span> samples, and compute <span class="math inline">\(Z_n^{(j)}\)</span> for each sample <span class="math inline">\(j = 1,\dots, p\)</span>, then for <span class="math inline">\(n\)</span> large enough <span class="math inline">\(Z_n^{(j)}\)</span>, <span class="math inline">\(j = 1,\dots, p\)</span>, should be approximately a sample from a standard normal distributed random variable. We could then check if <span class="math inline">\(Z_n^{(j)}\)</span>, <span class="math inline">\(j = 1,\dots, p\)</span> is truly normal distributed via, e.g., a QQ-plot. Let us try this, with <span class="math inline">\(n = 10\)</span>, <span class="math inline">\(p = 500\)</span> and <span class="math inline">\(\lambda = 0.5\)</span>:</p>
 <div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="r-for-statistical-inference.html#cb627-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># Sample size</span></span>
-<span id="cb627-2"><a href="r-for-statistical-inference.html#cb627-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">500</span> <span class="co"># Replications of experiment</span></span>
+<span id="cb627-2"><a href="r-for-statistical-inference.html#cb627-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">500</span> <span class="co"># Replications of the experiment</span></span>
 <span id="cb627-3"><a href="r-for-statistical-inference.html#cb627-3" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb627-4"><a href="r-for-statistical-inference.html#cb627-4" aria-hidden="true" tabindex="-1"></a>sim_exp <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rexp</span>(n <span class="sc">*</span> p, lambda), p, n) <span class="co"># Simulations in matrix form</span></span>
 <span id="cb627-5"><a href="r-for-statistical-inference.html#cb627-5" aria-hidden="true" tabindex="-1"></a>samp_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(sim_exp, <span class="dv">1</span>, mean) <span class="co"># Sample mean for each replication</span></span>
 <span id="cb627-6"><a href="r-for-statistical-inference.html#cb627-6" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> lambda <span class="co"># Population mean</span></span>
 <span id="cb627-7"><a href="r-for-statistical-inference.html#cb627-7" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> lambda<span class="sc">^</span><span class="dv">2</span> <span class="co"># Population variance</span></span>
 <span id="cb627-8"><a href="r-for-statistical-inference.html#cb627-8" aria-hidden="true" tabindex="-1"></a>std_mean <span class="ot">&lt;-</span> (samp_mean <span class="sc">-</span> mu) <span class="sc">/</span> (<span class="fu">sqrt</span>(sigma2 <span class="sc">/</span> n)) <span class="co"># Standardized mean (Z_n)</span></span>
-<span id="cb627-9"><a href="r-for-statistical-inference.html#cb627-9" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(std_mean, <span class="at">main =</span> <span class="st">&quot;Normal QQ plot - n = 10&quot;</span>) <span class="co"># QQ plot with standard normal</span></span>
+<span id="cb627-9"><a href="r-for-statistical-inference.html#cb627-9" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(std_mean, <span class="at">main =</span> <span class="st">&quot;Normal QQ plot - n = 10&quot;</span>) <span class="co"># QQ-plot with standard normal</span></span>
 <span id="cb627-10"><a href="r-for-statistical-inference.html#cb627-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-252-1.png" width="672" /></p>
-<p>In the figure above, we observe that <span class="math inline">\(Z_n\)</span> is not standard normal distributed (yet). However, if we now consider <span class="math inline">\(n = 1000\)</span>, the conclusion changes (see below).</p>
+<p>In the figure above, we observe that <span class="math inline">\(Z_n\)</span> is not standard normal distributed (yet). However, if we now consider <span class="math inline">\(n = 1000\)</span>, the conclusion changes (see figure below).</p>
 <p><img src="_main_files/figure-html/unnamed-chunk-253-1.png" width="672" /></p>
 </div>
 </div>
@@ -895,7 +898,7 @@ Thus, for our simulated sample, we obtain</p>
 <div class="theorem">
 <p><span id="thm:unlabeled-div-28" class="theorem"><strong>Theorem 2.3  </strong></span>Let <span class="math inline">\(X_1,X_2,\dots\)</span> be a sequence of i.i.d. random variables with common density function <span class="math inline">\(f(\cdot;\theta)\)</span>. Then, under mild conditions, for any <span class="math inline">\(\epsilon &gt;0\)</span>
 <span class="math display">\[
-\underset{n\rightarrow \infty}{\lim}P\{|\hat{\theta}_n-\theta|\geq \epsilon\}=0 \,,
+\underset{n\rightarrow \infty}{\lim}\mathbb{P}(|\hat{\theta}_n-\theta|\geq \epsilon)=0 \,,
 \]</span>
 where <span class="math inline">\(\hat{\theta}_n\)</span> is the maximum likelihood estimator of <span class="math inline">\(\theta\)</span> based on a sample of size <span class="math inline">\(n\)</span>.
 In other words, as the sample size <span class="math inline">\(n\)</span> increases, the probability that the MLE <span class="math inline">\(\hat{\theta}_n\)</span> is different from the true parameter <span class="math inline">\(\theta\)</span> converges to zero.</p>
