@@ -1772,8 +1772,8 @@ As previously mentioned, packages in CRAN are updated regularly. This means that
 ## accurate nanosecond times to avoid potential integer overflows</code></pre>
 <pre><code>## Unit: nanoseconds
 ##               expr  min   lq     mean median   uq     max neval
-##     sum_vect(x, y)  205  246  65554.9  266.5  533  647964    10
-##  sum_no_vect(x, y) 1025 1066 160162.4 1066.0 1148 1591743    10</code></pre>
+##     sum_vect(x, y)  205  205  35178.0    246  328  347557    10
+##  sum_no_vect(x, y) 1025 1066 197685.6   1189 1476 1965745    10</code></pre>
 <p>We can see that the performance of the vectorized version is, on average, around 5 times (this number may vary from computer to computer) faster than the implementation using a <code>for</code> loop. In conclusion, we should aim to do as many vectorized operations as possible in our code.</p>
 </div>
 <div id="reading-and-writing-data" class="section level2 hasAnchor" number="1.10">
