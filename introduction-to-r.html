@@ -1070,9 +1070,10 @@ respectively.</p>
 ## [2,]    2    5
 ## [3,]    3    6</code></pre>
 <p>The last argument, <code>dimnames</code>, helps us give names to a matrix’s rows and columns.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="introduction-to-r.html#cb305-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dv">3</span>, <span class="dv">2</span>, </span>
-<span id="cb305-2"><a href="introduction-to-r.html#cb305-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Row1&quot;</span>, <span class="st">&quot;Row2&quot;</span>, <span class="st">&quot;Row3&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;Column1&quot;</span>, <span class="st">&quot;Column2&quot;</span>)))</span>
-<span id="cb305-3"><a href="introduction-to-r.html#cb305-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="introduction-to-r.html#cb305-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dv">3</span>, <span class="dv">2</span>,</span>
+<span id="cb305-2"><a href="introduction-to-r.html#cb305-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Row1&quot;</span>, <span class="st">&quot;Row2&quot;</span>, <span class="st">&quot;Row3&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;Column1&quot;</span>, <span class="st">&quot;Column2&quot;</span>))</span>
+<span id="cb305-3"><a href="introduction-to-r.html#cb305-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb305-4"><a href="introduction-to-r.html#cb305-4" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>##      Column1 Column2
 ## Row1       1       4
 ## Row2       2       5
@@ -1445,7 +1446,7 @@ For instance, let us compute the mean by rows and columns:</p>
 <p>A list enables the storage of a variety of objects into a single one. In contrast to data frames, lists can contain different data types of different lengths. Lists can be generated in R using the function <code>list()</code>.</p>
 <div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="introduction-to-r.html#cb438-1" aria-hidden="true" tabindex="-1"></a>month <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>)</span>
 <span id="cb438-2"><a href="introduction-to-r.html#cb438-2" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.21</span>, <span class="fl">1.245</span>, <span class="fl">1.402</span>)</span>
-<span id="cb438-3"><a href="introduction-to-r.html#cb438-3" aria-hidden="true" tabindex="-1"></a>type <span class="ot">&lt;-</span> <span class="st">&quot;monthly -interest -rate&quot;</span></span>
+<span id="cb438-3"><a href="introduction-to-r.html#cb438-3" aria-hidden="true" tabindex="-1"></a>type <span class="ot">&lt;-</span> <span class="st">&quot;monthly-interest-rate&quot;</span></span>
 <span id="cb438-4"><a href="introduction-to-r.html#cb438-4" aria-hidden="true" tabindex="-1"></a>rate <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Month =</span> month, <span class="at">Value =</span> value, <span class="at">Type =</span> type)</span>
 <span id="cb438-5"><a href="introduction-to-r.html#cb438-5" aria-hidden="true" tabindex="-1"></a>rate</span></code></pre></div>
 <pre><code>## $Month
@@ -1455,13 +1456,13 @@ For instance, let us compute the mean by rows and columns:</p>
 ## [1] 1.210 1.245 1.402
 ## 
 ## $Type
-## [1] &quot;monthly -interest -rate&quot;</code></pre>
+## [1] &quot;monthly-interest-rate&quot;</code></pre>
 <p>The structure of a list object can also be displayed (in a more compact format) using <code>str()</code>:</p>
 <div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="introduction-to-r.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(rate)</span></code></pre></div>
 <pre><code>## List of 3
 ##  $ Month: chr [1:3] &quot;Jan&quot; &quot;Feb&quot; &quot;Mar&quot;
 ##  $ Value: num [1:3] 1.21 1.25 1.4
-##  $ Type : chr &quot;monthly -interest -rate&quot;</code></pre>
+##  $ Type : chr &quot;monthly-interest-rate&quot;</code></pre>
 <p>As is the case with data frames, we can use <code>$</code> to access information:</p>
 <div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="introduction-to-r.html#cb442-1" aria-hidden="true" tabindex="-1"></a>rate<span class="sc">$</span>Value</span></code></pre></div>
 <pre><code>## [1] 1.210 1.245 1.402</code></pre>
@@ -1478,7 +1479,7 @@ For instance, let us compute the mean by rows and columns:</p>
 <pre><code>## List of 4
 ##  $ Month: chr [1:3] &quot;Jan&quot; &quot;Feb&quot; &quot;Mar&quot;
 ##  $ Value: num [1:3] 1.21 1.25 1.4
-##  $ Type : chr &quot;monthly -interest -rate&quot;
+##  $ Type : chr &quot;monthly-interest-rate&quot;
 ##  $ Year : num 2021</code></pre>
 <p>Second, using <code>[]</code>:</p>
 <div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="introduction-to-r.html#cb452-1" aria-hidden="true" tabindex="-1"></a>rate[[<span class="dv">5</span>]] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;UK&quot;</span>)</span>
@@ -1486,7 +1487,7 @@ For instance, let us compute the mean by rows and columns:</p>
 <pre><code>## List of 5
 ##  $ Month: chr [1:3] &quot;Jan&quot; &quot;Feb&quot; &quot;Mar&quot;
 ##  $ Value: num [1:3] 1.21 1.25 1.4
-##  $ Type : chr &quot;monthly -interest -rate&quot;
+##  $ Type : chr &quot;monthly-interest-rate&quot;
 ##  $ Year : num 2021
 ##  $      : chr &quot;UK&quot;</code></pre>
 <p>Names can be handled in the same way as with data frames.</p>
@@ -1495,7 +1496,7 @@ For instance, let us compute the mean by rows and columns:</p>
 <pre><code>## List of 5
 ##  $ Month  : chr [1:3] &quot;Jan&quot; &quot;Feb&quot; &quot;Mar&quot;
 ##  $ Value  : num [1:3] 1.21 1.25 1.4
-##  $ Type   : chr &quot;monthly -interest -rate&quot;
+##  $ Type   : chr &quot;monthly-interest-rate&quot;
 ##  $ Year   : num 2021
 ##  $ Country: chr &quot;UK&quot;</code></pre>
 </div>
@@ -1561,7 +1562,7 @@ We write <span class="math inline">\(X \sim Exp(\lambda)\)</span>.</p>
 <span id="cb472-4"><a href="introduction-to-r.html#cb472-4" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb472-5"><a href="introduction-to-r.html#cb472-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dummy_function</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 20</code></pre>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="introduction-to-r.html#cb474-1" aria-hidden="true" tabindex="-1"></a>z <span class="co"># Keeps the value 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="introduction-to-r.html#cb474-1" aria-hidden="true" tabindex="-1"></a>z <span class="co"># Keeps the value of 2</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>However, if we create an object inside a function with the same name as an object in the global environment, the function will use the object defined inside the function’s body.</p>
 <div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="introduction-to-r.html#cb476-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">2</span></span>
@@ -1571,7 +1572,7 @@ We write <span class="math inline">\(X \sim Exp(\lambda)\)</span>.</p>
 <span id="cb476-5"><a href="introduction-to-r.html#cb476-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb476-6"><a href="introduction-to-r.html#cb476-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dummy_function</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 50</code></pre>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="introduction-to-r.html#cb478-1" aria-hidden="true" tabindex="-1"></a>z <span class="co"># Keeps the value 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="introduction-to-r.html#cb478-1" aria-hidden="true" tabindex="-1"></a>z <span class="co"># Keeps the value of 2</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <ul>
 <li>R does not alter objects given as input of a function. Instead, it creates copies.</li>
@@ -1772,8 +1773,8 @@ As previously mentioned, packages in CRAN are updated regularly. This means that
 ## accurate nanosecond times to avoid potential integer overflows</code></pre>
 <pre><code>## Unit: nanoseconds
 ##               expr  min   lq     mean median   uq     max neval
-##     sum_vect(x, y)  205  205  35178.0    246  328  347557    10
-##  sum_no_vect(x, y) 1025 1066 197685.6   1189 1476 1965745    10</code></pre>
+##     sum_vect(x, y)  205  246  39548.6  307.5  410  389459    10
+##  sum_no_vect(x, y) 1107 1189 204339.9 1230.0 1845 2031222    10</code></pre>
 <p>We can see that the performance of the vectorized version is, on average, around 5 times (this number may vary from computer to computer) faster than the implementation using a <code>for</code> loop. In conclusion, we should aim to do as many vectorized operations as possible in our code.</p>
 </div>
 <div id="reading-and-writing-data" class="section level2 hasAnchor" number="1.10">

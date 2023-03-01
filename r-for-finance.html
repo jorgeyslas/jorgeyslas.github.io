@@ -498,14 +498,15 @@ Var(\mathbf{R})  = \left( \begin{matrix}
 Then, the following code plots the opportunity set available to any investor:</p>
 <div class="sourceCode" id="cb897"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb897-1"><a href="r-for-finance.html#cb897-1" aria-hidden="true" tabindex="-1"></a>exp_r <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.105</span>, <span class="fl">0.18</span>, <span class="fl">0.02</span>)</span>
 <span id="cb897-2"><a href="r-for-finance.html#cb897-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb897-3"><a href="r-for-finance.html#cb897-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
-<span id="cb897-4"><a href="r-for-finance.html#cb897-4" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.15</span><span class="sc">^</span><span class="dv">2</span>, <span class="sc">-</span><span class="fl">0.012</span>, <span class="fl">0.002</span>,</span>
-<span id="cb897-5"><a href="r-for-finance.html#cb897-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fl">0.012</span>, <span class="fl">0.12</span><span class="sc">^</span><span class="dv">2</span>, <span class="sc">-</span><span class="fl">0.002</span>,</span>
-<span id="cb897-6"><a href="r-for-finance.html#cb897-6" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.002</span>, <span class="sc">-</span><span class="fl">0.002</span>, <span class="fl">0.2</span><span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb897-7"><a href="r-for-finance.html#cb897-7" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb897-8"><a href="r-for-finance.html#cb897-8" aria-hidden="true" tabindex="-1"></a><span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T</span>
-<span id="cb897-9"><a href="r-for-finance.html#cb897-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb897-10"><a href="r-for-finance.html#cb897-10" aria-hidden="true" tabindex="-1"></a>sigma</span></code></pre></div>
+<span id="cb897-3"><a href="r-for-finance.html#cb897-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb897-4"><a href="r-for-finance.html#cb897-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb897-5"><a href="r-for-finance.html#cb897-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.15</span><span class="sc">^</span><span class="dv">2</span>, <span class="sc">-</span><span class="fl">0.012</span>, <span class="fl">0.002</span>,</span>
+<span id="cb897-6"><a href="r-for-finance.html#cb897-6" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">0.012</span>, <span class="fl">0.12</span><span class="sc">^</span><span class="dv">2</span>, <span class="sc">-</span><span class="fl">0.002</span>,</span>
+<span id="cb897-7"><a href="r-for-finance.html#cb897-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.002</span>, <span class="sc">-</span><span class="fl">0.002</span>, <span class="fl">0.2</span><span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb897-8"><a href="r-for-finance.html#cb897-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb897-9"><a href="r-for-finance.html#cb897-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T</span>
+<span id="cb897-10"><a href="r-for-finance.html#cb897-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb897-11"><a href="r-for-finance.html#cb897-11" aria-hidden="true" tabindex="-1"></a>sigma</span></code></pre></div>
 <pre><code>##         [,1]    [,2]   [,3]
 ## [1,]  0.0225 -0.0120  0.002
 ## [2,] -0.0120  0.0144 -0.002
@@ -704,18 +705,18 @@ where <span class="math inline">\(R_f\)</span> is the risk-free rate, and <span 
 </div>
 <div id="the-binomial-model" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> The binomial model<a href="r-for-finance.html#the-binomial-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This section introduces the binomial tree model and uses it to compute arbitrage-free prices for European-style options. Although the mathematical description of this model involves only simple algebra, it is a powerful tool to understand arbitrage pricing theory. The main idea of the binomial model is to break the time to maturity of an option into periods. Then, in each period, and given the underlying asset’s price at the beginning of the period, it assumes that the stock price will change to one of two possible values at the end of the period. Thus, we can then determine the value of the option recursively by starting at the maturity date, evaluating the option’s value under each possibility for the final prices of the stock, and then moving backward through the tree.</p>
+<p>This section introduces the binomial tree model and uses it to compute arbitrage-free prices for European-style options. Although the mathematical description of this model involves only simple algebra, it is a powerful tool for understanding arbitrage pricing theory. The main idea of the binomial model is to break the time to maturity of an option into periods. Then, in each period, and given the underlying asset’s price at the beginning of the period, it assumes that the stock price will change to one of two possible values at the end of the period. Thus, we can then determine the value of the option recursively by starting at the maturity date, evaluating the option’s value under each possibility for the final prices of the stock, and then moving backward through the tree.</p>
 <div id="one-period-binomial-model" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> One-period binomial model<a href="r-for-finance.html#one-period-binomial-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We start with the one-period version of the model. The model assumes that we have two assets: a risk-free asset (e.g., a treasury bond) and a stock. Here, we denote by <span class="math inline">\(B_t\)</span> and <span class="math inline">\(S_t\)</span> the bond and stock prices at time <span class="math inline">\(t\)</span>, respectively. Typically, time <span class="math inline">\(t = 0\)</span> represents the present time, and <span class="math inline">\(t = 1\)</span> denotes some future time.</p>
-<p>Let us begin by describing the behavior of the stock prices. If at time <span class="math inline">\(t= 0\)</span> the price is <span class="math inline">\(S_0\)</span>, then the stock price at time <span class="math inline">\(t = 1\)</span>, <span class="math inline">\(S_1\)</span>, is given by the following random variable</p>
+<p>Let us begin by describing the behavior of the stock prices. If at time <span class="math inline">\(t= 0\)</span>, the price is <span class="math inline">\(S_0\)</span>, then the stock price at time <span class="math inline">\(t = 1\)</span>, <span class="math inline">\(S_1\)</span>, is given by the following random variable</p>
 <span class="math display">\[
 S_1 = \left\{ \begin{matrix}
   u S_0\,,  &amp; \text{with probability } p_u \,,\\
-  d S_0 &amp; \text{with probability } p_d \,,
+  d S_0\,, &amp; \text{with probability } p_d \,,
 \end{matrix}\right.
 \]</span>
-where <span class="math inline">\(u\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(p_u\)</span>, and <span class="math inline">\(p_d\)</span> are positive positive constants satisfying <span class="math inline">\(d&lt;u\)</span>, and <span class="math inline">\(p_u+p_d =1\)</span>. Figure <a href="r-for-finance.html#fig:bintreeoneper">3.1</a> shows the development of the price of a stock under the above specification.
+where <span class="math inline">\(u\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(p_u\)</span>, and <span class="math inline">\(p_d\)</span> are positive constants satisfying <span class="math inline">\(d&lt;u\)</span>, and <span class="math inline">\(p_u+p_d =1\)</span>. Figure <a href="r-for-finance.html#fig:bintreeoneper">3.1</a> shows the stock price development under the above specification.
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:bintreeoneper"></span>
 <img src="figures/Bintreeoneper.jpg" alt="Stock prices in a one-period binomial tree." width="45%" />
 <p class="caption">
@@ -763,24 +764,24 @@ Moreover, the above condition is equivalent to saying that <span class="math inl
 <span class="math display">\[
 1 + R = u q_u + d q_d \,.
 \]</span>
-where <span class="math inline">\(q_u, q_d \geq0\)</span> and <span class="math inline">\(q_u + q_d = 1\)</span>. In particular, the weights <span class="math inline">\(q_u\)</span> and <span class="math inline">\(q_d\)</span> can be interpreted as probabilities for a “new probability measure <span class="math inline">\(Q\)</span>” with the property <span class="math inline">\(Q(Z = u) = q_u\)</span>, <span class="math inline">\(Q(Z = d) = q_d\)</span>. Denoting expectation w.r.t. this measure by <span class="math inline">\(\mathbb{E}^Q\)</span>, it is easy to see that
+where <span class="math inline">\(q_u, q_d \geq0\)</span> and <span class="math inline">\(q_u + q_d = 1\)</span>. In particular, the weights <span class="math inline">\(q_u\)</span> and <span class="math inline">\(q_d\)</span> can be interpreted as probabilities for a “new probability measure <span class="math inline">\(Q\)</span>” with the property <span class="math inline">\(Q(Z = u) = q_u\)</span>, <span class="math inline">\(Q(Z = d) = q_d\)</span>. Denoting expectation with respect to this measure by <span class="math inline">\(\mathbb{E}^Q\)</span>, it is easy to see that
 <span class="math display">\[
 S_0 = \frac{1}{1+R} \mathbb{E}^Q[S_1] \,.
 \]</span>
-<span class="math inline">\(Q\)</span> is known as the “<strong>risk-neutral measure</strong>”. Furthermore, <span class="math inline">\(q_u\)</span> and <span class="math inline">\(q_d\)</span> are explicit and given by
+<span class="math inline">\(Q\)</span> is known as the “<strong>risk-neutral measure</strong>.” Furthermore, <span class="math inline">\(q_u\)</span> and <span class="math inline">\(q_d\)</span> are explicit and given by
 <span class="math display">\[\begin{align*}
 &amp; q_u = \frac{(1 +R) - d}{u - d} \,, \\
-&amp; q_d = \frac{u - (1 +R)}{u - d} \,,
+&amp; q_d = \frac{u - (1 +R)}{u - d} \,.
 \end{align*}\]</span>
-These are known as the <strong>risk-neutral probabilities</strong> and will play an essential role in option pricing.</p>
-<p>The above motivates the concept of <strong>risk-neutral valuation</strong>: The price of an asset is the expectation at time 1, calculated using the risk-neutral probabilities, and then discounted using the risk-free rate of interest.</p>
+These are known as <strong>risk-neutral probabilities</strong> and will play an essential role in option pricing.</p>
+<p>The above motivates the concept of <strong>risk-neutral valuation</strong>: The price of an asset is the expectation at time 1, calculated using the risk-neutral probabilities and then discounted using the risk-free interest rate.</p>
 </div>
 <div id="risk-neutral-pricing" class="section level4 unnumbered hasAnchor">
 <h4>Risk-neutral pricing<a href="r-for-finance.html#risk-neutral-pricing" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="definition">
-<p><span id="def:unlabeled-div-52" class="definition"><strong>Definition 3.4  </strong></span>A <strong>contingent claim</strong> (financial derivative) is any random variable <span class="math inline">\(X\)</span> of the form <span class="math inline">\(X = \Phi(S_1)\)</span>, where <span class="math inline">\(\Phi\)</span> is some given real valued function known as the <em>contract function</em>.</p>
+<p><span id="def:unlabeled-div-52" class="definition"><strong>Definition 3.4  </strong></span>A <strong>contingent claim</strong> (financial derivative) is any random variable <span class="math inline">\(X\)</span> of the form <span class="math inline">\(X = \Phi(S_1)\)</span>, where <span class="math inline">\(\Phi\)</span> is some given real-valued function known as the <em>contract function</em>.</p>
 </div>
-<p>The interpretation is that the contract holder receives the stochastic amount <span class="math inline">\(X\)</span> at time <span class="math inline">\(t = 1\)</span>. Two important examples are the European call and put options. For an European call option with strike <span class="math inline">\(K\)</span>, we have that the <span class="math inline">\(X = \max(S_1 -K, 0)\)</span>, while for the European put option with same strike <span class="math inline">\(K\)</span>, the claim is <span class="math inline">\(X = \max(K -S_1, 0)\)</span>. In what follows, we will denote by <span class="math inline">\(\Phi(u)\)</span> and <span class="math inline">\(\Phi(d)\)</span>, the evaluations <span class="math inline">\(\Phi(u S_0)\)</span> and <span class="math inline">\(\Phi(d S_0)\)</span>, respectively.</p>
+<p>The interpretation is that the contract holder receives the stochastic amount <span class="math inline">\(X\)</span> at time <span class="math inline">\(t = 1\)</span>. Two important examples are the European call and put options. For a European call option with strike <span class="math inline">\(K\)</span>, we have that the <span class="math inline">\(X = \max(S_1 -K, 0)\)</span>, while for the European put option with the same strike <span class="math inline">\(K\)</span>, the claim is <span class="math inline">\(X = \max(K -S_1, 0)\)</span>. In what follows, we will denote by <span class="math inline">\(\Phi(u)\)</span> and <span class="math inline">\(\Phi(d)\)</span>, the evaluations <span class="math inline">\(\Phi(u S_0)\)</span> and <span class="math inline">\(\Phi(d S_0)\)</span>, respectively.</p>
 <p>Our main problem is now determining the “fair” price for a given contingent claim <span class="math inline">\(X\)</span>. If we denote the price of
 <span class="math inline">\(X\)</span> at time <span class="math inline">\(t\)</span> by <span class="math inline">\(\Pi(t; X)\)</span>, then, in order to avoid arbitrage, we must have
 <span class="math display">\[
@@ -790,7 +791,7 @@ However, the hard part of the problem is determining <span class="math inline">\
 <span class="math display">\[
 V_{1}^h = X \,.
 \]</span>
-We call this a <strong>hedging</strong> portfolio or a <strong>replicating</strong> portfolio. Then, any price at <span class="math inline">\(t = 0\)</span> of the claim <span class="math inline">\(X\)</span>, different to <span class="math inline">\(V_0^h\)</span> (the price of the replicating portfolio), will lead to an arbitrage possibility. In other words, the price at <span class="math inline">\(t = 0\)</span> of the claim must be given by
+We call this a <strong>hedging</strong> portfolio or a <strong>replicating</strong> portfolio. Then, any price at <span class="math inline">\(t = 0\)</span> of the claim <span class="math inline">\(X\)</span>, different from <span class="math inline">\(V_0^h\)</span> (the price of the replicating portfolio), will lead to an arbitrage possibility. In other words, the price of the claim at <span class="math inline">\(t = 0\)</span> must be given by
 <span class="math display">\[
 \Pi(0;X) = V_0^h \,.
 \]</span>
@@ -823,7 +824,7 @@ Here, we recognize the risk-neutral probabilities <span class="math inline">\(q_
 \Pi(0;X)  = \frac{1}{1 + R} \mathbb{E}^Q[X]\,.
 \end{align*}\]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-53" class="example"><strong>Example 3.2  </strong></span>Consider a stock currently with current price <span class="math inline">\(S_0 = 50\)</span>. The Stock’s price is expected to increase to 60 or decrease to 40 during the next year. The risk-free interest rate is 5% compounded annually. Compute the price of a 1-year European call option with a strike price of 55.</p>
+<p><span id="exm:unlabeled-div-53" class="example"><strong>Example 3.2  </strong></span>Consider a stock with a current price of <span class="math inline">\(S_0 = 50\)</span>. The stock’s price is expected to increase to 60 or decrease to 40 during the next year. The risk-free interest rate is 5% compounded annually. Compute the price of a 1-year European call option with a strike price of 55.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-54" class="solution"><em>Solution</em>. </span><span class="math inline">\(\,\)</span></p>
@@ -847,8 +848,9 @@ Here, we recognize the risk-neutral probabilities <span class="math inline">\(q_
 <div class="sourceCode" id="cb916"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb916-1"><a href="r-for-finance.html#cb916-1" aria-hidden="true" tabindex="-1"></a>qd <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> qu</span>
 <span id="cb916-2"><a href="r-for-finance.html#cb916-2" aria-hidden="true" tabindex="-1"></a>qd</span></code></pre></div>
 <pre><code>## [1] 0.375</code></pre>
-<div class="sourceCode" id="cb918"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb918-1"><a href="r-for-finance.html#cb918-1" aria-hidden="true" tabindex="-1"></a>phiu <span class="ot">&lt;-</span> <span class="fu">max</span>(su <span class="sc">-</span> strike, <span class="dv">0</span>)</span>
-<span id="cb918-2"><a href="r-for-finance.html#cb918-2" aria-hidden="true" tabindex="-1"></a>phiu</span></code></pre></div>
+<div class="sourceCode" id="cb918"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb918-1"><a href="r-for-finance.html#cb918-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Value of the contingent claim at t = 1</span></span>
+<span id="cb918-2"><a href="r-for-finance.html#cb918-2" aria-hidden="true" tabindex="-1"></a>phiu <span class="ot">&lt;-</span> <span class="fu">max</span>(su <span class="sc">-</span> strike, <span class="dv">0</span>)</span>
+<span id="cb918-3"><a href="r-for-finance.html#cb918-3" aria-hidden="true" tabindex="-1"></a>phiu</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <div class="sourceCode" id="cb920"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb920-1"><a href="r-for-finance.html#cb920-1" aria-hidden="true" tabindex="-1"></a>phid <span class="ot">&lt;-</span> <span class="fu">max</span>(sd <span class="sc">-</span> strike, <span class="dv">0</span>)</span>
 <span id="cb920-2"><a href="r-for-finance.html#cb920-2" aria-hidden="true" tabindex="-1"></a>phid</span></code></pre></div>
@@ -866,18 +868,18 @@ Here, we recognize the risk-neutral probabilities <span class="math inline">\(q_
 <p>More specifically, the bond prices are deterministic and given by
 <span class="math display">\[\begin{align*}
 &amp; B_0 = 1 \,, \\
-&amp; B_{n+1} = (1 + R) B_n \,, \quad n = 0, \dots, T-1
+&amp; B_{n+1} = (1 + R) B_n \,, \quad n = 0, \dots, T-1 \,.
 \end{align*}\]</span>
-On the other hand, if at time <span class="math inline">\(t= 0\)</span> the price is of the stock is <span class="math inline">\(S_0\)</span>, then the future stock prices are random and given by
+On the other hand, if at time <span class="math inline">\(t= 0\)</span>, the price of the stock is <span class="math inline">\(S_0\)</span>, then the future stock prices are random and given by
 <span class="math display">\[\begin{align*}
-S_{n+1} = Z_n S_n \,, \quad n = 0, \dots, T-1
+S_{n+1} = Z_n S_n \,, \quad n = 0, \dots, T-1 \,,
 \end{align*}\]</span>
 where <span class="math inline">\(Z_{0}, . . . , Z_{T-1}\)</span> are iid random variables, taking only the two values <span class="math inline">\(u\)</span> and <span class="math inline">\(d\)</span> with probabilities
 <span class="math display">\[\begin{align*}
 \mathbb{P}(Z_n =u)=p_u \,, \quad
 \mathbb{P}(Z_n = d) = p_d \,.
 \end{align*}\]</span>
-In other words, during each time step, the stock price either moves up to <span class="math inline">\(u\)</span> times its initial value or moves down to <span class="math inline">\(d\)</span> times its initial value. Figure <a href="r-for-finance.html#fig:bintree">3.2</a> shows the behavior of the stock price for <span class="math inline">\(T = 2\)</span>.</p>
+In other words, during each time step, the stock price either moves up to <span class="math inline">\(u\)</span> times its initial value or down to <span class="math inline">\(d\)</span> times its initial value. For example, Figure <a href="r-for-finance.html#fig:bintree">3.2</a> shows the stock price behavior for <span class="math inline">\(T = 2\)</span>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:bintree"></span>
 <img src="figures/bintree.jpg" alt="Multiperiod binomial tree." width="65%" />
 <p class="caption">
@@ -886,7 +888,7 @@ Figure 3.2: Multiperiod binomial tree.
 </div>
 <p>Note that the prices of the stock at time <span class="math inline">\(t\)</span> can be written as
 <span class="math display">\[S_t = u^{k}d^{t-k} S_0 \,, \quad k = 0,\dots,t\,,\]</span>
-where <span class="math inline">\(k\)</span> denotes the number of up-moves that have occurred. Thus each node in the binomial tree can be represented by a pair <span class="math inline">\((t,k)\)</span> with <span class="math inline">\(k = 0,\dots,t\)</span>. Figure <a href="r-for-finance.html#fig:bintreestr">3.3</a> shows the representation of of the nodes of a binomial tree for <span class="math inline">\(T = 2\)</span>.</p>
+where <span class="math inline">\(k\)</span> denotes the number of up-moves that have occurred. Thus each node in the binomial tree can be represented by a pair <span class="math inline">\((t,k)\)</span> with <span class="math inline">\(k = 0,\dots,t\)</span>. Figure <a href="r-for-finance.html#fig:bintreestr">3.3</a> shows the representation of the nodes of a binomial tree for <span class="math inline">\(T = 2\)</span>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:bintreestr"></span>
 <img src="figures/Bintree_str.jpg" alt="Nodes of a multiperiod binomial tree." width="65%" />
 <p class="caption">
@@ -895,7 +897,7 @@ Figure 3.3: Nodes of a multiperiod binomial tree.
 </div>
 <p>Recall that the main aim is to find the arbitrage-free price of a given contingent claim (financial derivative). In particular, we will only work with contingent claims of the form
 <span class="math display">\[X = \Phi (S_T) \,,\]</span>
-that is, claims whose value only depends on the stock price at the final time <span class="math inline">\(T\)</span>, <span class="math inline">\(S_T\)</span>. This type of contingent claims is typically called <em>simple</em>. Note that the European Call and Put options are examples of simple claims.</p>
+that is, claims whose value only depends on the stock price at the final time <span class="math inline">\(T\)</span>, <span class="math inline">\(S_T\)</span>. This type of contingent claim is typically called <em>simple</em>. Note that the European Call and Put options are examples of simple claims.</p>
 <p>As in the one-period model, the problem is solved by finding a portfolio <span class="math inline">\(h\)</span> that replicates the final value of the contingent claim, that is, if <span class="math inline">\(V_t^h\)</span> denotes the value of the portfolio at time <span class="math inline">\(t\)</span>, we require that
 <span class="math display">\[
 V_T^h = X \,.
@@ -904,7 +906,7 @@ Then, the price of the derivative <span class="math inline">\(\Pi(0;X)\)</span> 
 <span class="math display">\[
 \Pi(0;X) = V_0^h \,.
 \]</span></p>
-<p>It turns out that to find the price of this portfolio (and hence of the claim), we only need to repeatedly and recursively apply the principles of the one-step binomial model. We illustrate this in a binomial model with <span class="math inline">\(T = 2\)</span>. First, we need to introduce further notation. We denote by <span class="math inline">\(V_t(k)\)</span> the value of the replicating portfolio of the claim at the node <span class="math inline">\((t,k)\)</span>. Next, we need to split the tree in Figure <a href="r-for-finance.html#fig:bintreestr">3.3</a> into two (one-period) subtrees as shown in Figure <a href="r-for-finance.html#fig:bintreesep">3.4</a>.</p>
+<p>It turns out that to find the price of this portfolio (and hence of the claim), we only need to repeatedly and recursively apply the principles of the one-step binomial model. We illustrate this in a binomial model with <span class="math inline">\(T = 2\)</span>. First, we need to introduce further notation. We denote by <span class="math inline">\(V_t(k)\)</span> the value of the replicating portfolio of the claim at the node <span class="math inline">\((t,k)\)</span>. Next, we need to split the tree in Figure <a href="r-for-finance.html#fig:bintreestr">3.3</a> into two (one-period) subtrees, as shown in Figure <a href="r-for-finance.html#fig:bintreesep">3.4</a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:bintreesep"></span>
 <img src="figures/Bintree1.jpg" alt="One-period subtrees." width="45%" /><img src="figures/Bintree2.jpg" alt="One-period subtrees." width="45%" />
 <p class="caption">
@@ -928,12 +930,12 @@ Thus, we now obtain the one-period binomial tree given in Figure <a href="r-for-
 Figure 3.5: One-period subtree.
 </p>
 </div>
-<p>Finally, using the same idea, we compute the initial price of the portfolio <span class="math inline">\(V_0(0)\)</span> as shown below
+<p>Finally, using the same idea, we compute the initial price of the portfolio <span class="math inline">\(V_0(0)\)</span> as
 <span class="math display">\[
-V_0(0) = \frac{1}{(1 +R)}(q_u V_{1}(1) + q_d V_{1}(0) )
+V_0(0) = \frac{1}{(1 +R)}(q_u V_{1}(1) + q_d V_{1}(0) ) \,.
 \]</span></p>
 <div class="example">
-<p><span id="exm:mulbin" class="example"><strong>Example 3.3  </strong></span>Consider a stock currently with current price <span class="math inline">\(S_0 = 50\)</span>. The Stock’s price is expected to increase to 10% or decrease 8% during the next two six-month periods. The risk-free interest rate is 5% compounded annually. Compute the price of a 1-year European put option with a strike price of 55.</p>
+<p><span id="exm:mulbin" class="example"><strong>Example 3.3  </strong></span>Consider a stock with a current price of <span class="math inline">\(S_0 = 50\)</span>. The stock’s price is expected to increase by 10% or decrease by 8% during the next two six-month periods. The risk-free interest rate is 5% compounded annually. Compute the price of a 1-year European put option with a strike price of 55.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-55" class="solution"><em>Solution</em>. </span><span class="math inline">\(\,\)</span></p>
@@ -1002,7 +1004,7 @@ V_0(0) = \frac{1}{(1 +R)}(q_u V_{1}(1) + q_d V_{1}(0) )
 ## [1,] 50.00  0.0  0.0
 ## [2,] 46.00 55.0  0.0
 ## [3,] 42.32 50.6 60.5</code></pre>
-<p>With the above tree at hand, we can evaluate the claim at the final nodes (2.) by simply taking the last row of the matrix. For instance,</p>
+<p>With the above tree at hand, we can evaluate the claim at the final nodes (2.) by simply taking the last row of the matrix. For instance, in our example, we have the following values of the claim at the final nodes:</p>
 <div class="sourceCode" id="cb939"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb939-1"><a href="r-for-finance.html#cb939-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pmax</span>(strike <span class="sc">-</span> tree[<span class="fu">nrow</span>(tree), ], <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 12.68  4.40  0.00</code></pre>
 <p>Finally, for the recursive computations (3.) we can use the following code:</p>
@@ -1049,9 +1051,9 @@ V_0(0) = \frac{1}{(1 +R)}(q_u V_{1}(1) + q_d V_{1}(0) )
 where <span class="math inline">\(n\)</span> is the number of intervals over one year. One can show that when <span class="math inline">\(n\)</span> tends to infinity, the binomial model converges to the Black-Scholes model.</p>
 <div id="r-packages-for-the-binomial-model" class="section level4 unnumbered hasAnchor">
 <h4>R packages for the binomial model<a href="r-for-finance.html#r-packages-for-the-binomial-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>There are several R packages that have implementations for the binomial model. For instance, <code>derivmkts</code> and <code>fOptions</code>. However, only important examples such as call and put options are available. Thus, when dealing with less standard derivatives, the previous analysis is highly relevant. We will come back to more complex examples shortly, but first let us illustrate the use of the <code>derivmkts</code> package.</p>
+<p>Several R packages have implementations for the binomial model. However, here we will employ the <code>derivmkts</code> R package. Unfortunately, only important examples, such as call and put options, are available. Thus, the previous analysis is highly relevant when dealing with less standard derivatives. We will come back to more complex examples shortly, but first, let us illustrate the use of <code>derivmkts</code>.</p>
 <div class="sourceCode" id="cb948"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb948-1"><a href="r-for-finance.html#cb948-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(derivmkts)</span></code></pre></div>
-<p>To compute prices of European (and American) call and put options we make use of the function <code>binomopt()</code>. Let us solve Example <a href="r-for-finance.html#exm:mulbin">3.3</a> using this function. We need to note the following about <code>binomopt()</code>: the risk-free rate (<code>r</code>) must be an annual continuously compounded rate. To price an European option we need to change the default value of the argument <code>american = TRUE</code> to <code>FALSE</code>. By default, the function works with a volatility, hence we need to use <code>specifyupdn = TRUE</code> to indicate that we will provide <span class="math inline">\(u\)</span> and <span class="math inline">\(d\)</span> through the arguments <code>up</code> and <code>dn</code>. We describe the rest of the arguments needed in the following code:</p>
+<p>To compute prices of European (and American) call and put options, we use the function <code>binomopt()</code>. Using this function, let us solve Example <a href="r-for-finance.html#exm:mulbin">3.3</a>. We need to note the following about <code>binomopt()</code>: the risk-free rate (<code>r</code>) must be an annual continuously compounded rate. To price a European option, we need to change the default value of the argument <code>american = TRUE</code> to <code>FALSE</code>. By default, the function works with volatilities; hence we need to use <code>specifyupdn = TRUE</code> to indicate that we will provide <span class="math inline">\(u\)</span> and <span class="math inline">\(d\)</span> through the arguments <code>up</code> and <code>dn</code>. We describe the rest of the arguments needed in the following code:</p>
 <div class="sourceCode" id="cb949"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb949-1"><a href="r-for-finance.html#cb949-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binomopt</span>(</span>
 <span id="cb949-2"><a href="r-for-finance.html#cb949-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">s =</span> <span class="dv">50</span>, <span class="co"># Initial stock price</span></span>
 <span id="cb949-3"><a href="r-for-finance.html#cb949-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">55</span>, <span class="co"># Strike price</span></span>
@@ -1067,7 +1069,7 @@ where <span class="math inline">\(n\)</span> is the number of intervals over one
 <span id="cb949-13"><a href="r-for-finance.html#cb949-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##    price 
 ## 4.153022</code></pre>
-<p>Moreover, <code>derivmkts</code> contains the function <code>binomplot()</code> which plots the development of the stock price and shows graphically the probability of being at each node (represented as the area of the circle at that price). The following is the plot for our example:</p>
+<p>Moreover, <code>derivmkts</code> contains the function <code>binomplot()</code>, which plots the development of the stock price and shows graphically the probability of being at each node (represented as the area of the circle at that price). The following is the plot for our example:</p>
 <div class="sourceCode" id="cb951"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb951-1"><a href="r-for-finance.html#cb951-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binomplot</span>(</span>
 <span id="cb951-2"><a href="r-for-finance.html#cb951-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">s =</span> <span class="dv">50</span>, <span class="at">k =</span> <span class="dv">55</span>, <span class="at">r =</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.05</span>), <span class="at">tt =</span> <span class="dv">1</span>, <span class="at">d =</span> <span class="dv">0</span>, <span class="at">nstep =</span> <span class="dv">2</span>,</span>
 <span id="cb951-3"><a href="r-for-finance.html#cb951-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">american =</span> <span class="cn">FALSE</span>, <span class="at">putopt =</span> <span class="cn">TRUE</span>, <span class="at">specifyupdn =</span> <span class="cn">TRUE</span>, <span class="at">up =</span> <span class="fl">1.1</span>, <span class="at">dn =</span> <span class="fl">0.92</span>,</span>
@@ -1077,16 +1079,16 @@ where <span class="math inline">\(n\)</span> is the number of intervals over one
 <span id="cb951-7"><a href="r-for-finance.html#cb951-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-388-1.png" width="672" />
 Note that a horizontal line with the strike value is included in the plot. This can also be omitted by using <code>drawstrike = FALSE</code>. Finally, the green and red colors indicate whether or not the option is optimally exercised there (green if yes, red if no). However, this is mainly relevant when working with American options.</p>
-<p>We finish our discussion of the binomial model with the following more complicated example, which cannot be solved directly with the functions in <code>derivmkts</code>. Hence the importance of our early discussion.</p>
+<p>We finish our discussion of the binomial model with the following more complicated example, which cannot be solved with the functions in <code>derivmkts</code>. Hence the importance of our early discussion.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-57" class="example"><strong>Example 3.4  </strong></span>A stock price is currently 40. Over each of the next three 5-month periods, it is expected to go up by 10% or down by 5%. The risk-free interest rate is 6% per annum with continuous compounding.</p>
+<p><span id="exm:unlabeled-div-57" class="example"><strong>Example 3.4  </strong></span>The price of a stock is currently 40. Over each of the following three 5-month periods, it is expected to go up by 10% or down by 5%. The risk-free interest rate is 6% per annum with continuous compounding.</p>
 <ol style="list-style-type: decimal">
 <li>Use a three-step binomial model to find the value of a European style derivative that pays off <span class="math inline">\(X = [\max(K - S_T, 0)]^3\)</span>, where <span class="math inline">\(S_T\)</span> is the stock price in <span class="math inline">\(15\)</span> months and <span class="math inline">\(K = 44\)</span>.</li>
 <li>Use a three-step binomial model to find the value of a European-style derivative that pays off <span class="math inline">\(X =\min(S^2_T,K)\)</span>, where <span class="math inline">\(S_T\)</span> is the stock price in <span class="math inline">\(15\)</span> months and <span class="math inline">\(K = 2000\)</span>.</li>
 </ol>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-58" class="solution"><em>Solution</em>. </span>We will solve 1. using Proposition <a href="r-for-finance.html#prp:binalg">3.2</a>, and 2. using Proposition <a href="r-for-finance.html#prp:riskfreeform">3.3</a>:</p>
+<p><span id="unlabeled-div-58" class="solution"><em>Solution</em>. </span>We will solve 1. using Proposition <a href="r-for-finance.html#prp:binalg">3.2</a> and 2. using Proposition <a href="r-for-finance.html#prp:riskfreeform">3.3</a>:</p>
 <ol style="list-style-type: decimal">
 <li></li>
 </ol>
@@ -1155,7 +1157,7 @@ Note that a horizontal line with the strike value is included in the plot. This 
 <div id="preliminars-brownian-motion" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Preliminars: Brownian motion<a href="r-for-finance.html#preliminars-brownian-motion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
-<p><span id="def:unlabeled-div-59" class="definition"><strong>Definition 3.5  (Standard Brownian motion) </strong></span>A <em>standard Brownian motion</em> is an stochastic process <span class="math inline">\(W = (W(t))_{t \geq0}\)</span> satisfying:</p>
+<p><span id="def:unlabeled-div-59" class="definition"><strong>Definition 3.5  (Standard Brownian motion) </strong></span>A <em>standard Brownian motion</em> is a stochastic process <span class="math inline">\(W = (W(t))_{t \geq0}\)</span> satisfying:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(W(0) = 0\)</span>.</li>
 <li>The process has <em>independent increments</em>, i.e., for any <span class="math inline">\(0 \leq t_1 &lt; t_2 &lt; \cdots &lt; t_n\)</span>, <span class="math inline">\(W(t_2) - W(t_{1}), \dots,W(t_n) - W(t_{n-1})\)</span> are independent random variables.</li>
@@ -1205,7 +1207,7 @@ Thus, we can repeat the same logic as above to simulate a whole process trajecto
 <pre><code>## NULL</code></pre>
 <p>The standard Brownian motion can be generalized to the <em>arithmetic Brownian motion</em>, which scales and shifts the former. More specifically, <span class="math inline">\(X(t)\)</span> is an arithmetic Brownian motion if
 <span class="math display">\[X(t) = \mu t + \sigma W(t)\]</span>
-where <span class="math inline">\(W(t)\)</span> is a standard Brownian motion and <span class="math inline">\(\mu \in \mathbb{R}\)</span> and <span class="math inline">\(\sigma&gt;0\)</span>. Here, <span class="math inline">\(\mu\)</span> is called the <em>drift</em>, and <span class="math inline">\(\sigma\)</span> is called the <em>volatility</em> of the process. Moreover, note that for <span class="math inline">\(s &lt; t\)</span>, <span class="math inline">\(X(t)-X(s)\sim N(\mu (t - s), \sigma^2(t - s))\)</span>. There are two straightforward ways to simulate from the arithmetic Brownian motion. One would be to simulate from a standard Brownian motion and then use the relationship above. The second, and perhaps easier to modify in our code above, is to generate independent <span class="math inline">\(N(\mu \delta t, \sigma^2\delta t)\)</span> random variables. The next code implements the later:</p>
+where <span class="math inline">\(W(t)\)</span> is a standard Brownian motion and <span class="math inline">\(\mu \in \mathbb{R}\)</span> and <span class="math inline">\(\sigma&gt;0\)</span>. Here, <span class="math inline">\(\mu\)</span> is called the <em>drift</em>, and <span class="math inline">\(\sigma\)</span> is called the <em>volatility</em> of the process. Moreover, note that for <span class="math inline">\(s &lt; t\)</span>, <span class="math inline">\(X(t)-X(s)\sim N(\mu (t - s), \sigma^2(t - s))\)</span>. There are two straightforward ways to simulate the arithmetic Brownian motion. One would be to simulate a standard Brownian motion and then use the relationship above. The second, and perhaps easier to modify in our code above, is to generate independent <span class="math inline">\(N(\mu \delta t, \sigma^2\delta t)\)</span> random variables. The next code implements the later:</p>
 <div class="sourceCode" id="cb969"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb969-1"><a href="r-for-finance.html#cb969-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb969-2"><a href="r-for-finance.html#cb969-2" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
 <span id="cb969-3"><a href="r-for-finance.html#cb969-3" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>

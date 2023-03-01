@@ -424,9 +424,9 @@ where <span class="math inline">\(s_{\mathbf{x}}\)</span> and <span class="math 
 <span id="cb582-7"><a href="r-for-statistical-inference.html#cb582-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Iris - Sepal length and petal length&quot;</span></span>
 <span id="cb582-8"><a href="r-for-statistical-inference.html#cb582-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-231-1.png" width="672" /></p>
-<p>Finally, for data with several columns, we can plot them all at once:</p>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="r-for-statistical-inference.html#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris[, <span class="sc">-</span><span class="dv">5</span>],</span>
-<span id="cb583-2"><a href="r-for-statistical-inference.html#cb583-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<p>Finally, for data with several (numeric) columns, we can plot them all at once:</p>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="r-for-statistical-inference.html#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris[, <span class="sc">-</span><span class="dv">5</span>], <span class="co"># We remove the column without numeric values</span></span>
+<span id="cb583-2"><a href="r-for-statistical-inference.html#cb583-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span></span>
 <span id="cb583-3"><a href="r-for-statistical-inference.html#cb583-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-232-1.png" width="672" /></p>
 </div>
@@ -756,9 +756,9 @@ The <em>maximum likelihood estimator</em> (MLE) is defined as the value of <span
 \]</span></p>
 <p>In practice, it is often more convenient to work with the <em>loglikelihood function</em> <span class="math inline">\(l\)</span>, which is obtained by taking <span class="math inline">\(\log\)</span> of the likelihood function, i.e.,
 <span class="math display">\[
-l(\mathbf{x}, \boldsymbol{\theta}) = \log(L(\boldsymbol{\theta}; \mathbf{x})) = \sum_{i = 1}^{n} \log\left(f(x_i; \boldsymbol{\theta}) \right) \,.
+l(\boldsymbol{\theta};\mathbf{x}) = \log(L(\boldsymbol{\theta}; \mathbf{x})) = \sum_{i = 1}^{n} \log\left(f(x_i; \boldsymbol{\theta}) \right) \,.
 \]</span>
-Since <span class="math inline">\(\log\)</span> is an increasing continuous function, maximizing the loglikelihood is equivalent to maximizing the likelihood. In other words,
+Since <span class="math inline">\(\log(\cdot)\)</span> is an increasing continuous function, maximizing the loglikelihood is equivalent to maximizing the likelihood. In other words,
 <span class="math display">\[
 \hat{\boldsymbol{\theta}} = \mathrm{arg\,max}_{\boldsymbol{\theta} \in \boldsymbol{\Theta}} l(\boldsymbol{\theta}; \mathbf{x}) = \mathrm{arg\,max}_{\boldsymbol{\theta} \in \boldsymbol{\Theta}} \sum_{i = 1}^{n} \log(f(x_i; \boldsymbol{\theta})) \,.
 \]</span>
@@ -853,9 +853,9 @@ As in the example of the exponential distribution, we need to modify the functio
 <span id="cb662-2"><a href="r-for-statistical-inference.html#cb662-2" aria-hidden="true" tabindex="-1"></a>sigma_sq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.75</span>, <span class="fl">2.5</span>, <span class="at">by =</span> <span class="fl">0.05</span>)</span>
 <span id="cb662-3"><a href="r-for-statistical-inference.html#cb662-3" aria-hidden="true" tabindex="-1"></a>ll_eval <span class="ot">&lt;-</span> <span class="fu">outer</span>(mu_sq, sigma_sq, loglik_norm, <span class="at">x =</span> x_norm) <span class="co"># Evaluates the LogLik at all points</span></span>
 <span id="cb662-4"><a href="r-for-statistical-inference.html#cb662-4" aria-hidden="true" tabindex="-1"></a><span class="fu">persp</span>(mu_sq, sigma_sq, ll_eval,</span>
-<span id="cb662-5"><a href="r-for-statistical-inference.html#cb662-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">phi =</span> <span class="dv">20</span>,</span>
-<span id="cb662-6"><a href="r-for-statistical-inference.html#cb662-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta =</span> <span class="dv">45</span>,</span>
-<span id="cb662-7"><a href="r-for-statistical-inference.html#cb662-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>,</span>
+<span id="cb662-5"><a href="r-for-statistical-inference.html#cb662-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">phi =</span> <span class="dv">20</span>, <span class="co"># Angle for visualization</span></span>
+<span id="cb662-6"><a href="r-for-statistical-inference.html#cb662-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta =</span> <span class="dv">45</span>, <span class="co"># Angle for visualization</span></span>
+<span id="cb662-7"><a href="r-for-statistical-inference.html#cb662-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>, <span class="co"># Adds values to the axis</span></span>
 <span id="cb662-8"><a href="r-for-statistical-inference.html#cb662-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;mu&quot;</span>,</span>
 <span id="cb662-9"><a href="r-for-statistical-inference.html#cb662-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;sigma&quot;</span>,</span>
 <span id="cb662-10"><a href="r-for-statistical-inference.html#cb662-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">zlab =</span> <span class="st">&quot;&quot;</span>,</span>
@@ -1033,7 +1033,7 @@ Consequently, the standard error can be approximated as <span class="math inline
 <div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="r-for-statistical-inference.html#cb698-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fitdistrplus)</span></code></pre></div>
 <pre><code>## Loading required package: MASS</code></pre>
 <pre><code>## Loading required package: survival</code></pre>
-<p>The <code>fitdistrplus</code> package comes with the <code>fitdist()</code> function to perform MLE (and other estimation methods). The distribution is specified with the argument <code>distr</code>, but the density (<code>d</code>) and distribution (<code>p</code>) functions must be available for the given distribution (see help for details <code>?fitdist</code>). Note that the argument <code>start</code> can be omitted for some distributions (the list can be found in the help); otherwise, it has to be specified. Let us give a couple of examples.</p>
+<p>The <code>fitdistrplus</code> package comes with the <code>fitdist()</code> function to perform MLE (and other estimation methods). The distribution is specified with the argument <code>distr</code>, which should be the root name of a distribution (e.g., <code>gamma</code>). To access all the functionalities of <code>fitdistrplus</code>, the density (<code>d</code>), distribution function (<code>p</code>), and quantiles (<code>q</code>) must be available for the given distribution (see help for details <code>?fitdist</code>). However, specifying the density is enough if we only require to find the MLE when considering uncensored observations (although a Warning message will be displayed). Moreover, note that the argument <code>start</code> can be omitted for some distributions (the list can be found in the help); otherwise, it has to be specified. Let us give a couple of examples.</p>
 <p>First, the MLE for our exponentially distributed sample:</p>
 <div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="r-for-statistical-inference.html#cb701-1" aria-hidden="true" tabindex="-1"></a>fit_exp <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(x_exp, <span class="at">distr =</span> <span class="st">&quot;exp&quot;</span>)</span>
 <span id="cb701-2"><a href="r-for-statistical-inference.html#cb701-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_exp)</span></code></pre></div>
@@ -1129,13 +1129,13 @@ An implementation of these functions is the following:</p>
 <div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="r-for-statistical-inference.html#cb719-1" aria-hidden="true" tabindex="-1"></a>fit_gamma <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(danish_loss,</span>
 <span id="cb719-2"><a href="r-for-statistical-inference.html#cb719-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">distr =</span> <span class="st">&quot;gamma&quot;</span></span>
 <span id="cb719-3"><a href="r-for-statistical-inference.html#cb719-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb719-4"><a href="r-for-statistical-inference.html#cb719-4" aria-hidden="true" tabindex="-1"></a>fit_burr <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(danish_loss,</span>
-<span id="cb719-5"><a href="r-for-statistical-inference.html#cb719-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">distr =</span> <span class="st">&quot;burr&quot;</span>,</span>
-<span id="cb719-6"><a href="r-for-statistical-inference.html#cb719-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">list</span>(<span class="at">shape1 =</span> <span class="dv">1</span>, <span class="at">shape2 =</span> <span class="dv">1</span>, <span class="at">scale =</span> <span class="dv">1</span>)</span>
+<span id="cb719-4"><a href="r-for-statistical-inference.html#cb719-4" aria-hidden="true" tabindex="-1"></a>fit_pareto <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(danish_loss,</span>
+<span id="cb719-5"><a href="r-for-statistical-inference.html#cb719-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">distr =</span> <span class="st">&quot;pareto&quot;</span>,</span>
+<span id="cb719-6"><a href="r-for-statistical-inference.html#cb719-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">scale =</span> <span class="dv">1</span>)</span>
 <span id="cb719-7"><a href="r-for-statistical-inference.html#cb719-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb719-8"><a href="r-for-statistical-inference.html#cb719-8" aria-hidden="true" tabindex="-1"></a>fit_pareto <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(danish_loss,</span>
-<span id="cb719-9"><a href="r-for-statistical-inference.html#cb719-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">distr =</span> <span class="st">&quot;pareto&quot;</span>,</span>
-<span id="cb719-10"><a href="r-for-statistical-inference.html#cb719-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">scale =</span> <span class="dv">1</span>)</span>
+<span id="cb719-8"><a href="r-for-statistical-inference.html#cb719-8" aria-hidden="true" tabindex="-1"></a>fit_burr <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(danish_loss,</span>
+<span id="cb719-9"><a href="r-for-statistical-inference.html#cb719-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">distr =</span> <span class="st">&quot;burr&quot;</span>,</span>
+<span id="cb719-10"><a href="r-for-statistical-inference.html#cb719-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">list</span>(<span class="at">shape1 =</span> <span class="dv">1</span>, <span class="at">shape2 =</span> <span class="dv">1</span>, <span class="at">rate =</span> <span class="dv">1</span>)</span>
 <span id="cb719-11"><a href="r-for-statistical-inference.html#cb719-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>To perform MLE of the mixture of Gamma and Pareto, we need to program its density and distribution functions. This is easily done using the corresponding functions for the <code>gamma</code> and <code>pareto</code> distributions:</p>
 <div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb720-1"><a href="r-for-statistical-inference.html#cb720-1" aria-hidden="true" tabindex="-1"></a>dmgp <span class="ot">&lt;-</span> <span class="cf">function</span>(x, shapeg, rateg, shapep, scalep, prob) {</span>
@@ -1183,16 +1183,16 @@ An implementation of these functions is the following:</p>
 <div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="r-for-statistical-inference.html#cb729-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_burr)</span></code></pre></div>
 <pre><code>## Fitting of the distribution &#39; burr &#39; by maximum likelihood 
 ## Parameters : 
-##        estimate Std. Error
-## shape1 1.232000 0.10508632
-## shape2 1.134183 0.03620174
-## scale  1.029599 0.11953332
+##         estimate Std. Error
+## shape1 1.2313513 0.10490815
+## shape2 1.1342848 0.03618015
+## rate   0.9718628 0.11269533
 ## Loglikelihood:  -3331.881   AIC:  6669.761   BIC:  6686.789 
 ## Correlation matrix:
-##            shape1     shape2      scale
-## shape1  1.0000000 -0.8285421  0.9641895
-## shape2 -0.8285421  1.0000000 -0.8099389
-## scale   0.9641895 -0.8099389  1.0000000</code></pre>
+##            shape1     shape2       rate
+## shape1  1.0000000 -0.8282684 -0.9640989
+## shape2 -0.8282684  1.0000000  0.8095964
+## rate   -0.9640989  0.8095964  1.0000000</code></pre>
 <div class="sourceCode" id="cb731"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb731-1"><a href="r-for-statistical-inference.html#cb731-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_mgp)</span></code></pre></div>
 <pre><code>## Fitting of the distribution &#39; mgp &#39; by maximum likelihood 
 ## Parameters : 
@@ -1206,8 +1206,8 @@ An implementation of these functions is the following:</p>
 ## Correlation matrix:
 ## [1] NA</code></pre>
 <p>The first number we can look at to select a model is the likelihood. Remember that we aim to maximize the likelihood; hence we would prefer a model with the highest likelihood possible. In our case, the mixture model has the highest likelihood. However, we also need to take into account the complexity of a model. Let us explain the last point in detail: In general, statistical models with more parameters allow for more flexibility, and thus, we can expect improvements in the fits as the number of parameters increases. However, having too many parameters can result in a fit that only describes the data at hand and fails to fit additional data or predict future observations. This is known as overfitting. On the other hand, underfitting occurs when a model cannot adequately capture the underlying structure of the data. Information criteria, such as the Akaike information criterion (AIC) and the Bayesian information criterion (BIC), deal with the problem of overfitting by introducing a penalty term for the number of parameters in the model. More specifically, if we let <span class="math inline">\(\hat {L}\)</span> be the maximum value of the likelihood function, <span class="math inline">\(d\)</span> the number of parameters in our model, and <span class="math inline">\(n\)</span> the sample size, the AIC and BIC are computed as</p>
-<p><span class="math display">\[ \mathrm {AIC} \,=\,2d-2\ln({\hat {L}})\]</span>
-<span class="math display">\[ \mathrm {BIC} \,=\,d\log(n)-2\ln({\hat {L}})\]</span>
+<p><span class="math display">\[ \mathrm {AIC} \,=\,2d-2\log({\hat {L}})\]</span>
+<span class="math display">\[ \mathrm {BIC} \,=\,d\log(n)-2\log({\hat {L}})\]</span>
 Given a set of candidate models for our data, the preferred model would be the one with the minimum AIC (or BIC) value. In our current example, these numbers indicate that the mixture model is still preferred.</p>
 <p>We can also use visual tools to assess the quality of the fit. Let us start by plotting the histogram of the data</p>
 <div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="r-for-statistical-inference.html#cb733-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(danish_loss, <span class="at">freq =</span> F, <span class="at">breaks =</span> <span class="dv">30</span>)</span></code></pre></div>
@@ -1227,13 +1227,19 @@ Given a set of candidate models for our data, the preferred model would be the o
 <span id="cb735-9"><a href="r-for-statistical-inference.html#cb735-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span></span>
 <span id="cb735-10"><a href="r-for-statistical-inference.html#cb735-10" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb735-11"><a href="r-for-statistical-inference.html#cb735-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(sq,</span>
-<span id="cb735-12"><a href="r-for-statistical-inference.html#cb735-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dburr</span>(<span class="fu">exp</span>(sq), fit_burr<span class="sc">$</span>estimate[<span class="dv">1</span>], fit_burr<span class="sc">$</span>estimate[<span class="dv">2</span>]) <span class="sc">*</span> <span class="fu">exp</span>(sq),</span>
-<span id="cb735-13"><a href="r-for-statistical-inference.html#cb735-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;green&quot;</span></span>
-<span id="cb735-14"><a href="r-for-statistical-inference.html#cb735-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb735-15"><a href="r-for-statistical-inference.html#cb735-15" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(</span>
-<span id="cb735-16"><a href="r-for-statistical-inference.html#cb735-16" aria-hidden="true" tabindex="-1"></a>  sq,</span>
-<span id="cb735-17"><a href="r-for-statistical-inference.html#cb735-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dmgp</span>(<span class="fu">exp</span>(sq), fit_mgp<span class="sc">$</span>estimate[<span class="dv">1</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">2</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">3</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">4</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">5</span>]) <span class="sc">*</span> <span class="fu">exp</span>(sq)</span>
-<span id="cb735-18"><a href="r-for-statistical-inference.html#cb735-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb735-12"><a href="r-for-statistical-inference.html#cb735-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dburr</span>(</span>
+<span id="cb735-13"><a href="r-for-statistical-inference.html#cb735-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(sq), fit_burr<span class="sc">$</span>estimate[<span class="dv">1</span>], fit_burr<span class="sc">$</span>estimate[<span class="dv">2</span>],</span>
+<span id="cb735-14"><a href="r-for-statistical-inference.html#cb735-14" aria-hidden="true" tabindex="-1"></a>    fit_burr<span class="sc">$</span>estimate[<span class="dv">3</span>]</span>
+<span id="cb735-15"><a href="r-for-statistical-inference.html#cb735-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">*</span> <span class="fu">exp</span>(sq),</span>
+<span id="cb735-16"><a href="r-for-statistical-inference.html#cb735-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;green&quot;</span></span>
+<span id="cb735-17"><a href="r-for-statistical-inference.html#cb735-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb735-18"><a href="r-for-statistical-inference.html#cb735-18" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(</span>
+<span id="cb735-19"><a href="r-for-statistical-inference.html#cb735-19" aria-hidden="true" tabindex="-1"></a>  sq,</span>
+<span id="cb735-20"><a href="r-for-statistical-inference.html#cb735-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dmgp</span>(</span>
+<span id="cb735-21"><a href="r-for-statistical-inference.html#cb735-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(sq), fit_mgp<span class="sc">$</span>estimate[<span class="dv">1</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">2</span>],</span>
+<span id="cb735-22"><a href="r-for-statistical-inference.html#cb735-22" aria-hidden="true" tabindex="-1"></a>    fit_mgp<span class="sc">$</span>estimate[<span class="dv">3</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">4</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">5</span>]</span>
+<span id="cb735-23"><a href="r-for-statistical-inference.html#cb735-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">*</span> <span class="fu">exp</span>(sq)</span>
+<span id="cb735-24"><a href="r-for-statistical-inference.html#cb735-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-299-1.png" width="672" /></p>
 <p>We observe that the density mixture distribution is closer to the histogram. Finally, we can also create QQ-plots to evaluate the fit. Notice that to create the QQ-plot of the mixture distribution, we need to implement a function to compute its quantiles. An implementation is the following:</p>
 <div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="r-for-statistical-inference.html#cb736-1" aria-hidden="true" tabindex="-1"></a>qmgp <span class="ot">&lt;-</span> <span class="cf">function</span>(p, shapeg, rateg, shapep, scalep, prob) {</span>
@@ -1265,7 +1271,7 @@ Given a set of candidate models for our data, the preferred model would be the o
 <span id="cb738-18"><a href="r-for-statistical-inference.html#cb738-18" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb738-19"><a href="r-for-statistical-inference.html#cb738-19" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
 <span id="cb738-20"><a href="r-for-statistical-inference.html#cb738-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb738-21"><a href="r-for-statistical-inference.html#cb738-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">qburr</span>(p, fit_burr<span class="sc">$</span>estimate[<span class="dv">1</span>], fit_burr<span class="sc">$</span>estimate[<span class="dv">2</span>]),</span>
+<span id="cb738-21"><a href="r-for-statistical-inference.html#cb738-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">qburr</span>(p, fit_burr<span class="sc">$</span>estimate[<span class="dv">1</span>], fit_burr<span class="sc">$</span>estimate[<span class="dv">2</span>], fit_burr<span class="sc">$</span>estimate[<span class="dv">3</span>]),</span>
 <span id="cb738-22"><a href="r-for-statistical-inference.html#cb738-22" aria-hidden="true" tabindex="-1"></a>  danish_quant,</span>
 <span id="cb738-23"><a href="r-for-statistical-inference.html#cb738-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;QQ plot - Burr&quot;</span>,</span>
 <span id="cb738-24"><a href="r-for-statistical-inference.html#cb738-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Quantiles fitted Burr&quot;</span>,</span>
@@ -1273,13 +1279,17 @@ Given a set of candidate models for our data, the preferred model would be the o
 <span id="cb738-26"><a href="r-for-statistical-inference.html#cb738-26" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb738-27"><a href="r-for-statistical-inference.html#cb738-27" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
 <span id="cb738-28"><a href="r-for-statistical-inference.html#cb738-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb738-29"><a href="r-for-statistical-inference.html#cb738-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">qmgp</span>(p, fit_mgp<span class="sc">$</span>estimate[<span class="dv">1</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">2</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">3</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">4</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">5</span>]),</span>
-<span id="cb738-30"><a href="r-for-statistical-inference.html#cb738-30" aria-hidden="true" tabindex="-1"></a>  danish_quant,</span>
-<span id="cb738-31"><a href="r-for-statistical-inference.html#cb738-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;QQ plot - Gamma-Pareto mixture&quot;</span>,</span>
-<span id="cb738-32"><a href="r-for-statistical-inference.html#cb738-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Quantiles fitted Gamma-Pareto mixture&quot;</span>,</span>
-<span id="cb738-33"><a href="r-for-statistical-inference.html#cb738-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Empirical quantiles&quot;</span></span>
-<span id="cb738-34"><a href="r-for-statistical-inference.html#cb738-34" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb738-35"><a href="r-for-statistical-inference.html#cb738-35" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<span id="cb738-29"><a href="r-for-statistical-inference.html#cb738-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb738-30"><a href="r-for-statistical-inference.html#cb738-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qmgp</span>(</span>
+<span id="cb738-31"><a href="r-for-statistical-inference.html#cb738-31" aria-hidden="true" tabindex="-1"></a>    p, fit_mgp<span class="sc">$</span>estimate[<span class="dv">1</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">2</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">3</span>],</span>
+<span id="cb738-32"><a href="r-for-statistical-inference.html#cb738-32" aria-hidden="true" tabindex="-1"></a>    fit_mgp<span class="sc">$</span>estimate[<span class="dv">4</span>], fit_mgp<span class="sc">$</span>estimate[<span class="dv">5</span>]</span>
+<span id="cb738-33"><a href="r-for-statistical-inference.html#cb738-33" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb738-34"><a href="r-for-statistical-inference.html#cb738-34" aria-hidden="true" tabindex="-1"></a>  danish_quant,</span>
+<span id="cb738-35"><a href="r-for-statistical-inference.html#cb738-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;QQ plot - Gamma-Pareto mixture&quot;</span>,</span>
+<span id="cb738-36"><a href="r-for-statistical-inference.html#cb738-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Quantiles fitted Gamma-Pareto mixture&quot;</span>,</span>
+<span id="cb738-37"><a href="r-for-statistical-inference.html#cb738-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Empirical quantiles&quot;</span></span>
+<span id="cb738-38"><a href="r-for-statistical-inference.html#cb738-38" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb738-39"><a href="r-for-statistical-inference.html#cb738-39" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-301-1.png" width="672" /></p>
 <p>One of the difficulties of this data set is the large values, which make it challenging to find a model that adequately models the body and tail simultaneously. However, the problem can be split. On the one hand, one can find a model for the body of the distribution and, on the other, a model for the tail of the distribution by, for example, using Extreme value theory statistics. In fact, this data set has been analyzed extensively using Extreme Value Theory techniques.</p>
 </div>
@@ -1302,7 +1312,7 @@ Then, the moment matching estimator <span class="math inline">\(\hat{\boldsymbol
 \]</span>
 Sometimes it is more convenient to base the estimation on central moments. Let
 <span class="math display">\[
-m_1(\boldsymbol{\theta}) = \mathbb{E}\left[ X\right] \quad \mbox{and} \quad m_k(\boldsymbol{\theta}) = \mathbb{E}\left[ (X - \mathbb{E}\left[ X\right])^k\right] \,,k = 2,\dots, d \,,
+m_1(\boldsymbol{\theta}) = \mathbb{E}\left[ X\right] \quad \mbox{and} \quad m_k(\boldsymbol{\theta}) = \mathbb{E}\left[ (X - \mathbb{E}\left[ X\right])^k\right] \,, \quad k = 2,\dots, d \,,
 \]</span>
 and
 <span class="math display">\[
@@ -2022,7 +2032,7 @@ For notation convenience, the intercept is included among the other parameters, 
 \]</span>
 Now assume that we have a set of observations <span class="math inline">\((y_1, x_1), \dots, (y_n, x_n)\)</span>, where <span class="math inline">\(x_i = (x_{i1}, \dots,x_{ip})\)</span> are vectors of covariates, <span class="math inline">\(i = 1,\dots, n\)</span>, and that we want to estimate <span class="math inline">\(\boldsymbol{\beta}\)</span> from this data. The most common method to do so is the method of <em>least squares</em>, which consists of finding the coefficients <span class="math inline">\(\boldsymbol{\beta} = (\beta_1, \dots, \beta_p)\)</span> that minimize the residual sum of squares</p>
 <p><span class="math display">\[
-RSS(\boldsymbol{\beta}) = \sum_{i = 1}^n (y_i - \beta_0 - \sum_{j = 1}^n x_{ij} \beta_j)^2 \,.
+RSS(\boldsymbol{\beta}) = \sum_{i = 1}^n (y_i - \beta_0 - \sum_{j = 1}^p x_{ij} \beta_j)^2 \,.
 \]</span>
 Before showing how to minimize the above expression, we introduce further notation. Let <span class="math inline">\(\mathbf{X}\)</span> be the <span class="math inline">\(n \times (p + 1)\)</span> matrix with <span class="math inline">\(i\)</span>-th row the vector <span class="math inline">\(x_i\)</span> (with <span class="math inline">\(1\)</span> in the first position) and let <span class="math inline">\(\mathbf{y} = (y_1, \dots, y_n)^{\top}\)</span>. Then we can write the residual sum of squares as
 <span class="math display">\[
@@ -2081,12 +2091,12 @@ Moreover, we could use the above expression to predict values for new covariate 
 ## 0.8229078 0.7612550 0.4416131 0.6199877 1.7315458 0.8434007</code></pre>
 <p>If we want to predict values of a new set of covariate values, these have to be passed into the <code>predict()</code> function in the form of a data frame with column names equal to those of the data frame used to create the linear mode. For example,</p>
 <div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="r-for-statistical-inference.html#cb851-1" aria-hidden="true" tabindex="-1"></a>xn <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.35</span>, <span class="fl">3.6</span>, <span class="dv">64</span>, <span class="fl">0.1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.18</span>, <span class="dv">6</span>, <span class="fl">2.5</span>), <span class="dv">1</span>)</span>
-<span id="cb851-2"><a href="r-for-statistical-inference.html#cb851-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(xn) <span class="ot">&lt;-</span>  <span class="fu">names</span>(prostate[, <span class="sc">-</span><span class="dv">9</span>])</span>
+<span id="cb851-2"><a href="r-for-statistical-inference.html#cb851-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(xn) <span class="ot">&lt;-</span> <span class="fu">names</span>(prostate[, <span class="sc">-</span><span class="dv">9</span>])</span>
 <span id="cb851-3"><a href="r-for-statistical-inference.html#cb851-3" aria-hidden="true" tabindex="-1"></a>xn <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(xn) <span class="co"># Covariates have to be in the form of a data.frame</span></span>
 <span id="cb851-4"><a href="r-for-statistical-inference.html#cb851-4" aria-hidden="true" tabindex="-1"></a>xn</span></code></pre></div>
 <pre><code>##   lcavol lweight age lbph svi   lcp gleason pgg45
 ## 1   1.35     3.6  64  0.1   0 -0.18       6   2.5</code></pre>
-<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb853-1"><a href="r-for-statistical-inference.html#cb853-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(prost_lm, xn) </span></code></pre></div>
+<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb853-1"><a href="r-for-statistical-inference.html#cb853-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(prost_lm, xn)</span></code></pre></div>
 <pre><code>##        1 
 ## 2.158081</code></pre>
 <p>So far, we have made minimal assumptions regarding the linear model. However, we need further assumptions to draw inference about the parameters and the model. More specifically, we assume that our model is of the form</p>
