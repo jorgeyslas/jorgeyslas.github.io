@@ -2165,7 +2165,7 @@ where <span class="math inline">\(v_j\)</span> is the <span class="math inline">
 ## Residual standard error: 0.6995 on 88 degrees of freedom
 ## Multiple R-squared:  0.6634, Adjusted R-squared:  0.6328 
 ## F-statistic: 21.68 on 8 and 88 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>R also provides the <em>p-value</em>s associated with these tests (column <em>Pr(&gt;|t|)</em>). Recall that a p-value is the probability of obtaining test results at least as “extreme” as the results observed, assuming that the null hypothesis is correct. In other words, the smaller the p-value, the stronger the evidence that you should reject the null hypothesis. A nice feature of R is that marks with <code>*</code> and <code>.</code> the parameters with p-values lower than commonly used significance levels.</p>
+<p>R also provides the <em>p-value</em>s associated with these tests (column <em>Pr(&gt;|t|)</em>). Recall that a p-value is the probability of obtaining test results at least as “extreme” as the results observed, assuming that the null hypothesis is correct. In other words, the smaller the p-value, the stronger the evidence that we should reject the null hypothesis. A nice feature of R is that marks with <code>*</code> and <code>.</code> the parameters with p-values lower than commonly used significance levels.</p>
 <p>It is often the case that we need to test for the significance of groups of coefficients simultaneously. For that purpose, we can use the F statistics, defined as
 <span class="math display">\[
 F = \frac{(RSS_0 - RSS_1) / ( p_1 - p_0)}{RSS_1 / (n - p_1 - 1)} \,,

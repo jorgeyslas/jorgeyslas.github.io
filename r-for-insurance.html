@@ -256,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">4</span> R for Insurance<a href="r-for-insurance.html#r-for-insurance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="the-collective-risk-model" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> The collective risk model<a href="r-for-insurance.html#the-collective-risk-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Let <span class="math inline">\(S\)</span> be a random variable representing the aggregate claim amount (or the total amount of claims) of an insurance portfolio of independent risks over a fixed period. Let <span class="math inline">\(N\)</span> be a random variable representing the number of claims (or frequency) in the portfolio over that period, and <span class="math inline">\(X_1, X_2, \dots\)</span> be a sequence of i.i.d. random variables denoting the claim sizes (or severities), with common element <span class="math inline">\(X\geq0\)</span>.
+<p>Let <span class="math inline">\(S\)</span> be a random variable representing the aggregate claim amount (or the total amount of claims) of an insurance portfolio of independent risks over a fixed period. Let <span class="math inline">\(N\)</span> be a random variable representing the number of claims (or frequency) in the portfolio over that period, and <span class="math inline">\(X_1, X_2, \dots\)</span> be a sequence of iid random variables denoting the claim sizes (or severities), with common element <span class="math inline">\(X\geq0\)</span>.
 Then, <span class="math inline">\(S\)</span> is given as the random sum
 <span class="math display">\[\begin{equation*}
     S=\left\{\begin{array}{ll}
@@ -279,7 +279,7 @@ and
 <span class="math display">\[
 \text{Var}(S)=\mathbb{E}[N]\text{Var}(X)+\text{Var}(N)\mathbb{E}^2[X] \,.
 \]</span>
-Finally,the distribution function <span class="math inline">\(F_S\)</span> of <span class="math inline">\(S\)</span> is given by
+Finally, the distribution function <span class="math inline">\(F_S\)</span> of <span class="math inline">\(S\)</span> is given by
 <span class="math display" id="eq:sconv">\[\begin{equation}
   F_S(x)=\mathbb{P}(S\leq x)=\sum_{n=0}^{\infty}p_nF^{\star n}_X(x)\,,\quad x\geq 0 \,,
   \tag{4.1}
@@ -365,52 +365,52 @@ The discretized and the true distributions have the same total probability and e
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-65" class="solution"><em>Solution</em>. </span><span class="math inline">\(\,\)</span></p>
-<div class="sourceCode" id="cb980"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb980-1"><a href="r-for-insurance.html#cb980-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(actuar)</span>
-<span id="cb980-2"><a href="r-for-insurance.html#cb980-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb980-3"><a href="r-for-insurance.html#cb980-3" aria-hidden="true" tabindex="-1"></a>fx_upper <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
-<span id="cb980-4"><a href="r-for-insurance.html#cb980-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;upper&quot;</span>,</span>
-<span id="cb980-5"><a href="r-for-insurance.html#cb980-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>,</span>
-<span id="cb980-6"><a href="r-for-insurance.html#cb980-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">10</span>,</span>
-<span id="cb980-7"><a href="r-for-insurance.html#cb980-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">step =</span> <span class="fl">0.5</span></span>
-<span id="cb980-8"><a href="r-for-insurance.html#cb980-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb980-9"><a href="r-for-insurance.html#cb980-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb980-10"><a href="r-for-insurance.html#cb980-10" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span> <span class="sc">-</span> <span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb980-11"><a href="r-for-insurance.html#cb980-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stepfun</span>(x, <span class="fu">diffinv</span>(fx_upper)), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Upper&quot;</span>)</span>
-<span id="cb980-12"><a href="r-for-insurance.html#cb980-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-400-1.png" width="75%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb981"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb981-1"><a href="r-for-insurance.html#cb981-1" aria-hidden="true" tabindex="-1"></a>fx_lower <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
-<span id="cb981-2"><a href="r-for-insurance.html#cb981-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;lower&quot;</span>,</span>
-<span id="cb981-3"><a href="r-for-insurance.html#cb981-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>,</span>
-<span id="cb981-4"><a href="r-for-insurance.html#cb981-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">10</span>,</span>
-<span id="cb981-5"><a href="r-for-insurance.html#cb981-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">step =</span> <span class="fl">0.5</span></span>
-<span id="cb981-6"><a href="r-for-insurance.html#cb981-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb981-7"><a href="r-for-insurance.html#cb981-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb981-8"><a href="r-for-insurance.html#cb981-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span>
-<span id="cb981-9"><a href="r-for-insurance.html#cb981-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stepfun</span>(x, <span class="fu">diffinv</span>(fx_lower)), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Lower&quot;</span>)</span>
-<span id="cb981-10"><a href="r-for-insurance.html#cb981-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-400-2.png" width="75%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb982"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb982-1"><a href="r-for-insurance.html#cb982-1" aria-hidden="true" tabindex="-1"></a>fx_round <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
-<span id="cb982-2"><a href="r-for-insurance.html#cb982-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;rounding&quot;</span>,</span>
-<span id="cb982-3"><a href="r-for-insurance.html#cb982-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>,</span>
-<span id="cb982-4"><a href="r-for-insurance.html#cb982-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">10</span>,</span>
-<span id="cb982-5"><a href="r-for-insurance.html#cb982-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">step =</span> <span class="fl">0.5</span></span>
-<span id="cb982-6"><a href="r-for-insurance.html#cb982-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb982-7"><a href="r-for-insurance.html#cb982-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb982-8"><a href="r-for-insurance.html#cb982-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span> <span class="sc">-</span> <span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb982-9"><a href="r-for-insurance.html#cb982-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stepfun</span>(x, <span class="fu">diffinv</span>(fx_round)), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Rounding&quot;</span>)</span>
-<span id="cb982-10"><a href="r-for-insurance.html#cb982-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-400-3.png" width="75%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb983"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb983-1"><a href="r-for-insurance.html#cb983-1" aria-hidden="true" tabindex="-1"></a>fx_unbi <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
-<span id="cb983-2"><a href="r-for-insurance.html#cb983-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;unbiased&quot;</span>,</span>
-<span id="cb983-3"><a href="r-for-insurance.html#cb983-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>,</span>
-<span id="cb983-4"><a href="r-for-insurance.html#cb983-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">10</span>,</span>
-<span id="cb983-5"><a href="r-for-insurance.html#cb983-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">step =</span> <span class="fl">0.5</span>,</span>
-<span id="cb983-6"><a href="r-for-insurance.html#cb983-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lev =</span> <span class="fu">levgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>) <span class="co"># Computes E[min(X, a)]</span></span>
-<span id="cb983-7"><a href="r-for-insurance.html#cb983-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb983-8"><a href="r-for-insurance.html#cb983-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span>
-<span id="cb983-9"><a href="r-for-insurance.html#cb983-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stepfun</span>(x, <span class="fu">diffinv</span>(fx_unbi)), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Unbiased&quot;</span>)</span>
-<span id="cb983-10"><a href="r-for-insurance.html#cb983-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-400-4.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb984"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb984-1"><a href="r-for-insurance.html#cb984-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(actuar)</span>
+<span id="cb984-2"><a href="r-for-insurance.html#cb984-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb984-3"><a href="r-for-insurance.html#cb984-3" aria-hidden="true" tabindex="-1"></a>fx_upper <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb984-4"><a href="r-for-insurance.html#cb984-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;upper&quot;</span>,</span>
+<span id="cb984-5"><a href="r-for-insurance.html#cb984-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>,</span>
+<span id="cb984-6"><a href="r-for-insurance.html#cb984-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">10</span>,</span>
+<span id="cb984-7"><a href="r-for-insurance.html#cb984-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">step =</span> <span class="fl">0.5</span></span>
+<span id="cb984-8"><a href="r-for-insurance.html#cb984-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb984-9"><a href="r-for-insurance.html#cb984-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb984-10"><a href="r-for-insurance.html#cb984-10" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span> <span class="sc">-</span> <span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb984-11"><a href="r-for-insurance.html#cb984-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stepfun</span>(x, <span class="fu">diffinv</span>(fx_upper)), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Upper&quot;</span>)</span>
+<span id="cb984-12"><a href="r-for-insurance.html#cb984-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-401-1.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb985"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb985-1"><a href="r-for-insurance.html#cb985-1" aria-hidden="true" tabindex="-1"></a>fx_lower <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb985-2"><a href="r-for-insurance.html#cb985-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;lower&quot;</span>,</span>
+<span id="cb985-3"><a href="r-for-insurance.html#cb985-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>,</span>
+<span id="cb985-4"><a href="r-for-insurance.html#cb985-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">10</span>,</span>
+<span id="cb985-5"><a href="r-for-insurance.html#cb985-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">step =</span> <span class="fl">0.5</span></span>
+<span id="cb985-6"><a href="r-for-insurance.html#cb985-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb985-7"><a href="r-for-insurance.html#cb985-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb985-8"><a href="r-for-insurance.html#cb985-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span>
+<span id="cb985-9"><a href="r-for-insurance.html#cb985-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stepfun</span>(x, <span class="fu">diffinv</span>(fx_lower)), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Lower&quot;</span>)</span>
+<span id="cb985-10"><a href="r-for-insurance.html#cb985-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-401-2.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb986"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb986-1"><a href="r-for-insurance.html#cb986-1" aria-hidden="true" tabindex="-1"></a>fx_round <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb986-2"><a href="r-for-insurance.html#cb986-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;rounding&quot;</span>,</span>
+<span id="cb986-3"><a href="r-for-insurance.html#cb986-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>,</span>
+<span id="cb986-4"><a href="r-for-insurance.html#cb986-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">10</span>,</span>
+<span id="cb986-5"><a href="r-for-insurance.html#cb986-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">step =</span> <span class="fl">0.5</span></span>
+<span id="cb986-6"><a href="r-for-insurance.html#cb986-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb986-7"><a href="r-for-insurance.html#cb986-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb986-8"><a href="r-for-insurance.html#cb986-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span> <span class="sc">-</span> <span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb986-9"><a href="r-for-insurance.html#cb986-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stepfun</span>(x, <span class="fu">diffinv</span>(fx_round)), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Rounding&quot;</span>)</span>
+<span id="cb986-10"><a href="r-for-insurance.html#cb986-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-401-3.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb987"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb987-1"><a href="r-for-insurance.html#cb987-1" aria-hidden="true" tabindex="-1"></a>fx_unbi <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb987-2"><a href="r-for-insurance.html#cb987-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;unbiased&quot;</span>,</span>
+<span id="cb987-3"><a href="r-for-insurance.html#cb987-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>,</span>
+<span id="cb987-4"><a href="r-for-insurance.html#cb987-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">10</span>,</span>
+<span id="cb987-5"><a href="r-for-insurance.html#cb987-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">step =</span> <span class="fl">0.5</span>,</span>
+<span id="cb987-6"><a href="r-for-insurance.html#cb987-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lev =</span> <span class="fu">levgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>) <span class="co"># Computes E[min(X, a)]</span></span>
+<span id="cb987-7"><a href="r-for-insurance.html#cb987-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb987-8"><a href="r-for-insurance.html#cb987-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span>
+<span id="cb987-9"><a href="r-for-insurance.html#cb987-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">stepfun</span>(x, <span class="fu">diffinv</span>(fx_unbi)), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Unbiased&quot;</span>)</span>
+<span id="cb987-10"><a href="r-for-insurance.html#cb987-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-401-4.png" width="75%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="calculation-of-the-aggregate-claim-amount-distribution" class="section level3 hasAnchor" number="4.1.2">
@@ -418,7 +418,7 @@ The discretized and the true distributions have the same total probability and e
 <p>In this section, we present various methods to compute or approximate the cdf of the aggregate claims amount <span class="math inline">\(S\)</span>. These methods are implemented in the <code>actuar</code> package through the function <code>aggregateDist()</code>.</p>
 <div id="panjers-recursion" class="section level4 unnumbered hasAnchor">
 <h4>Panjer’s recursion<a href="r-for-insurance.html#panjers-recursion" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>The first method that we present is the well known Panjer’s recursion. This method requires the severity distribution to be discrete arithmetic on <span class="math inline">\(0, 1, 2, \dots, m\)</span> for some monetary unit and the frequency distribution to be in the <span class="math inline">\((a,b,0)\)</span> or <span class="math inline">\((a,b,1)\)</span> class of distributions. Recall that <span class="math inline">\(N\)</span> is in the <span class="math inline">\((a,b,0)\)</span> class (resp. in the <span class="math inline">\((a,b,1)\)</span> class) if its pf <span class="math inline">\(p_n\)</span> can be written recursively in the following form
+<p>The first method that we present is the well-known Panjer’s recursion. This method requires the severity distribution to be discrete arithmetic on <span class="math inline">\(0, 1, 2, \dots, m\)</span> for some monetary unit and the frequency distribution to be in the <span class="math inline">\((a,b,0)\)</span> or <span class="math inline">\((a,b,1)\)</span> class of distributions. Recall that <span class="math inline">\(N\)</span> is in the <span class="math inline">\((a,b,0)\)</span> class (resp. in the <span class="math inline">\((a,b,1)\)</span> class) if its pf <span class="math inline">\(p_n\)</span> can be written recursively in the following form
 <span class="math display">\[\begin{equation*}
   p_n=\left(a+\frac{b}{n}\right)p_{n-1}, \quad n=1,2,3,\dots\,,
 \end{equation*}\]</span>
@@ -478,7 +478,7 @@ Many known distributions belong to the <span class="math inline">\((a,b,0)\)</sp
 </table>
 <p>Under the above setting, the pf of the aggregate claims can be calculated recursively based on the following theorem.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-66" class="theorem"><strong>Theorem 4.1  </strong></span>Let <span class="math inline">\(N\)</span> be a random variable in the <span class="math inline">\((a,b,0)\)</span> (resp. <span class="math inline">\((a,b,1)\)</span>) family of distributions. Then, for <span class="math inline">\(x=0,1,\dots\)</span> the pf <span class="math inline">\(f_S\)</span> of the aggregate claims is given by
+<p><span id="thm:unlabeled-div-66" class="theorem"><strong>Theorem 4.1  </strong></span>Let <span class="math inline">\(N\)</span> be a random variable in the <span class="math inline">\((a,b,0)\)</span> (resp. <span class="math inline">\((a,b,1)\)</span>) family of distributions. Then, the pf <span class="math inline">\(f_S\)</span> of the aggregate claims is given by
 <span class="math display">\[\begin{equation*}
 f_S(x) = \left\{\begin{array}{ll}
   P_N(f_X(0))\,, &amp; x=0 \,, \\
@@ -494,18 +494,18 @@ f_S(x) = \left\{\begin{array}{ll}
 \end{equation*}\]</span>
 where <span class="math inline">\(P_N(t)=\mathbb{E}(t^N)\)</span> is the probability generating function (pgf) of <span class="math inline">\(N\)</span>.</p>
 </div>
-<p>To perform Panjer’s recursion in R, we can use the function <code>aggregateDist()</code> with argument <code>method = "recursive"</code>. Let us give a concrete example. We consider <span class="math inline">\(S\)</span> such that <span class="math inline">\(N\)</span> is Poisson distributed with mean <span class="math inline">\(10\)</span> and <span class="math inline">\(X \sim Gamma(2, 1)\)</span>. Then, we approximate the cdf of <span class="math inline">\(S\)</span> by first discretizing the gamma distribution on (0, 22) with the unbiased method and a step of 0.5, and then using the recursive method in aggregateDist.</p>
-<div class="sourceCode" id="cb984"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb984-1"><a href="r-for-insurance.html#cb984-1" aria-hidden="true" tabindex="-1"></a>fx <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
-<span id="cb984-2"><a href="r-for-insurance.html#cb984-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;unbiased&quot;</span>,</span>
-<span id="cb984-3"><a href="r-for-insurance.html#cb984-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">22</span>, <span class="at">step =</span> <span class="fl">0.5</span>,</span>
-<span id="cb984-4"><a href="r-for-insurance.html#cb984-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lev =</span> <span class="fu">levgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>)</span>
-<span id="cb984-5"><a href="r-for-insurance.html#cb984-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb984-6"><a href="r-for-insurance.html#cb984-6" aria-hidden="true" tabindex="-1"></a>Fs <span class="ot">&lt;-</span> <span class="fu">aggregateDist</span>(<span class="st">&quot;recursive&quot;</span>,</span>
-<span id="cb984-7"><a href="r-for-insurance.html#cb984-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.freq =</span> <span class="st">&quot;poisson&quot;</span>,</span>
-<span id="cb984-8"><a href="r-for-insurance.html#cb984-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.sev =</span> fx, <span class="at">lambda =</span> <span class="dv">10</span>,</span>
-<span id="cb984-9"><a href="r-for-insurance.html#cb984-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x.scale =</span> <span class="fl">0.5</span></span>
-<span id="cb984-10"><a href="r-for-insurance.html#cb984-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb984-11"><a href="r-for-insurance.html#cb984-11" aria-hidden="true" tabindex="-1"></a>Fs</span></code></pre></div>
+<p>To perform Panjer’s recursion in R, we can use the function <code>aggregateDist()</code> with argument <code>method = "recursive"</code>. Let us give a concrete example. We consider <span class="math inline">\(S\)</span> such that <span class="math inline">\(N\)</span> is Poisson distributed with mean <span class="math inline">\(10\)</span> and <span class="math inline">\(X \sim Gamma(2, 1)\)</span>. Then, we approximate the cdf of <span class="math inline">\(S\)</span> by first discretizing the gamma distribution on (0, 22) with the unbiased method and a step of 0.5 and then using the recursive method in <code>aggregateDist()</code>.</p>
+<div class="sourceCode" id="cb988"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb988-1"><a href="r-for-insurance.html#cb988-1" aria-hidden="true" tabindex="-1"></a>fx <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb988-2"><a href="r-for-insurance.html#cb988-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;unbiased&quot;</span>,</span>
+<span id="cb988-3"><a href="r-for-insurance.html#cb988-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">22</span>, <span class="at">step =</span> <span class="fl">0.5</span>,</span>
+<span id="cb988-4"><a href="r-for-insurance.html#cb988-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lev =</span> <span class="fu">levgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb988-5"><a href="r-for-insurance.html#cb988-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb988-6"><a href="r-for-insurance.html#cb988-6" aria-hidden="true" tabindex="-1"></a>Fs <span class="ot">&lt;-</span> <span class="fu">aggregateDist</span>(<span class="st">&quot;recursive&quot;</span>,</span>
+<span id="cb988-7"><a href="r-for-insurance.html#cb988-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.freq =</span> <span class="st">&quot;poisson&quot;</span>,</span>
+<span id="cb988-8"><a href="r-for-insurance.html#cb988-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.sev =</span> fx, <span class="at">lambda =</span> <span class="dv">10</span>,</span>
+<span id="cb988-9"><a href="r-for-insurance.html#cb988-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x.scale =</span> <span class="fl">0.5</span></span>
+<span id="cb988-10"><a href="r-for-insurance.html#cb988-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb988-11"><a href="r-for-insurance.html#cb988-11" aria-hidden="true" tabindex="-1"></a>Fs</span></code></pre></div>
 <pre><code>## 
 ## Aggregate Claim Amount Distribution
 ##   Recursive method approximation
@@ -517,40 +517,40 @@ where <span class="math inline">\(P_N(t)=\mathbb{E}(t^N)\)</span> is the probabi
 ## Data:  ( 143 obs. )
 ##  x[1:143] =     0,   0.5,     1,  ...,  70.5,    71</code></pre>
 <p>The above code returns an object of the class <code>aggregateDist</code> from which we can obtain information regarding <span class="math inline">\(S\)</span>. Firstly, we can use directly such an object to evaluate the cdf of <span class="math inline">\(S\)</span>:</p>
-<div class="sourceCode" id="cb986"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb986-1"><a href="r-for-insurance.html#cb986-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Fs</span>(<span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb990"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb990-1"><a href="r-for-insurance.html#cb990-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Fs</span>(<span class="dv">20</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5470771</code></pre>
 <p>Note that the support can be obtained with the <code>knots()</code> function:</p>
-<div class="sourceCode" id="cb988"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb988-1"><a href="r-for-insurance.html#cb988-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">knots</span>(Fs))</span></code></pre></div>
+<div class="sourceCode" id="cb992"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb992-1"><a href="r-for-insurance.html#cb992-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">knots</span>(Fs))</span></code></pre></div>
 <pre><code>## [1] 0.0 0.5 1.0 1.5 2.0 2.5</code></pre>
 <p>Moreover, we can apply other functions to the above object to obtain different quantities or even plots. For instance, <code>summary()</code> provides some basic information on <span class="math inline">\(S\)</span>.</p>
-<div class="sourceCode" id="cb990"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb990-1"><a href="r-for-insurance.html#cb990-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Fs)</span></code></pre></div>
+<div class="sourceCode" id="cb994"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb994-1"><a href="r-for-insurance.html#cb994-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Fs)</span></code></pre></div>
 <pre><code>## Aggregate Claim Amount Empirical CDF:
 ##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 ##  0.00000 14.50000 19.50000 19.99994 25.00000 71.00000</code></pre>
 <p>To plot the approximated cdf of <span class="math inline">\(S\)</span>, we can use the <code>plot()</code> function:</p>
-<div class="sourceCode" id="cb992"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb992-1"><a href="r-for-insurance.html#cb992-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Fs, <span class="at">do.points =</span> <span class="cn">FALSE</span>, <span class="at">verticals =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-405-1.png" width="672" /></p>
+<div class="sourceCode" id="cb996"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb996-1"><a href="r-for-insurance.html#cb996-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Fs, <span class="at">do.points =</span> <span class="cn">FALSE</span>, <span class="at">verticals =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-406-1.png" width="672" /></p>
 <p>We will illustrate additional useful functions with the other approximation method presented next.</p>
 </div>
 <div id="exact-calculation-by-numerical-convolutions" class="section level4 unnumbered hasAnchor">
 <h4>Exact calculation by numerical convolutions<a href="r-for-insurance.html#exact-calculation-by-numerical-convolutions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>This method consists of using directly <a href="r-for-insurance.html#eq:sconv">(4.1)</a>, and it can be accessed using the argument <code>method = "convolution"</code> in the <code>aggregateDist()</code> function. However, it only works with discrete severity models and computes the distribution of the convolution using <a href="r-for-insurance.html#eq:recconv">(4.2)</a>. This method is computationally demanding, and hence, it only works well with relatively small problems. Nevertheless, an advantage is that any discrete distribution can be employed for the claim number. We now present a concrete example: As before, we consider a <span class="math inline">\(Gamma(2,1)\)</span> distribution for the severities, but now consider a <span class="math inline">\(Bin(10, 0.4)\)</span> distribution for the number of claims.</p>
-<div class="sourceCode" id="cb993"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb993-1"><a href="r-for-insurance.html#cb993-1" aria-hidden="true" tabindex="-1"></a>fx <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
-<span id="cb993-2"><a href="r-for-insurance.html#cb993-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;unbiased&quot;</span>,</span>
-<span id="cb993-3"><a href="r-for-insurance.html#cb993-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">22</span>, <span class="at">step =</span> <span class="fl">0.5</span>,</span>
-<span id="cb993-4"><a href="r-for-insurance.html#cb993-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lev =</span> <span class="fu">levgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>)</span>
-<span id="cb993-5"><a href="r-for-insurance.html#cb993-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb993-6"><a href="r-for-insurance.html#cb993-6" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.4</span>) <span class="co"># We require a vector of claim number probabilities</span></span>
-<span id="cb993-7"><a href="r-for-insurance.html#cb993-7" aria-hidden="true" tabindex="-1"></a>Fs <span class="ot">&lt;-</span> <span class="fu">aggregateDist</span>(<span class="st">&quot;convolution&quot;</span>,</span>
-<span id="cb993-8"><a href="r-for-insurance.html#cb993-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.freq =</span> fn,</span>
-<span id="cb993-9"><a href="r-for-insurance.html#cb993-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.sev =</span> fx,</span>
-<span id="cb993-10"><a href="r-for-insurance.html#cb993-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">x.scale =</span> <span class="fl">0.5</span></span>
-<span id="cb993-11"><a href="r-for-insurance.html#cb993-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb993-12"><a href="r-for-insurance.html#cb993-12" aria-hidden="true" tabindex="-1"></a><span class="fu">Fs</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb997"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb997-1"><a href="r-for-insurance.html#cb997-1" aria-hidden="true" tabindex="-1"></a>fx <span class="ot">&lt;-</span> <span class="fu">discretize</span>(<span class="fu">pgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb997-2"><a href="r-for-insurance.html#cb997-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;unbiased&quot;</span>,</span>
+<span id="cb997-3"><a href="r-for-insurance.html#cb997-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">22</span>, <span class="at">step =</span> <span class="fl">0.5</span>,</span>
+<span id="cb997-4"><a href="r-for-insurance.html#cb997-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lev =</span> <span class="fu">levgamma</span>(x, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb997-5"><a href="r-for-insurance.html#cb997-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb997-6"><a href="r-for-insurance.html#cb997-6" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.4</span>) <span class="co"># We require a vector of claim number probabilities</span></span>
+<span id="cb997-7"><a href="r-for-insurance.html#cb997-7" aria-hidden="true" tabindex="-1"></a>Fs <span class="ot">&lt;-</span> <span class="fu">aggregateDist</span>(<span class="st">&quot;convolution&quot;</span>,</span>
+<span id="cb997-8"><a href="r-for-insurance.html#cb997-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.freq =</span> fn,</span>
+<span id="cb997-9"><a href="r-for-insurance.html#cb997-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.sev =</span> fx,</span>
+<span id="cb997-10"><a href="r-for-insurance.html#cb997-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">x.scale =</span> <span class="fl">0.5</span></span>
+<span id="cb997-11"><a href="r-for-insurance.html#cb997-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb997-12"><a href="r-for-insurance.html#cb997-12" aria-hidden="true" tabindex="-1"></a><span class="fu">Fs</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 0.7282019</code></pre>
 <p>Once the object above was created, we can again find different quantities of interest. For instance, the density can be found using the <code>diff()</code> function:</p>
-<div class="sourceCode" id="cb995"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb995-1"><a href="r-for-insurance.html#cb995-1" aria-hidden="true" tabindex="-1"></a>fs <span class="ot">&lt;-</span> <span class="fu">diff</span>(Fs)</span>
-<span id="cb995-2"><a href="r-for-insurance.html#cb995-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fs)</span></code></pre></div>
+<div class="sourceCode" id="cb999"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb999-1"><a href="r-for-insurance.html#cb999-1" aria-hidden="true" tabindex="-1"></a>fs <span class="ot">&lt;-</span> <span class="fu">diff</span>(Fs)</span>
+<span id="cb999-2"><a href="r-for-insurance.html#cb999-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fs)</span></code></pre></div>
 <pre><code>## [1] 0.007499618 0.006946915 0.011704075 0.016188003 0.020890637 0.025716230</code></pre>
 </div>
 <div id="normal-approximation" class="section level4 unnumbered hasAnchor">
@@ -560,11 +560,11 @@ where <span class="math inline">\(P_N(t)=\mathbb{E}(t^N)\)</span> is the probabi
 F_S(x) \approx \Phi\left( \frac{x - \mu_S}{\sigma_S} \right) \,,
 \]</span>
 where <span class="math inline">\(\mu_S = \mathbb{E}[S]\)</span>, <span class="math inline">\(\sigma^2_S = \text{Var}(S)\)</span>, and <span class="math inline">\(\Phi\)</span> denotes the cdf of a standard normal. However, this approximation ignores the tail behavior of the distribution, which may be problematic when we are interested in the tails. Moreover, we require the existence of at least the second moment. To use this method in the <code>aggregateDist()</code> function, we need to pass the argument <code>method = "normal"</code> and a vector with the moments of <span class="math inline">\(S\)</span> in the order <span class="math inline">\((\mu_S , \sigma^2_S)\)</span>. For instance,</p>
-<div class="sourceCode" id="cb997"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb997-1"><a href="r-for-insurance.html#cb997-1" aria-hidden="true" tabindex="-1"></a>Fs <span class="ot">&lt;-</span> <span class="fu">aggregateDist</span>(<span class="st">&quot;normal&quot;</span>, <span class="at">moments =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">2</span>))</span>
-<span id="cb997-2"><a href="r-for-insurance.html#cb997-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Fs</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1001"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1001-1"><a href="r-for-insurance.html#cb1001-1" aria-hidden="true" tabindex="-1"></a>Fs <span class="ot">&lt;-</span> <span class="fu">aggregateDist</span>(<span class="st">&quot;normal&quot;</span>, <span class="at">moments =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">2</span>))</span>
+<span id="cb1001-2"><a href="r-for-insurance.html#cb1001-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Fs</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.2397501</code></pre>
 <p>Note that the above cdf evaluation can also be computed simply as</p>
-<div class="sourceCode" id="cb999"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb999-1"><a href="r-for-insurance.html#cb999-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1003"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1003-1"><a href="r-for-insurance.html#cb1003-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## [1] 0.2397501</code></pre>
 </div>
 <div id="normal-power-ii-approximation" class="section level4 unnumbered hasAnchor">
@@ -575,8 +575,8 @@ F_S(x) \approx \Phi\left( - \frac{3}{\gamma_S} + \sqrt{\frac{9}{\gamma_S^2} + 1 
 \]</span>
 where <span class="math inline">\(\gamma_S = \mathbb{E}[(S - \mu_S)^3]/ \sigma^{3}_S\)</span>. The approximation is valid for <span class="math inline">\(x &gt; \mu_S\)</span> only
 and performs reasonably well when <span class="math inline">\(\gamma_S &lt; 1\)</span>. This method is implemented in the <code>aggregateDist()</code> function and accessible through the argument <code>method = "npower"</code>. We require to give a vector with <span class="math inline">\((\mu_S , \sigma^2_S, \gamma_S)\)</span>, in that order. For example,</p>
-<div class="sourceCode" id="cb1001"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1001-1"><a href="r-for-insurance.html#cb1001-1" aria-hidden="true" tabindex="-1"></a>Fs <span class="ot">&lt;-</span> <span class="fu">aggregateDist</span>(<span class="st">&quot;npower&quot;</span>, <span class="at">moments =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">2</span>, <span class="fl">0.5</span>))</span>
-<span id="cb1001-2"><a href="r-for-insurance.html#cb1001-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Fs</span>(<span class="dv">7</span>) <span class="co"># Accesible only for x &gt; mu_S</span></span></code></pre></div>
+<div class="sourceCode" id="cb1005"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1005-1"><a href="r-for-insurance.html#cb1005-1" aria-hidden="true" tabindex="-1"></a>Fs <span class="ot">&lt;-</span> <span class="fu">aggregateDist</span>(<span class="st">&quot;npower&quot;</span>, <span class="at">moments =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">2</span>, <span class="fl">0.5</span>))</span>
+<span id="cb1005-2"><a href="r-for-insurance.html#cb1005-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Fs</span>(<span class="dv">7</span>) <span class="co"># Accesible only for x &gt; mu_S</span></span></code></pre></div>
 <pre><code>## [1] 0.7716457</code></pre>
 </div>
 <div id="simulation" class="section level4 unnumbered hasAnchor">
@@ -585,18 +585,18 @@ and performs reasonably well when <span class="math inline">\(\gamma_S &lt; 1\)<
 <span class="math display">\[
 F_n(x) = \frac{1}{n}\sum_{j = 1}^n 1_{(x_j \leq x)} \,.
 \]</span>
-The above can be performed using the <code>aggregateDist()</code> function with the argument <code>method = "simulation"</code>. For instance, for <span class="math inline">\(S\)</span> with <span class="math inline">\(N\)</span> Poisson distributed with mean <span class="math inline">\(10\)</span> and <span class="math inline">\(X \sim Gamma(2,1)\)</span> we have</p>
-<div class="sourceCode" id="cb1003"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1003-1"><a href="r-for-insurance.html#cb1003-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1003-2"><a href="r-for-insurance.html#cb1003-2" aria-hidden="true" tabindex="-1"></a>model_freq <span class="ot">&lt;-</span> <span class="fu">expression</span>(<span class="at">data =</span> <span class="fu">rpois</span>(<span class="dv">10</span>))</span>
-<span id="cb1003-3"><a href="r-for-insurance.html#cb1003-3" aria-hidden="true" tabindex="-1"></a>model_sev <span class="ot">&lt;-</span> <span class="fu">expression</span>(<span class="at">data =</span> <span class="fu">rgamma</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb1003-4"><a href="r-for-insurance.html#cb1003-4" aria-hidden="true" tabindex="-1"></a>Fs <span class="ot">&lt;-</span> <span class="fu">aggregateDist</span>(<span class="st">&quot;simulation&quot;</span>,</span>
-<span id="cb1003-5"><a href="r-for-insurance.html#cb1003-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nb.simul =</span> <span class="dv">2500</span>,</span>
-<span id="cb1003-6"><a href="r-for-insurance.html#cb1003-6" aria-hidden="true" tabindex="-1"></a>  model_freq, model_sev</span>
-<span id="cb1003-7"><a href="r-for-insurance.html#cb1003-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>We can then computer different quantities related to <span class="math inline">\(S\)</span>. For instance, the mean and quantiles can be computed using the <code>mean()</code> and <code>quantile()</code> functions:</p>
-<div class="sourceCode" id="cb1004"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1004-1"><a href="r-for-insurance.html#cb1004-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Fs)</span></code></pre></div>
+The above can be performed using the <code>aggregateDist()</code> function with the argument <code>method = "simulation"</code>. For instance, for <span class="math inline">\(S\)</span> with <span class="math inline">\(N\)</span> Poisson distributed with mean <span class="math inline">\(10\)</span> and <span class="math inline">\(X \sim Gamma(2,1)\)</span>, we have</p>
+<div class="sourceCode" id="cb1007"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1007-1"><a href="r-for-insurance.html#cb1007-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1007-2"><a href="r-for-insurance.html#cb1007-2" aria-hidden="true" tabindex="-1"></a>model_freq <span class="ot">&lt;-</span> <span class="fu">expression</span>(<span class="at">data =</span> <span class="fu">rpois</span>(<span class="dv">10</span>))</span>
+<span id="cb1007-3"><a href="r-for-insurance.html#cb1007-3" aria-hidden="true" tabindex="-1"></a>model_sev <span class="ot">&lt;-</span> <span class="fu">expression</span>(<span class="at">data =</span> <span class="fu">rgamma</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb1007-4"><a href="r-for-insurance.html#cb1007-4" aria-hidden="true" tabindex="-1"></a>Fs <span class="ot">&lt;-</span> <span class="fu">aggregateDist</span>(<span class="st">&quot;simulation&quot;</span>,</span>
+<span id="cb1007-5"><a href="r-for-insurance.html#cb1007-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nb.simul =</span> <span class="dv">2500</span>,</span>
+<span id="cb1007-6"><a href="r-for-insurance.html#cb1007-6" aria-hidden="true" tabindex="-1"></a>  model_freq, model_sev</span>
+<span id="cb1007-7"><a href="r-for-insurance.html#cb1007-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>We can then compute different quantities related to <span class="math inline">\(S\)</span>. For instance, the mean and quantiles can be computed using the <code>mean()</code> and <code>quantile()</code> functions:</p>
+<div class="sourceCode" id="cb1008"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1008-1"><a href="r-for-insurance.html#cb1008-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Fs)</span></code></pre></div>
 <pre><code>## [1] 20.13251</code></pre>
-<div class="sourceCode" id="cb1006"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1006-1"><a href="r-for-insurance.html#cb1006-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Fs)</span></code></pre></div>
+<div class="sourceCode" id="cb1010"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1010-1"><a href="r-for-insurance.html#cb1010-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(Fs)</span></code></pre></div>
 <pre><code>##      25%      50%      75%      90%      95%    97.5%      99%    99.5% 
 ## 14.38965 19.37523 25.25919 30.98962 33.85464 36.24842 39.92677 43.65289</code></pre>
 <p>Other relevant quantities in insurance applications are the Value at Risk (VaR) and the Conditional Tail Expectation. Recall that the VaR of level <span class="math inline">\(\alpha \in (0,1)\)</span>, <span class="math inline">\(VaR_\alpha\)</span>, is the quantity satisfying</p>
@@ -607,43 +607,43 @@ and that the conditional tail expectation of level <span class="math inline">\(\
 <span class="math display">\[
 CTE_\alpha = \mathbb{E}[S \mid S&gt; VaR_\alpha  ] \,.
 \]</span></p>
-<p>The above quantities can be computed easily using the <code>VaR()</code> and <code>CTE()</code> function in the <code>actuar</code> package.</p>
-<div class="sourceCode" id="cb1008"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1008-1"><a href="r-for-insurance.html#cb1008-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VaR</span>(Fs)</span></code></pre></div>
+<p>The above quantities can be computed easily using the <code>VaR()</code> and <code>CTE()</code> functions in the <code>actuar</code> package.</p>
+<div class="sourceCode" id="cb1012"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1012-1"><a href="r-for-insurance.html#cb1012-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VaR</span>(Fs)</span></code></pre></div>
 <pre><code>##      90%      95%      99% 
 ## 30.98962 33.85464 39.92677</code></pre>
-<div class="sourceCode" id="cb1010"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1010-1"><a href="r-for-insurance.html#cb1010-1" aria-hidden="true" tabindex="-1"></a><span class="fu">CTE</span>(Fs)</span></code></pre></div>
+<div class="sourceCode" id="cb1014"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1014-1"><a href="r-for-insurance.html#cb1014-1" aria-hidden="true" tabindex="-1"></a><span class="fu">CTE</span>(Fs)</span></code></pre></div>
 <pre><code>##      90%      95%      99% 
 ## 34.84512 37.52703 44.26966</code></pre>
 <p>In fact, <code>aggregateDist()</code> implicitly calls the function <code>simul()</code> to perform the simulation. We can use the later directly as follows:</p>
-<div class="sourceCode" id="cb1012"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1012-1"><a href="r-for-insurance.html#cb1012-1" aria-hidden="true" tabindex="-1"></a>sim_s <span class="ot">&lt;-</span> <span class="fu">simul</span>(<span class="dv">2500</span>,</span>
-<span id="cb1012-2"><a href="r-for-insurance.html#cb1012-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.freq =</span> <span class="fu">expression</span>(<span class="fu">rpois</span>(<span class="dv">10</span>)),</span>
-<span id="cb1012-3"><a href="r-for-insurance.html#cb1012-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.sev =</span> <span class="fu">expression</span>(<span class="fu">rgamma</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb1012-4"><a href="r-for-insurance.html#cb1012-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>These creates an object containing the severities, frequencies and also the aggregate claim amounts. The latter, representing <span class="math inline">\(S\)</span>, can be obtained using the <code>aggreate()</code> function.</p>
-<div class="sourceCode" id="cb1013"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1013-1"><a href="r-for-insurance.html#cb1013-1" aria-hidden="true" tabindex="-1"></a>s_sample <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(sim_s)</span>
-<span id="cb1013-2"><a href="r-for-insurance.html#cb1013-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(s_sample[<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb1016"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1016-1"><a href="r-for-insurance.html#cb1016-1" aria-hidden="true" tabindex="-1"></a>sim_s <span class="ot">&lt;-</span> <span class="fu">simul</span>(<span class="dv">2500</span>,</span>
+<span id="cb1016-2"><a href="r-for-insurance.html#cb1016-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.freq =</span> <span class="fu">expression</span>(<span class="fu">rpois</span>(<span class="dv">10</span>)),</span>
+<span id="cb1016-3"><a href="r-for-insurance.html#cb1016-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.sev =</span> <span class="fu">expression</span>(<span class="fu">rgamma</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb1016-4"><a href="r-for-insurance.html#cb1016-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>This creates an object containing the severities, frequencies, and aggregate claim amounts. The latter, representing <span class="math inline">\(S\)</span>, can be obtained using the <code>aggreate()</code> function.</p>
+<div class="sourceCode" id="cb1017"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1017-1"><a href="r-for-insurance.html#cb1017-1" aria-hidden="true" tabindex="-1"></a>s_sample <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(sim_s)</span>
+<span id="cb1017-2"><a href="r-for-insurance.html#cb1017-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(s_sample[<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>])</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    0.00   14.45   19.03   19.87   24.65   52.91</code></pre>
-<div class="sourceCode" id="cb1015"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1015-1"><a href="r-for-insurance.html#cb1015-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(s_sample[<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>], <span class="at">freq =</span> F, <span class="at">breaks =</span> <span class="dv">20</span>, <span class="at">main =</span> <span class="st">&quot;Simulation of S&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-415-1.png" width="672" /></p>
-<p>Alternatively, simulation of <span class="math inline">\(S\)</span> can be performed with the following code:</p>
-<div class="sourceCode" id="cb1016"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1016-1"><a href="r-for-insurance.html#cb1016-1" aria-hidden="true" tabindex="-1"></a>s_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(n, distr, ...) {</span>
-<span id="cb1016-2"><a href="r-for-insurance.html#cb1016-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">distr</span>(n, ...))</span>
-<span id="cb1016-3"><a href="r-for-insurance.html#cb1016-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1016-4"><a href="r-for-insurance.html#cb1016-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1016-5"><a href="r-for-insurance.html#cb1016-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">2500</span>, <span class="dv">10</span>)</span>
-<span id="cb1016-6"><a href="r-for-insurance.html#cb1016-6" aria-hidden="true" tabindex="-1"></a>s_sample <span class="ot">&lt;-</span> <span class="fu">sapply</span>(N, s_sim, <span class="at">distr =</span> rgamma, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">rate =</span> <span class="dv">1</span>)</span>
-<span id="cb1016-7"><a href="r-for-insurance.html#cb1016-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(s_sample)</span></code></pre></div>
+<div class="sourceCode" id="cb1019"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1019-1"><a href="r-for-insurance.html#cb1019-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(s_sample[<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>], <span class="at">freq =</span> F, <span class="at">breaks =</span> <span class="dv">20</span>, <span class="at">main =</span> <span class="st">&quot;Simulation of S&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-416-1.png" width="672" /></p>
+<p>Alternatively, the simulation of <span class="math inline">\(S\)</span> can be performed with the following code:</p>
+<div class="sourceCode" id="cb1020"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1020-1"><a href="r-for-insurance.html#cb1020-1" aria-hidden="true" tabindex="-1"></a>s_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(n, distr, ...) {</span>
+<span id="cb1020-2"><a href="r-for-insurance.html#cb1020-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">distr</span>(n, ...))</span>
+<span id="cb1020-3"><a href="r-for-insurance.html#cb1020-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1020-4"><a href="r-for-insurance.html#cb1020-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1020-5"><a href="r-for-insurance.html#cb1020-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">2500</span>, <span class="dv">10</span>)</span>
+<span id="cb1020-6"><a href="r-for-insurance.html#cb1020-6" aria-hidden="true" tabindex="-1"></a>s_sample <span class="ot">&lt;-</span> <span class="fu">sapply</span>(N, s_sim, <span class="at">distr =</span> rgamma, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">rate =</span> <span class="dv">1</span>)</span>
+<span id="cb1020-7"><a href="r-for-insurance.html#cb1020-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(s_sample)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  0.8999 14.3967 19.3932 20.1325 25.2531 51.6455</code></pre>
-<div class="sourceCode" id="cb1018"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1018-1"><a href="r-for-insurance.html#cb1018-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(s_sample, <span class="at">freq =</span> F, <span class="at">breaks =</span> <span class="dv">20</span>, <span class="at">main =</span> <span class="st">&quot;Simulation of S&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-416-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1022"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1022-1"><a href="r-for-insurance.html#cb1022-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(s_sample, <span class="at">freq =</span> F, <span class="at">breaks =</span> <span class="dv">20</span>, <span class="at">main =</span> <span class="st">&quot;Simulation of S&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-417-1.png" width="672" /></p>
 </div>
 </div>
 </div>
 <div id="ruin-theory" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Ruin theory<a href="r-for-insurance.html#ruin-theory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the previous section, we modeled the total claims over a fixed period in an insurance portfolio. In this section, we are interested in describing the evolution of the insurance company’s surplus over many periods of time. In particular, we want to find the probability that the surplus becomes negative, in other words, the probability that the ruin of the insurance company occurs. Finding this ruin probability is the main topic of <em>ruin theory</em>.</p>
+<p>In the previous section, we modeled the total claims over a fixed period in an insurance portfolio. In this section, we are interested in describing the evolution of the insurance company’s surplus over many periods. In particular, we want to find the probability that the surplus becomes negative, in other words, the probability that the ruin of the insurance company occurs. Finding this ruin probability is the main topic of <em>ruin theory</em>.</p>
 <div id="the-surplus-process" class="section level3 hasAnchor" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> The surplus process<a href="r-for-insurance.html#the-surplus-process" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In classical ruin theory, an insurer’s surplus at a fixed time <span class="math inline">\(t&gt;0\)</span> is determined by three quantities: the amount of the surplus at time <span class="math inline">\(t = 0\)</span> (also called initial surplus), the amount of premium income received up to time <span class="math inline">\(t\)</span>, and the amount paid out in claims up to time <span class="math inline">\(t\)</span>. More specifically, let <span class="math inline">\(U(t)\)</span> denote the surplus of an insurance company at time <span class="math inline">\(t\)</span>, <span class="math inline">\(c(t)\)</span> denote the premium received up to time <span class="math inline">\(t\)</span>, and <span class="math inline">\(S(t)\)</span> denote the aggregate claims paid up to time <span class="math inline">\(t\)</span>. If <span class="math inline">\(u\)</span> is the initial surplus at time <span class="math inline">\(t = 0\)</span>, then <span class="math inline">\(U(t)\)</span> is given by</p>
@@ -665,7 +665,7 @@ S(t) = \sum_{j = 1}^{N(t)} X_j \,,
 \]</span></p>
 <p>where <span class="math inline">\(N(t)\)</span> denotes the number of claims up to time <span class="math inline">\(t\)</span> and <span class="math inline">\(X_j\)</span> denotes the amount of claim <span class="math inline">\(j\)</span>.
 Note that we follow the convention that <span class="math inline">\(S(t) = 0\)</span> if <span class="math inline">\(N(t) = 0\)</span>.
-Furthermore, we assume that <span class="math inline">\(X_1, X_2, \dots\)</span> are iid random variables, which are also independent of <span class="math inline">\(N(t)\)</span>. We now require a specification for the claim number process <span class="math inline">\(N(t)\)</span>. We start by recalling the definition of <em>counting process</em>.</p>
+Furthermore, we assume that <span class="math inline">\(X_1, X_2, \dots\)</span> are iid random variables, which are also independent of <span class="math inline">\(N(t)\)</span>. We now require a specification for the claim number process <span class="math inline">\(N(t)\)</span>. We start by recalling the definition of a <em>counting process</em>.</p>
 <div class="definition">
 <p><span id="def:unlabeled-div-67" class="definition"><strong>Definition 4.1  </strong></span>A stochastic process <span class="math inline">\(\{N(t)\}_{t\geq 0}\)</span> is called a counting process if it satisfies the following properties:</p>
 <ol style="list-style-type: lower-roman">
@@ -674,7 +674,7 @@ Furthermore, we assume that <span class="math inline">\(X_1, X_2, \dots\)</span>
 <li><span class="math inline">\(N(t)\in \mathbb{N}\)</span> for all <span class="math inline">\(t&gt;0\)</span>.</li>
 </ol>
 </div>
-<p>Intuitively, a counting process <span class="math inline">\(N(t)\)</span> counts the number of the events that appear in the time interval <span class="math inline">\((0,t]\)</span>. In what follows we denote by <span class="math inline">\(T_1, T_2, \dots\)</span> the jump times of <span class="math inline">\(N(t)\)</span>, that is, <span class="math inline">\(T_k = \inf\{t\geq0 : N(t) \geq k\}\)</span> for all <span class="math inline">\(k \in \mathbb{N}\)</span>.</p>
+<p>Intuitively, a counting process <span class="math inline">\(N(t)\)</span> counts the number of events that appear in the time interval <span class="math inline">\((0,t]\)</span>. In what follows we denote by <span class="math inline">\(T_1, T_2, \dots\)</span> the jump times of <span class="math inline">\(N(t)\)</span>, that is, <span class="math inline">\(T_k = \inf\{t\geq0 : N(t) \geq k\}\)</span> for all <span class="math inline">\(k \in \mathbb{N}\)</span>.</p>
 <p>In classical ruin theory, it is common to assume that <span class="math inline">\(\{N(t)\}_{t\geq 0}\)</span> is a <em>Poisson process</em>. In fact, in such a case, the model is often referred to as the Cramer-Lundberg model or classical risk model. We now present the definition of the Poisson process.</p>
 <div class="definition">
 <p><span id="def:unlabeled-div-68" class="definition"><strong>Definition 4.2  </strong></span>A counting process <span class="math inline">\(\{N(t)\}_{t\geq 0}\)</span> is called a Poisson process with rate <span class="math inline">\(\lambda &gt; 0\)</span> if:</p>
@@ -693,9 +693,9 @@ Furthermore, we assume that <span class="math inline">\(X_1, X_2, \dots\)</span>
 <li>The interarrival times <span class="math inline">\(\{ T_k - T_{k-1} : k \geq 1 \}\)</span> are independent and exponentially distributed with mean <span class="math inline">\(1/\lambda\)</span>.</li>
 </ol>
 </div>
-<p>In what follows we denote the interarrival times by <span class="math inline">\(W_k = T_k - T_{k-1}\)</span>. Note that, in particular, iii. implies that a Poisson process is a particular case of a <em>renewal process</em>.</p>
+<p>In what follows, we denote the interarrival times by <span class="math inline">\(W_k = T_k - T_{k-1}\)</span>. Note that, in particular, iii. implies that a Poisson process is a particular case of a <em>renewal process</em>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-70" class="definition"><strong>Definition 4.3  </strong></span>A counting process <span class="math inline">\(\{N(t)\}_{t\geq 0}\)</span> is called <em>ordinary renewal process</em> if its interarrival times <span class="math inline">\(\{ W_k : k \geq 1 \}\)</span> are iid.</p>
+<p><span id="def:unlabeled-div-70" class="definition"><strong>Definition 4.3  </strong></span>A counting process <span class="math inline">\(\{N(t)\}_{t\geq 0}\)</span> is called an <em>ordinary renewal process</em> if its interarrival times <span class="math inline">\(\{ W_k : k \geq 1 \}\)</span> are iid.</p>
 </div>
 <p>When <span class="math inline">\(\{N(t)\}_{t\geq 0}\)</span> is a renewal process, the model is called <em>renewal risk model</em> or <em>Sparre Andersen model</em>.</p>
 <p>To study the ruin probability <span class="math inline">\(\psi(u)\)</span>, we require further assumptions regarding the premium rate <span class="math inline">\(c&gt;0\)</span>. First, one can show that</p>
@@ -732,43 +732,43 @@ h(t) = \mathbb{E} \left[\exp(tX - tcW) \right] = 1 \,,
 \]</span>
 where <span class="math inline">\(c&gt;0\)</span> satisfies the net profit condition. Under the assumption of independence between <span class="math inline">\(X\)</span> and <span class="math inline">\(W\)</span>, as in the most common models, the equation can be rewritten as</p>
 <p><span class="math display">\[
-h(t) = M_X(t) M_W(-tc) = 1 \,,
+h(t) = M_X(t) M_W(-tc) = 1 \,.
 \]</span></p>
 <p>In general, it is not possible to explicitly solve the above equation for <span class="math inline">\(R\)</span>. Usually, one must resort to numerical methods, many of which require an initial guess about the value of <span class="math inline">\(R\)</span>. An upper bound of the adjustment coefficient in the classical risk model (there are many) is given by
 <span class="math display">\[
 R\leq \frac{2(c-\lambda\mathbb{E}[X])}{\lambda\mathbb{E}[X^2]}=\frac{2\theta\mathbb{E}[X]}{\mathbb{E}[X^2]}\,.
 \]</span></p>
 <p>In R, we can use the <code>adjCoef()</code> function from the <code>actuar</code> package to compute the adjustment coefficient. We require the following arguments: the two moment generating functions <span class="math inline">\(M_X(t)\)</span> and <span class="math inline">\(M_W(t)\)</span> (thereby assuming independence), the premium rate <span class="math inline">\(c\)</span>, and the upper bound of the support of <span class="math inline">\(M_X(t)\)</span> or any other upper bound for <span class="math inline">\(R\)</span>. For example, if <span class="math inline">\(W\sim Exp(2)\)</span>, <span class="math inline">\(X \sim Exp(1)\)</span> and the premium rate is <span class="math inline">\(c = 2.4\)</span>, then the adjustment coefficient is</p>
-<div class="sourceCode" id="cb1019"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1019-1"><a href="r-for-insurance.html#cb1019-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adjCoef</span>(</span>
-<span id="cb1019-2"><a href="r-for-insurance.html#cb1019-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mgf.claim =</span> <span class="fu">mgfexp</span>(x), <span class="at">mgf.wait =</span> <span class="fu">mgfexp</span>(x, <span class="dv">2</span>),</span>
-<span id="cb1019-3"><a href="r-for-insurance.html#cb1019-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">premium.rate =</span> <span class="fl">2.4</span>, <span class="at">upper.bound =</span> <span class="dv">1</span></span>
-<span id="cb1019-4"><a href="r-for-insurance.html#cb1019-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb1023"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1023-1"><a href="r-for-insurance.html#cb1023-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adjCoef</span>(</span>
+<span id="cb1023-2"><a href="r-for-insurance.html#cb1023-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mgf.claim =</span> <span class="fu">mgfexp</span>(x), <span class="at">mgf.wait =</span> <span class="fu">mgfexp</span>(x, <span class="dv">2</span>),</span>
+<span id="cb1023-3"><a href="r-for-insurance.html#cb1023-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">premium.rate =</span> <span class="fl">2.4</span>, <span class="at">upper.bound =</span> <span class="dv">1</span></span>
+<span id="cb1023-4"><a href="r-for-insurance.html#cb1023-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## [1] 0.1666667</code></pre>
 <p>In the above solution, we passed the upper bound for the support of <span class="math inline">\(M_X(t)\)</span>. However, since we are in the classical risk model setup, we could have also used the upper bound of <span class="math inline">\(R\)</span> described previously</p>
-<div class="sourceCode" id="cb1021"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1021-1"><a href="r-for-insurance.html#cb1021-1" aria-hidden="true" tabindex="-1"></a>exp_aux <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1021-2"><a href="r-for-insurance.html#cb1021-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">*</span> <span class="fu">dexp</span>(x, <span class="dv">1</span>)</span>
-<span id="cb1021-3"><a href="r-for-insurance.html#cb1021-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1021-4"><a href="r-for-insurance.html#cb1021-4" aria-hidden="true" tabindex="-1"></a>snd_aux <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1021-5"><a href="r-for-insurance.html#cb1021-5" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">dexp</span>(x, <span class="dv">1</span>)</span>
-<span id="cb1021-6"><a href="r-for-insurance.html#cb1021-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1021-7"><a href="r-for-insurance.html#cb1021-7" aria-hidden="true" tabindex="-1"></a>exp_x <span class="ot">&lt;-</span> <span class="fu">integrate</span>(exp_aux, <span class="dv">0</span>, <span class="cn">Inf</span>)<span class="sc">$</span>value</span>
-<span id="cb1021-8"><a href="r-for-insurance.html#cb1021-8" aria-hidden="true" tabindex="-1"></a>exp_x</span></code></pre></div>
+<div class="sourceCode" id="cb1025"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1025-1"><a href="r-for-insurance.html#cb1025-1" aria-hidden="true" tabindex="-1"></a>exp_aux <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1025-2"><a href="r-for-insurance.html#cb1025-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">*</span> <span class="fu">dexp</span>(x, <span class="dv">1</span>)</span>
+<span id="cb1025-3"><a href="r-for-insurance.html#cb1025-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1025-4"><a href="r-for-insurance.html#cb1025-4" aria-hidden="true" tabindex="-1"></a>snd_aux <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1025-5"><a href="r-for-insurance.html#cb1025-5" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">dexp</span>(x, <span class="dv">1</span>)</span>
+<span id="cb1025-6"><a href="r-for-insurance.html#cb1025-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1025-7"><a href="r-for-insurance.html#cb1025-7" aria-hidden="true" tabindex="-1"></a>exp_x <span class="ot">&lt;-</span> <span class="fu">integrate</span>(exp_aux, <span class="dv">0</span>, <span class="cn">Inf</span>)<span class="sc">$</span>value</span>
+<span id="cb1025-8"><a href="r-for-insurance.html#cb1025-8" aria-hidden="true" tabindex="-1"></a>exp_x</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb1023"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1023-1"><a href="r-for-insurance.html#cb1023-1" aria-hidden="true" tabindex="-1"></a>snd_x <span class="ot">&lt;-</span> <span class="fu">integrate</span>(snd_aux, <span class="dv">0</span>, <span class="cn">Inf</span>)<span class="sc">$</span>value</span>
-<span id="cb1023-2"><a href="r-for-insurance.html#cb1023-2" aria-hidden="true" tabindex="-1"></a>snd_x</span></code></pre></div>
+<div class="sourceCode" id="cb1027"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1027-1"><a href="r-for-insurance.html#cb1027-1" aria-hidden="true" tabindex="-1"></a>snd_x <span class="ot">&lt;-</span> <span class="fu">integrate</span>(snd_aux, <span class="dv">0</span>, <span class="cn">Inf</span>)<span class="sc">$</span>value</span>
+<span id="cb1027-2"><a href="r-for-insurance.html#cb1027-2" aria-hidden="true" tabindex="-1"></a>snd_x</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb1025"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1025-1"><a href="r-for-insurance.html#cb1025-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fl">2.4</span></span>
-<span id="cb1025-2"><a href="r-for-insurance.html#cb1025-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb1025-3"><a href="r-for-insurance.html#cb1025-3" aria-hidden="true" tabindex="-1"></a>bound <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (c <span class="sc">-</span> lambda <span class="sc">*</span> exp_x) <span class="sc">/</span> (lambda <span class="sc">*</span> snd_x)</span>
-<span id="cb1025-4"><a href="r-for-insurance.html#cb1025-4" aria-hidden="true" tabindex="-1"></a>bound</span></code></pre></div>
+<div class="sourceCode" id="cb1029"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1029-1"><a href="r-for-insurance.html#cb1029-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fl">2.4</span></span>
+<span id="cb1029-2"><a href="r-for-insurance.html#cb1029-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb1029-3"><a href="r-for-insurance.html#cb1029-3" aria-hidden="true" tabindex="-1"></a>bound <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (c <span class="sc">-</span> lambda <span class="sc">*</span> exp_x) <span class="sc">/</span> (lambda <span class="sc">*</span> snd_x)</span>
+<span id="cb1029-4"><a href="r-for-insurance.html#cb1029-4" aria-hidden="true" tabindex="-1"></a>bound</span></code></pre></div>
 <pre><code>## [1] 0.2</code></pre>
-<div class="sourceCode" id="cb1027"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1027-1"><a href="r-for-insurance.html#cb1027-1" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">adjCoef</span>(</span>
-<span id="cb1027-2"><a href="r-for-insurance.html#cb1027-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mgf.claim =</span> <span class="fu">mgfexp</span>(x), <span class="at">mgf.wait =</span> <span class="fu">mgfexp</span>(x, <span class="dv">2</span>),</span>
-<span id="cb1027-3"><a href="r-for-insurance.html#cb1027-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">premium.rate =</span> <span class="fl">2.4</span>, <span class="at">upper.bound =</span> bound</span>
-<span id="cb1027-4"><a href="r-for-insurance.html#cb1027-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1027-5"><a href="r-for-insurance.html#cb1027-5" aria-hidden="true" tabindex="-1"></a>R</span></code></pre></div>
+<div class="sourceCode" id="cb1031"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1031-1"><a href="r-for-insurance.html#cb1031-1" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">adjCoef</span>(</span>
+<span id="cb1031-2"><a href="r-for-insurance.html#cb1031-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mgf.claim =</span> <span class="fu">mgfexp</span>(x), <span class="at">mgf.wait =</span> <span class="fu">mgfexp</span>(x, <span class="dv">2</span>),</span>
+<span id="cb1031-3"><a href="r-for-insurance.html#cb1031-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">premium.rate =</span> <span class="fl">2.4</span>, <span class="at">upper.bound =</span> bound</span>
+<span id="cb1031-4"><a href="r-for-insurance.html#cb1031-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1031-5"><a href="r-for-insurance.html#cb1031-5" aria-hidden="true" tabindex="-1"></a>R</span></code></pre></div>
 <pre><code>## [1] 0.1666667</code></pre>
-<p>As previously mentioned, knowledge of the adjustment coefficient allows computing a bound for the ruin probability as described in the following result.</p>
+<p>As previously mentioned, knowledge of the adjustment coefficient allows computing a bound for the ruin probability, as described in the following result.</p>
 <div class="theorem">
 <p><span id="thm:unlabeled-div-71" class="theorem"><strong>Theorem 4.2  (Lundberg's inequality) </strong></span>For <span class="math inline">\(u\geq 0\)</span>, the ruin probability, <span class="math inline">\(\psi(u)\)</span>, has an exponential upper bound, given by
 <span class="math display">\[
@@ -777,8 +777,8 @@ R\leq \frac{2(c-\lambda\mathbb{E}[X])}{\lambda\mathbb{E}[X^2]}=\frac{2\theta\mat
 where <span class="math inline">\(R\)</span> is the adjustment coefficient.</p>
 </div>
 <p>In our last example, we can then compute a bound for the ruin probability as (assuming <span class="math inline">\(u = 3\)</span>)</p>
-<div class="sourceCode" id="cb1029"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1029-1"><a href="r-for-insurance.html#cb1029-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb1029-2"><a href="r-for-insurance.html#cb1029-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span>R <span class="sc">*</span> u)</span></code></pre></div>
+<div class="sourceCode" id="cb1033"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1033-1"><a href="r-for-insurance.html#cb1033-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb1033-2"><a href="r-for-insurance.html#cb1033-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span>R <span class="sc">*</span> u)</span></code></pre></div>
 <pre><code>## [1] 0.6065307</code></pre>
 </div>
 <div id="probability-of-ruin" class="section level3 hasAnchor" number="4.2.3">
@@ -787,42 +787,42 @@ where <span class="math inline">\(R\)</span> is the adjustment coefficient.</p>
 <p><span class="math display">\[
 \psi(u) = \frac{\lambda}{c \beta} \exp((\beta  - \lambda / c)u) \,, \quad u \geq0 \,.
 \]</span>
-In the model above, although the frequency assumption can be justified, the severity assumption can hardly be used to describe real-life problems making the model mainly an illustration tool. Fortunately, other generalizations of the exponential distribution, such as mixtures of exponentials and Erlang (and more generally, phase-type distributions), also allow for a closed-form solution for the ruin probability. The function <code>ruin()</code> of the <code>actuar</code> package allows computing the ruin probability for such cases. First, one needs to specify the claim amount and interarrival times models with any combination of “exponential”, “Erlang” (and “phase-type”). Then, one passes the parameters of each model using lists with components named after the corresponding parameters of <code>dexp</code>, <code>dgamma</code> (and <code>dphtype</code>). If an argument <code>weights</code> is provided, the model is a mixture of exponential or Erlang. Let us illustrate first an exponential/exponential model with premium rate <span class="math inline">\(c = 1\)</span> (default):</p>
-<div class="sourceCode" id="cb1031"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1031-1"><a href="r-for-insurance.html#cb1031-1" aria-hidden="true" tabindex="-1"></a>psi <span class="ot">&lt;-</span> <span class="fu">ruin</span>(</span>
-<span id="cb1031-2"><a href="r-for-insurance.html#cb1031-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">claims =</span> <span class="st">&quot;e&quot;</span>, <span class="at">par.claims =</span> <span class="fu">list</span>(<span class="at">rate =</span> <span class="dv">5</span>),</span>
-<span id="cb1031-3"><a href="r-for-insurance.html#cb1031-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">wait =</span> <span class="st">&quot;e&quot;</span>, <span class="at">par.wait =</span> <span class="fu">list</span>(<span class="at">rate =</span> <span class="dv">3</span>)</span>
-<span id="cb1031-4"><a href="r-for-insurance.html#cb1031-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1031-5"><a href="r-for-insurance.html#cb1031-5" aria-hidden="true" tabindex="-1"></a><span class="fu">psi</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>) <span class="co"># Evaluates the ruin probability for initial surplus from 0 to 10.</span></span></code></pre></div>
+In the model above, although the frequency assumption can be justified, the severity assumption can hardly be used to describe real-life problems making the model mainly an illustration tool. Fortunately, other generalizations of the exponential distribution, such as mixtures of exponentials and Erlang (and, more generally, phase-type distributions), also allow for a closed-form solution for the ruin probability. The function <code>ruin()</code> of the <code>actuar</code> package allows computing the ruin probability for such cases. First, one needs to specify the claim amount and interarrival times models with any combination of “exponential”, “Erlang” (and “phase-type”). Then, one passes the parameters of each model using lists with components named after the corresponding parameters of <code>dexp</code>, <code>dgamma</code> (and <code>dphtype</code>). If an argument <code>weights</code> is provided, the model is a mixture of exponential or Erlang. Let us illustrate first an exponential/exponential model with premium rate <span class="math inline">\(c = 1\)</span> (default):</p>
+<div class="sourceCode" id="cb1035"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1035-1"><a href="r-for-insurance.html#cb1035-1" aria-hidden="true" tabindex="-1"></a>psi <span class="ot">&lt;-</span> <span class="fu">ruin</span>(</span>
+<span id="cb1035-2"><a href="r-for-insurance.html#cb1035-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">claims =</span> <span class="st">&quot;e&quot;</span>, <span class="at">par.claims =</span> <span class="fu">list</span>(<span class="at">rate =</span> <span class="dv">5</span>),</span>
+<span id="cb1035-3"><a href="r-for-insurance.html#cb1035-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">wait =</span> <span class="st">&quot;e&quot;</span>, <span class="at">par.wait =</span> <span class="fu">list</span>(<span class="at">rate =</span> <span class="dv">3</span>)</span>
+<span id="cb1035-4"><a href="r-for-insurance.html#cb1035-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1035-5"><a href="r-for-insurance.html#cb1035-5" aria-hidden="true" tabindex="-1"></a><span class="fu">psi</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>) <span class="co"># Evaluates the ruin probability for initial surplus from 0 to 10.</span></span></code></pre></div>
 <pre><code>##  [1] 6.000000e-01 8.120117e-02 1.098938e-02 1.487251e-03 2.012776e-04
 ##  [6] 2.723996e-05 3.686527e-06 4.989172e-07 6.752110e-08 9.137988e-09
 ## [11] 1.236692e-09</code></pre>
-<p>Next, we consider a model with mixture of two exponentials for the claim amount, exponential interarrival times, and premium rate <span class="math inline">\(c = 1.5\)</span>.</p>
-<div class="sourceCode" id="cb1033"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1033-1"><a href="r-for-insurance.html#cb1033-1" aria-hidden="true" tabindex="-1"></a>psi <span class="ot">&lt;-</span> <span class="fu">ruin</span>(</span>
-<span id="cb1033-2"><a href="r-for-insurance.html#cb1033-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">claims =</span> <span class="st">&quot;e&quot;</span>, <span class="at">par.claims =</span> <span class="fu">list</span>(<span class="at">rate =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">7</span>), <span class="at">w =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>)),</span>
-<span id="cb1033-3"><a href="r-for-insurance.html#cb1033-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">wait =</span> <span class="st">&quot;e&quot;</span>, <span class="at">par.wait =</span> <span class="fu">list</span>(<span class="at">rate =</span> <span class="dv">3</span>),</span>
-<span id="cb1033-4"><a href="r-for-insurance.html#cb1033-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pre =</span> <span class="fl">1.5</span></span>
-<span id="cb1033-5"><a href="r-for-insurance.html#cb1033-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1033-6"><a href="r-for-insurance.html#cb1033-6" aria-hidden="true" tabindex="-1"></a><span class="fu">psi</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<p>Next, we consider a model with a mixture of two exponentials for the claim amounts, exponential interarrival times, and premium rate <span class="math inline">\(c = 1.5\)</span>.</p>
+<div class="sourceCode" id="cb1037"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1037-1"><a href="r-for-insurance.html#cb1037-1" aria-hidden="true" tabindex="-1"></a>psi <span class="ot">&lt;-</span> <span class="fu">ruin</span>(</span>
+<span id="cb1037-2"><a href="r-for-insurance.html#cb1037-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">claims =</span> <span class="st">&quot;e&quot;</span>, <span class="at">par.claims =</span> <span class="fu">list</span>(<span class="at">rate =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">7</span>), <span class="at">w =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>)),</span>
+<span id="cb1037-3"><a href="r-for-insurance.html#cb1037-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">wait =</span> <span class="st">&quot;e&quot;</span>, <span class="at">par.wait =</span> <span class="fu">list</span>(<span class="at">rate =</span> <span class="dv">3</span>),</span>
+<span id="cb1037-4"><a href="r-for-insurance.html#cb1037-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pre =</span> <span class="fl">1.5</span></span>
+<span id="cb1037-5"><a href="r-for-insurance.html#cb1037-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1037-6"><a href="r-for-insurance.html#cb1037-6" aria-hidden="true" tabindex="-1"></a><span class="fu">psi</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##  [1] 4.380952e-01 5.310603e-02 7.529333e-03 1.070525e-03 1.522149e-04
 ##  [6] 2.164303e-05 3.077365e-06 4.375623e-07 6.221582e-08 8.846302e-09
 ## [11] 1.257832e-09</code></pre>
 <p>Moreover, we can plot the ruin probability straightforwardly as a function of the initial surplus using the <code>plot()</code> function as follows:</p>
-<div class="sourceCode" id="cb1035"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1035-1"><a href="r-for-insurance.html#cb1035-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(psi, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-422-1.png" width="672" /></p>
-<p>Finally, we consider a model with Erlang claim amounts and exponentials interarrival times:</p>
-<div class="sourceCode" id="cb1036"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1036-1"><a href="r-for-insurance.html#cb1036-1" aria-hidden="true" tabindex="-1"></a>psi <span class="ot">&lt;-</span> <span class="fu">ruin</span>(</span>
-<span id="cb1036-2"><a href="r-for-insurance.html#cb1036-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">claims =</span> <span class="st">&quot;E&quot;</span>, <span class="at">par.claims =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">3</span>, <span class="at">rate =</span> <span class="dv">1</span>),</span>
-<span id="cb1036-3"><a href="r-for-insurance.html#cb1036-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">wait =</span> <span class="st">&quot;e&quot;</span>, <span class="at">par.wait =</span> <span class="fu">list</span>(<span class="at">rate =</span> <span class="dv">3</span>),</span>
-<span id="cb1036-4"><a href="r-for-insurance.html#cb1036-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pre =</span> <span class="dv">10</span></span>
-<span id="cb1036-5"><a href="r-for-insurance.html#cb1036-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1036-6"><a href="r-for-insurance.html#cb1036-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(psi, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1039"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1039-1"><a href="r-for-insurance.html#cb1039-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(psi, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-423-1.png" width="672" /></p>
+<p>Finally, we consider a model with Erlang claim amounts and exponentials interarrival times:</p>
+<div class="sourceCode" id="cb1040"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1040-1"><a href="r-for-insurance.html#cb1040-1" aria-hidden="true" tabindex="-1"></a>psi <span class="ot">&lt;-</span> <span class="fu">ruin</span>(</span>
+<span id="cb1040-2"><a href="r-for-insurance.html#cb1040-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">claims =</span> <span class="st">&quot;E&quot;</span>, <span class="at">par.claims =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">3</span>, <span class="at">rate =</span> <span class="dv">1</span>),</span>
+<span id="cb1040-3"><a href="r-for-insurance.html#cb1040-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">wait =</span> <span class="st">&quot;e&quot;</span>, <span class="at">par.wait =</span> <span class="fu">list</span>(<span class="at">rate =</span> <span class="dv">3</span>),</span>
+<span id="cb1040-4"><a href="r-for-insurance.html#cb1040-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pre =</span> <span class="dv">10</span></span>
+<span id="cb1040-5"><a href="r-for-insurance.html#cb1040-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1040-6"><a href="r-for-insurance.html#cb1040-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(psi, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-424-1.png" width="672" /></p>
 </div>
 <div id="reinsurance" class="section level3 hasAnchor" number="4.2.4">
 <h3><span class="header-section-number">4.2.4</span> Reinsurance<a href="r-for-insurance.html#reinsurance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Reinsurance means that the company (the cedent) insures a part of the risk at another insurance company (the reinsurer).
 In this subsection, we study how different types of reinsurance can affect the adjustment coefficient and the probability of ruin. In what follows, we consider the classical risk model unless it states otherwise.</p>
-<p>Let <span class="math inline">\(X\)</span> (<span class="math inline">\(\geq 0\)</span>) denote the claim amount under a reinsurance-free environment. A reinsurance arrangement is then defined in terms of a function <span class="math inline">\(h(x)\)</span> with the property <span class="math inline">\(0\leq h(x)\leq x\)</span>. Here <span class="math inline">\(h(x)\)</span> is the amount of the claim <span class="math inline">\(x\)</span> to be paid by the cedent and <span class="math inline">\(x - h(x)\)</span> the amount to be paid by the reinsurer. The most common examples are the following two:</p>
+<p>Let <span class="math inline">\(X\)</span> (<span class="math inline">\(\geq 0\)</span>) denote the claim amount under a reinsurance-free environment. A reinsurance arrangement is then defined in terms of a function <span class="math inline">\(h(x)\)</span> with the property <span class="math inline">\(0\leq h(x)\leq x\)</span>. Here <span class="math inline">\(h(x)\)</span> is the amount of the claim <span class="math inline">\(x\)</span> to be paid by the cedent, and <span class="math inline">\(x - h(x)\)</span> is the amount to be paid by the reinsurer. The most common examples are the following two:</p>
 <ul>
 <li><strong>Proportional reinsurance</strong>. <span class="math inline">\(h(x) = ax\)</span> for some <span class="math inline">\(a \in [0, 1]\)</span>. Also called quota share reinsurance.</li>
 <li><strong>Excess-of-loss reinsurance</strong>. <span class="math inline">\(h(x) = \min(x, m)\)</span> for some <span class="math inline">\(m \in (0, \infty)\)</span>, referred to as the retention limit.</li>
@@ -861,7 +861,7 @@ where <span class="math inline">\(\psi_{*}\)</span> is the probability of ruin c
 <p>We now study in more detail the proportional and excess-of-loss reinsurance agreements, which are implemented in the <code>actuar</code> package.</p>
 <div id="proportional-reinsurance" class="section level4 unnumbered hasAnchor">
 <h4>Proportional reinsurance<a href="r-for-insurance.html#proportional-reinsurance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Under the proportional reinsurance, <span class="math inline">\(h\)</span> is given by
+<p>Under proportional reinsurance, <span class="math inline">\(h\)</span> is given by
 <span class="math display">\[
     h(X)=aX \,, \qquad 0\leq a\leq 1\,.
 \]</span>
@@ -873,7 +873,7 @@ Thus, the relative security loading <span class="math inline">\(\theta_h\)</span
 <span class="math display">\[
   a&gt;1-\frac{\theta}{\theta_h} \,.
 \]</span>
-In other words, the insurer must retain at least the proportion <span class="math inline">\(1-{\theta}/{\theta_h}\)</span> in order to avoid ultimate ruin with probability one.</p>
+In other words, the insurer must retain at least the proportion <span class="math inline">\(1-{\theta}/{\theta_h}\)</span> to avoid ultimate ruin with probability one.</p>
 <p>In this case, the adjustment coefficient <span class="math inline">\(R_h\)</span> satisfies the equation<br />
 <span class="math display">\[
   1=M_{aX}(t) M_W(-c^* t) = M_{X}(at) M_W(-c^* t) \,.
@@ -888,7 +888,7 @@ In other words, the insurer must retain at least the proportion <span class="mat
 <ol style="list-style-type: lower-alpha">
 <li>Find the adjustment coefficient <span class="math inline">\(R_h\)</span> if <span class="math inline">\(a=0.75, 0.8, 0.9, 1\)</span>.</li>
 <li>Plot the adjustment coefficient as a function of the proportion <span class="math inline">\(a\)</span>.</li>
-<li>Find an upper bound for the ruin probability if <span class="math inline">\(a = 0.5\)</span> and <span class="math inline">\(u = 2\)</span></li>
+<li>Find an upper bound for the ruin probability if <span class="math inline">\(a = 0.5\)</span> and <span class="math inline">\(u = 2\)</span>.</li>
 </ol>
 </div>
 <div class="solution">
@@ -896,43 +896,43 @@ In other words, the insurer must retain at least the proportion <span class="mat
 <ol style="list-style-type: lower-alpha">
 <li></li>
 </ol>
-<div class="sourceCode" id="cb1037"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1037-1"><a href="r-for-insurance.html#cb1037-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb1037-2"><a href="r-for-insurance.html#cb1037-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb1037-3"><a href="r-for-insurance.html#cb1037-3" aria-hidden="true" tabindex="-1"></a>thetah <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb1037-4"><a href="r-for-insurance.html#cb1037-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1037-5"><a href="r-for-insurance.html#cb1037-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We require a function to compute the premium rate for different values of a</span></span>
-<span id="cb1037-6"><a href="r-for-insurance.html#cb1037-6" aria-hidden="true" tabindex="-1"></a>prem <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1037-7"><a href="r-for-insurance.html#cb1037-7" aria-hidden="true" tabindex="-1"></a>  ((<span class="dv">1</span> <span class="sc">+</span> theta) <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> thetah) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> x)) <span class="sc">*</span> lambda</span>
-<span id="cb1037-8"><a href="r-for-insurance.html#cb1037-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1037-9"><a href="r-for-insurance.html#cb1037-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1037-10"><a href="r-for-insurance.html#cb1037-10" aria-hidden="true" tabindex="-1"></a><span class="co"># We require need a function to computute the mgf of aX for different values of a</span></span>
-<span id="cb1037-11"><a href="r-for-insurance.html#cb1037-11" aria-hidden="true" tabindex="-1"></a>mgf_ax <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb1037-12"><a href="r-for-insurance.html#cb1037-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mgfexp</span>(x <span class="sc">*</span> y)</span>
-<span id="cb1037-13"><a href="r-for-insurance.html#cb1037-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1037-14"><a href="r-for-insurance.html#cb1037-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1037-15"><a href="r-for-insurance.html#cb1037-15" aria-hidden="true" tabindex="-1"></a>adj_prop <span class="ot">&lt;-</span> <span class="fu">adjCoef</span>(mgf_ax,</span>
-<span id="cb1037-16"><a href="r-for-insurance.html#cb1037-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">mgf.wait =</span> <span class="fu">mgfexp</span>(x, <span class="dv">2</span>),</span>
-<span id="cb1037-17"><a href="r-for-insurance.html#cb1037-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">premium.rate =</span> prem,</span>
-<span id="cb1037-18"><a href="r-for-insurance.html#cb1037-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">upper =</span> <span class="dv">1</span>,</span>
-<span id="cb1037-19"><a href="r-for-insurance.html#cb1037-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">reins =</span> <span class="st">&quot;prop&quot;</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span></span>
-<span id="cb1037-20"><a href="r-for-insurance.html#cb1037-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1037-21"><a href="r-for-insurance.html#cb1037-21" aria-hidden="true" tabindex="-1"></a><span class="fu">adj_prop</span>(<span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1041"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1041-1"><a href="r-for-insurance.html#cb1041-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb1041-2"><a href="r-for-insurance.html#cb1041-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb1041-3"><a href="r-for-insurance.html#cb1041-3" aria-hidden="true" tabindex="-1"></a>thetah <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb1041-4"><a href="r-for-insurance.html#cb1041-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1041-5"><a href="r-for-insurance.html#cb1041-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We require a function to compute the premium rate for different values of a</span></span>
+<span id="cb1041-6"><a href="r-for-insurance.html#cb1041-6" aria-hidden="true" tabindex="-1"></a>prem <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1041-7"><a href="r-for-insurance.html#cb1041-7" aria-hidden="true" tabindex="-1"></a>  ((<span class="dv">1</span> <span class="sc">+</span> theta) <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> thetah) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> x)) <span class="sc">*</span> lambda</span>
+<span id="cb1041-8"><a href="r-for-insurance.html#cb1041-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1041-9"><a href="r-for-insurance.html#cb1041-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1041-10"><a href="r-for-insurance.html#cb1041-10" aria-hidden="true" tabindex="-1"></a><span class="co"># We require need a function to computute the mgf of aX for different values of a</span></span>
+<span id="cb1041-11"><a href="r-for-insurance.html#cb1041-11" aria-hidden="true" tabindex="-1"></a>mgf_ax <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb1041-12"><a href="r-for-insurance.html#cb1041-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mgfexp</span>(x <span class="sc">*</span> y)</span>
+<span id="cb1041-13"><a href="r-for-insurance.html#cb1041-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1041-14"><a href="r-for-insurance.html#cb1041-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1041-15"><a href="r-for-insurance.html#cb1041-15" aria-hidden="true" tabindex="-1"></a>adj_prop <span class="ot">&lt;-</span> <span class="fu">adjCoef</span>(mgf_ax,</span>
+<span id="cb1041-16"><a href="r-for-insurance.html#cb1041-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">mgf.wait =</span> <span class="fu">mgfexp</span>(x, <span class="dv">2</span>),</span>
+<span id="cb1041-17"><a href="r-for-insurance.html#cb1041-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">premium.rate =</span> prem,</span>
+<span id="cb1041-18"><a href="r-for-insurance.html#cb1041-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">upper =</span> <span class="dv">1</span>,</span>
+<span id="cb1041-19"><a href="r-for-insurance.html#cb1041-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">reins =</span> <span class="st">&quot;prop&quot;</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span></span>
+<span id="cb1041-20"><a href="r-for-insurance.html#cb1041-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1041-21"><a href="r-for-insurance.html#cb1041-21" aria-hidden="true" tabindex="-1"></a><span class="fu">adj_prop</span>(<span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## [1] 0.1904762 0.1861702 0.1765317 0.1666667</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
 <li></li>
 </ol>
-<div class="sourceCode" id="cb1039"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1039-1"><a href="r-for-insurance.html#cb1039-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(adj_prop)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-425-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1043"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1043-1"><a href="r-for-insurance.html#cb1043-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(adj_prop)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-426-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li></li>
 </ol>
-<div class="sourceCode" id="cb1040"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1040-1"><a href="r-for-insurance.html#cb1040-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fu">adj_prop</span>(<span class="fl">0.5</span>) <span class="sc">*</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1044"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1044-1"><a href="r-for-insurance.html#cb1044-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fu">adj_prop</span>(<span class="fl">0.5</span>) <span class="sc">*</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6951439</code></pre>
 </div>
 </div>
 <div id="excess-of-loss-reinsurance" class="section level4 unnumbered hasAnchor">
 <h4>Excess-of-loss reinsurance<a href="r-for-insurance.html#excess-of-loss-reinsurance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Under the excess-of-loss reinsurance with retention level <span class="math inline">\(m\)</span>, <span class="math inline">\(h\)</span> is given by</p>
+<p>Under excess-of-loss reinsurance with retention level <span class="math inline">\(m\)</span>, <span class="math inline">\(h\)</span> is given by</p>
 <p><span class="math display">\[
     h(X)=\min(X,m) \,.
 \]</span>
@@ -963,21 +963,21 @@ Note that
 \int_{0}^{m}\exp(t x)f_X(x)dx = \left( \frac{\lambda}{\lambda - t}\right)^\alpha F_{\tilde{X}}(m) \,,
 \]</span>
 where <span class="math inline">\(\tilde{X} \sim Gamma(\alpha, \lambda - t)\)</span>. Thus,</p>
-<div class="sourceCode" id="cb1042"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1042-1"><a href="r-for-insurance.html#cb1042-1" aria-hidden="true" tabindex="-1"></a>prem <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1042-2"><a href="r-for-insurance.html#cb1042-2" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.3</span> <span class="sc">*</span> <span class="fu">levgamma</span>(x, <span class="dv">2</span>, <span class="dv">2</span>) <span class="sc">-</span> <span class="fl">0.1</span></span>
-<span id="cb1042-3"><a href="r-for-insurance.html#cb1042-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1042-4"><a href="r-for-insurance.html#cb1042-4" aria-hidden="true" tabindex="-1"></a>mgfx <span class="ot">&lt;-</span> <span class="cf">function</span>(x, l) {</span>
-<span id="cb1042-5"><a href="r-for-insurance.html#cb1042-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mgfgamma</span>(x, <span class="dv">2</span>, <span class="dv">2</span>) <span class="sc">*</span> <span class="fu">pgamma</span>(l, <span class="dv">2</span>, <span class="dv">2</span> <span class="sc">-</span> x) <span class="sc">+</span></span>
-<span id="cb1042-6"><a href="r-for-insurance.html#cb1042-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(x <span class="sc">*</span> l) <span class="sc">*</span> <span class="fu">pgamma</span>(l, <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">lower =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1042-7"><a href="r-for-insurance.html#cb1042-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1042-8"><a href="r-for-insurance.html#cb1042-8" aria-hidden="true" tabindex="-1"></a>adj_eol <span class="ot">&lt;-</span> <span class="fu">adjCoef</span>(mgfx,</span>
-<span id="cb1042-9"><a href="r-for-insurance.html#cb1042-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">premium =</span> prem,</span>
-<span id="cb1042-10"><a href="r-for-insurance.html#cb1042-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">upper =</span> <span class="dv">1</span>,</span>
-<span id="cb1042-11"><a href="r-for-insurance.html#cb1042-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">reins =</span> <span class="st">&quot;excess-of-loss&quot;</span>,</span>
-<span id="cb1042-12"><a href="r-for-insurance.html#cb1042-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span></span>
-<span id="cb1042-13"><a href="r-for-insurance.html#cb1042-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1042-14"><a href="r-for-insurance.html#cb1042-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(adj_eol)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-427-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1046"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1046-1"><a href="r-for-insurance.html#cb1046-1" aria-hidden="true" tabindex="-1"></a>prem <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1046-2"><a href="r-for-insurance.html#cb1046-2" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.3</span> <span class="sc">*</span> <span class="fu">levgamma</span>(x, <span class="dv">2</span>, <span class="dv">2</span>) <span class="sc">-</span> <span class="fl">0.1</span></span>
+<span id="cb1046-3"><a href="r-for-insurance.html#cb1046-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1046-4"><a href="r-for-insurance.html#cb1046-4" aria-hidden="true" tabindex="-1"></a>mgfx <span class="ot">&lt;-</span> <span class="cf">function</span>(x, l) {</span>
+<span id="cb1046-5"><a href="r-for-insurance.html#cb1046-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mgfgamma</span>(x, <span class="dv">2</span>, <span class="dv">2</span>) <span class="sc">*</span> <span class="fu">pgamma</span>(l, <span class="dv">2</span>, <span class="dv">2</span> <span class="sc">-</span> x) <span class="sc">+</span></span>
+<span id="cb1046-6"><a href="r-for-insurance.html#cb1046-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(x <span class="sc">*</span> l) <span class="sc">*</span> <span class="fu">pgamma</span>(l, <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">lower =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1046-7"><a href="r-for-insurance.html#cb1046-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1046-8"><a href="r-for-insurance.html#cb1046-8" aria-hidden="true" tabindex="-1"></a>adj_eol <span class="ot">&lt;-</span> <span class="fu">adjCoef</span>(mgfx,</span>
+<span id="cb1046-9"><a href="r-for-insurance.html#cb1046-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">premium =</span> prem,</span>
+<span id="cb1046-10"><a href="r-for-insurance.html#cb1046-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">upper =</span> <span class="dv">1</span>,</span>
+<span id="cb1046-11"><a href="r-for-insurance.html#cb1046-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">reins =</span> <span class="st">&quot;excess-of-loss&quot;</span>,</span>
+<span id="cb1046-12"><a href="r-for-insurance.html#cb1046-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span></span>
+<span id="cb1046-13"><a href="r-for-insurance.html#cb1046-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1046-14"><a href="r-for-insurance.html#cb1046-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(adj_eol)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-428-1.png" width="672" /></p>
 </div>
 
 </div>
