@@ -641,9 +641,9 @@ Figure 1.6: Rstudio.
 <pre><code>## Error: &lt;text&gt;:1:6: unexpected INCOMPLETE_STRING
 ## 1: z &lt;- &#39;Mix&quot;
 ##          ^</code></pre>
-<p>To check whether an object is a character string, we can use the <code>as.character()</code> function.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="introduction-to-r.html#cb123-1" tabindex="-1"></a><span class="fu">as.character</span>(x)</span></code></pre></div>
-<pre><code>## [1] &quot;Actuarial&quot;</code></pre>
+<p>To check whether an object is a character string, we can use the <code>is.character()</code> function.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="introduction-to-r.html#cb123-1" tabindex="-1"></a><span class="fu">is.character</span>(x)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 <p>We can concatenate two character strings by using the <code>paste()</code> function:</p>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="introduction-to-r.html#cb125-1" tabindex="-1"></a><span class="fu">paste</span>(x, y)</span></code></pre></div>
 <pre><code>## [1] &quot;Actuarial Mathematics&quot;</code></pre>
@@ -1398,9 +1398,9 @@ For instance, let us compute the mean by rows and columns:</p>
 <div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="introduction-to-r.html#cb415-1" tabindex="-1"></a>students[<span class="dv">1</span>, ] <span class="co"># Information of the first student</span></span></code></pre></div>
 <pre><code>##      names grades
 ## 1 student1     90</code></pre>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="introduction-to-r.html#cb417-1" tabindex="-1"></a>students[, <span class="dv">1</span>] <span class="co"># Grades</span></span></code></pre></div>
-<pre><code>## [1] &quot;student1&quot; &quot;student2&quot; &quot;student3&quot; &quot;student4&quot;</code></pre>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="introduction-to-r.html#cb419-1" tabindex="-1"></a>students[<span class="dv">2</span>, <span class="dv">2</span>] <span class="co"># Grades of second student</span></span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="introduction-to-r.html#cb417-1" tabindex="-1"></a>students[, <span class="dv">2</span>] <span class="co"># Grades</span></span></code></pre></div>
+<pre><code>## [1] 90 95 85 70</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="introduction-to-r.html#cb419-1" tabindex="-1"></a>students[<span class="dv">2</span>, <span class="dv">2</span>] <span class="co"># Grade of second student</span></span></code></pre></div>
 <pre><code>## [1] 95</code></pre>
 <div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="introduction-to-r.html#cb421-1" tabindex="-1"></a>students[students[, <span class="dv">2</span>] <span class="sc">&gt;</span> <span class="dv">80</span>, ] <span class="co"># Students with grades above 80</span></span></code></pre></div>
 <pre><code>##      names grades
@@ -1606,16 +1606,16 @@ We write <span class="math inline">\(X \sim Exp(\lambda)\)</span>.</p>
 <div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="introduction-to-r.html#cb488-1" tabindex="-1"></a><span class="fu">library</span>(derivmkts)</span></code></pre></div>
 <p>R packages in CRAN are updated regularly with new functions, fix bugs, performance improvements, etc. To update an R package, we can use the <code>update.packages()</code> function. The syntax is similar to <code>install.packages()</code>, for instance,</p>
 <div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="introduction-to-r.html#cb489-1" tabindex="-1"></a><span class="fu">update.packages</span>(<span class="fu">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;devtools&quot;</span>))</span></code></pre></div>
-<p>If a package in CRAN is not updated regularly, it can potentially be removed from CRAN. This means that sometimes, when a package has not been updated for a while, we will not be able to install it using <code>install.packages()</code>. Let us try, for instance, with the <code>CASdatasets</code> package:</p>
+<p>If a package in CRAN is not updated regularly, it can potentially be removed from CRAN. This means that sometimes when a package has not been updated for a while, we will not be able to install it using <code>install.packages()</code>. Let us try, for instance, with the <code>CASdatasets</code> package:</p>
 <div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="introduction-to-r.html#cb490-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;CASdatasets&quot;</span>)</span></code></pre></div>
 <p>However, the source code of an older version may still be available, and we can use that to install the package using the command</p>
 <div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="introduction-to-r.html#cb491-1" tabindex="-1"></a><span class="fu">install.packages</span>(path_to_file, <span class="at">repos =</span> <span class="cn">NULL</span>, <span class="at">type =</span> <span class="st">&quot;source&quot;</span>)</span></code></pre></div>
-<p>where <code>path_to_file</code> is the location and name of the file. Following the example of <code>CASdatasets</code> package, it is available to download at <a href="http://cas.uqam.ca" class="uri">http://cas.uqam.ca</a>. Try to install this package from source (you may need to install first the packages <code>xts</code> and <code>sp</code>).
+<p>where <code>path_to_file</code> is the location and name of the file. Following the example of <code>CASdatasets</code> package, it is available to download at <a href="http://cas.uqam.ca" class="uri">http://cas.uqam.ca</a>. Try to install this package from source (you may need to install the packages <code>xts</code> and <code>sp</code> first).
 As previously mentioned, packages in CRAN are updated regularly. This means that their functionality may change over time by adding, modifying, or even erasing functions. Fortunately, CRAN keeps an archive of previous versions of each package. Hence, the previous method can also be used to install an older version of a package.</p>
 <div class="remark">
 <p><span id="unlabeled-div-17" class="remark"><em>Remark</em>. </span>Submitting a package to CRAN requires passing certain tests, documenting properly, and constantly updating. That is why some developers make their code available in other places, for instance, GitHub. We can install a package from almost anywhere using the <code>devtools</code> package. For example, to install a package in GitHub, we can use the function <code>install_github()</code>.</p>
 </div>
-<p>A powerful characteristic of R is that it allows writing code in other computer languages, such as C++. However, this also means that some packages will require compilation for their installation. Thus, we need to set up our computer to do so. For Windows computers, we need to download and install Rtools, which can be found at the following link: <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a>. If you have installed version 4.2.2 of R (or any 4.2.x version), you will need RTools 4.2. Otherwise, you will need to select the version compatible with your R version. For Mac computers, we have two options: Download and install Xcode from the Apple store or install Xcode command line by running the following in the terminal</p>
+<p>A powerful characteristic of R is that it allows writing code in other computer languages, such as C++. However, this also means that some packages will require compilation for their installation. Thus, we need to set up our computer to do so. For Windows computers, we need to download and install Rtools, which can be found at the following link: <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a>. If you have installed version 4.3.2 of R (or any 4.3.x version), you will need RTools 4.3. Otherwise, you will need to select the version compatible with your R version. For Mac computers, we have two options: Download and install Xcode from the Apple store or install Xcode command line by running the following in the terminal</p>
 <pre><code>sudo xcode-select --install</code></pre>
 <p>In addition, some packages are written using Fortran, and this will require installing a Fortran compiler for macOS. The instructions can be found here: <a href="https://mac.r-project.org/tools/" class="uri">https://mac.r-project.org/tools/</a>. However, installing Xcode or Xcode command line will work fine for the packages used in the present notes.</p>
 <p>Test that your setup is working by installing the <code>actuar</code> package:</p>
@@ -1634,7 +1634,7 @@ As previously mentioned, packages in CRAN are updated regularly. This means that
 <h3><span class="header-section-number">1.8.1</span> Conditional statements<a href="introduction-to-r.html#conditional-statements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Conditional statements evaluate if a condition is <code>TRUE</code> and perform an action depending on the result. We start with the <code>if</code> statement. Its structure is as follows:</p>
 <pre><code>if (condition) {
-  action(s)
+  action(s) in case of TRUE
 }</code></pre>
 <p>Below, there is a very simple example:</p>
 <div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="introduction-to-r.html#cb497-1" tabindex="-1"></a>claim <span class="ot">&lt;-</span> <span class="dv">50</span></span>
@@ -1699,7 +1699,7 @@ As previously mentioned, packages in CRAN are updated regularly. This means that
 <h4>while statements<a href="introduction-to-r.html#while-statements" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>A <code>while</code> statement repeats lines of code while a certain condition is <code>TRUE</code>, and it stops when it is <code>FALSE</code>. The general structure of a <code>while</code> loop is the following:</p>
 <pre><code>while (condition) {
-  action(s)
+  action(s) while the condition is TRUE
 }</code></pre>
 <p>We now give a simple example.</p>
 <div class="example">
@@ -1778,8 +1778,8 @@ As previously mentioned, packages in CRAN are updated regularly. This means that
 ## accurate nanosecond times to avoid potential integer overflows</code></pre>
 <pre><code>## Unit: nanoseconds
 ##               expr  min   lq     mean median   uq     max neval
-##     sum_vect(x, y)  205  246  72032.9    328 1066  712908    10
-##  sum_no_vect(x, y) 1066 1066 175234.0   1107 1189 1742090    10</code></pre>
+##     sum_vect(x, y)  205  205  36182.5    246  328  357520    10
+##  sum_no_vect(x, y) 1025 1066 194844.3   1189 1476 1937291    10</code></pre>
 <p>We can see that the performance of the vectorized version is, on average, around 5 times (this number may vary from computer to computer) faster than the implementation using a <code>for</code> loop. In conclusion, we should aim to do as many vectorized operations as possible in our code.</p>
 </div>
 <div id="reading-and-writing-data" class="section level2 hasAnchor" number="1.10">
@@ -1821,7 +1821,7 @@ As previously mentioned, packages in CRAN are updated regularly. This means that
 &quot;student2&quot;,95
 &quot;student3&quot;,85
 &quot;student4&quot;,70</code></pre>
-<p>Since CSV files are easier to read for most programs (including MS Excel), we have a specific function to write this type of files: <code>write.csv()</code>.</p>
+<p>Since CSV files are easier to read for most programs (including MS Excel), we have a specific function to write this type of file: <code>write.csv()</code>.</p>
 <div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="introduction-to-r.html#cb536-1" tabindex="-1"></a><span class="fu">write.csv</span>(students, <span class="at">file =</span> <span class="st">&quot;students.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>The above code generates exactly the same CSV file as before.</p>
 </div>
